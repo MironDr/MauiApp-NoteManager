@@ -5,4 +5,5 @@ namespace MauiApp1.Models;
 
 public class BaseModel : BaseCommon
 {
+    public int Id { get; set; }
 }

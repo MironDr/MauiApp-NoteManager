@@ -4,7 +4,7 @@ namespace MauiApp1.View;
 
 public class BaseView : ContentView
 {
-    public void SetBindingContext(BaseViewModel viewModel)
+    protected void SetBindingContext(BaseViewModel viewModel)
     {
         BindingContext = viewModel;
     }

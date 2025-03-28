@@ -2,7 +2,7 @@
 
 namespace MauiApp1.ViewModels;
 
-public class BaseViewModel : BaseCommon
+public class BaseViewModel: BaseCommon
 {
     
 }

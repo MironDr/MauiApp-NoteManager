@@ -58,7 +58,7 @@
         <Setter Property="Padding" Value="14,5"/>
         <Setter Property="MinimumHeightRequest" Value="15"/>
         <Setter Property="MinimumWidthRequest" Value="44"/>
-        <Setter Property="Margin" Value="10,0"/>
+        <Setter Property="Margin" Value="10,10"/>
         <Setter Property="TextTransform" Value="Uppercase"/>
     </Style>
     
@@ -71,7 +71,7 @@
         <Setter Property="Padding" Value="14,5"/>
         <Setter Property="MinimumHeightRequest" Value="15"/>
         <Setter Property="MinimumWidthRequest" Value="44"/>
-        <Setter Property="Margin" Value="10,0"/>
+        <Setter Property="Margin" Value="10,5"/>
         <Setter Property="FontAttributes" Value="Bold"/>
         <Setter Property="TextTransform" Value="Uppercase"/>
     </Style>

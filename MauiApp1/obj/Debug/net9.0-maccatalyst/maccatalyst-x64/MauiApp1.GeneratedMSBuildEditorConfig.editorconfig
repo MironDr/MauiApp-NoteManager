@@ -30,11 +30,11 @@ build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.AppShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
-[D:/RiderMAUI/MauiApp1/MauiApp1/MainPage.xaml]
+[D:/RiderMAUI/MauiApp1/MauiApp1/Pages/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.MainPage.xaml
-build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
-build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Pages.MainPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\MainPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\MainPage.xaml
 
 [D:/RiderMAUI/MauiApp1/MauiApp1/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
@@ -47,6 +47,12 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Resources.Styles.Styles.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/View/CreateCategoryView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.View.CreateCategoryView.xaml
+build_metadata.AdditionalFiles.TargetPath = View\CreateCategoryView.xaml
+build_metadata.AdditionalFiles.RelativePath = View\CreateCategoryView.xaml
 
 [D:/RiderMAUI/MauiApp1/MauiApp1/View/HorizontalCategoriesView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

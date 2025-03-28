@@ -14,5 +14,7 @@ public partial class HorizontalCategoriesView : BaseView
         InitializeComponent();
         SetBindingContext(viewModel);
     }
+    
+    
 
 }

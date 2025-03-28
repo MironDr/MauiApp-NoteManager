@@ -1,6 +1,8 @@
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-ios\iossimulator-x64\MauiApp1.runtimeconfig.json
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-ios\iossimulator-x64\MauiApp1.dll
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-ios\iossimulator-x64\MauiApp1.pdb
+D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-ios\iossimulator-x64\CommunityToolkit.Maui.dll
+D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-ios\iossimulator-x64\CommunityToolkit.Maui.Core.dll
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-ios\iossimulator-x64\Microsoft.Extensions.Configuration.dll
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-ios\iossimulator-x64\Microsoft.Extensions.Configuration.Abstractions.dll
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-ios\iossimulator-x64\Microsoft.Extensions.DependencyInjection.dll
@@ -299,6 +301,7 @@ D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-ios\iossimulator-x64\MauiApp1.Ge
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-ios\iossimulator-x64\MauiApp1.AssemblyInfoInputs.cache
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-ios\iossimulator-x64\MauiApp1.AssemblyInfo.cs
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-ios\iossimulator-x64\MauiApp1.csproj.CoreCompileInputs.cache
+D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-ios\iossimulator-x64\MauiApp1.sourcelink.json
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-ios\iossimulator-x64\XamlC.stamp
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-ios\iossimulator-x64\MauiApp1.csproj.Up2Date
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-ios\iossimulator-x64\MauiApp1.dll
