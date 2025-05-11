@@ -1,4 +1,5 @@
-﻿using MauiApp1.DTOs;
+﻿using System.Windows.Input;
+using MauiApp1.DTOs;
 using MauiApp1.Models;
 using MauiApp1.Services;
 using MauiApp1.ViewModels.Categories;
@@ -14,7 +15,7 @@ public class CreateNoteViewModel : BaseViewModel
     public readonly CategorySelectorViewModel CategorySelectorViewModel;
     public NoteDto Note { get; } =  new ();
     
-    public Command SaveNoteCommand { get; }
+    public ICommand SaveNoteCommand { get; }
     
     public CreateNoteViewModel(INoteService noteService, IPopupService popupService,  CategorySelectorViewModel selectorViewModel)
     {

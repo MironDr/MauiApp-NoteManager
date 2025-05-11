@@ -1,16 +1,21 @@
 ﻿using System.Collections.ObjectModel;
+using MauiApp1.Models;
 using MauiApp1.Services;
 using MauiApp1.View;
 using MauiApp1.View.Categories;
 using MauiApp1.VisualModels;
 
+
 namespace MauiApp1.ViewModels.Categories;
 
-public class MultiCategoriesViewModel : BaseViewModel
+public class CategoriesViewModel : BaseViewModel
 {
     private readonly ICategoryService _categoryService;
 
 
+    public event EventHandler<CategoryModel?>? CategorySelected;
+
+  
     private ObservableCollection<CategoryButtonModel> _categories = new();
 
     public ObservableCollection<CategoryButtonModel> Categories
@@ -26,11 +31,11 @@ public class MultiCategoriesViewModel : BaseViewModel
         }
     }
 
-    private readonly HashSet<CategoryButtonModel> _selectedCategories = new();
+    private  CategoryButtonModel? _selectedCategory = null;
     
     
 
-    public MultiCategoriesViewModel(ICategoryService categoryService) : base()
+    public CategoriesViewModel(ICategoryService categoryService) : base()
     {
         _categoryService = categoryService;
         _categoryService.CategoriesUpdated += OnCategoriesUpdated!;
@@ -40,7 +45,7 @@ public class MultiCategoriesViewModel : BaseViewModel
     
     private void LoadCategories()
     {
-        _selectedCategories.Clear();
+        _selectedCategory = null;
         Categories = new ObservableCollection<CategoryButtonModel>(
             _categoryService.GetCategories().Select(c => new CategoryButtonModel { Category = c, Command = new Command<CategoryButtonModel>(CategoryChooseAction)})
         );
@@ -53,21 +58,27 @@ public class MultiCategoriesViewModel : BaseViewModel
     }
     private void CategoryChooseAction(CategoryButtonModel selectedCategoryModel)
     {
-        
-        foreach (var item in _selectedCategories)
+        if (_selectedCategory != null)
         {
-         
-            if (item.Equals(selectedCategoryModel))
+            _selectedCategory.ChangeSelected(false);
+
+            if (_selectedCategory.Equals(selectedCategoryModel))
             {
-                selectedCategoryModel.ChangeSelected(false);
-                _selectedCategories.Remove(selectedCategoryModel);
+                _selectedCategory = null;
+                SelectCategory(_selectedCategory?.Category);
                 return;
             }
+            
         }
-       
         
         selectedCategoryModel.ChangeSelected(true);
-        _selectedCategories.Add(selectedCategoryModel);
+        _selectedCategory = selectedCategoryModel;
+        SelectCategory(_selectedCategory.Category);
+        
+    }
+    private void SelectCategory(CategoryModel? category)
+    {
+        CategorySelected?.Invoke(this, category);
         
     }
     

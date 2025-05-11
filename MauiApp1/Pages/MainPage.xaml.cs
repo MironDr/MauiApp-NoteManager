@@ -18,16 +18,20 @@ public partial class MainPage : BasePage
     public MainPage(IServiceProvider serviceProvider)
     {
         InitializeComponent();
-        
         _serviceProvider = serviceProvider;
 
+        var mainVm = _serviceProvider.GetRequiredService<MainPageViewModel>();
 
-        var horizontalCategoriesView = _serviceProvider.GetRequiredService<HorizontalCategoriesView>();
-        var verticalNotesView = _serviceProvider.GetRequiredService<VerticalNotesView>();
-    
+        var horizontalCategoriesView = new HorizontalCategoriesView(
+            mainVm.CategoriesViewModel,
+            _serviceProvider.GetRequiredService<CreateCategoryButtonView>());
+
+        var verticalNotesView = new VerticalNotesView(
+            mainVm.NotesViewModel,
+            _serviceProvider.GetRequiredService<CreateNoteButtonView>());
+
         Layout.Add(horizontalCategoriesView);
         Layout.Add(verticalNotesView);
-
     }
 
     

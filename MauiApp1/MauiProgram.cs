@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
 using MauiApp1.View.Categories;
+using MauiApp1.ViewModels;
 using MauiApp1.ViewModels.Categories;
 using MauiApp1.ViewModels.Notes;
 using MauiApp1.Views.Categories;
@@ -29,8 +30,10 @@ public static class MauiProgram
         builder.Services.AddSingleton<IPopupService, PopupService>();
         
         //Register ViewModels
+            //Page
+            builder.Services.AddTransient<MainPageViewModel>();
             //Category
-            builder.Services.AddTransient<MultiCategoriesViewModel>();
+            builder.Services.AddTransient<CategoriesViewModel>();
             builder.Services.AddTransient<CreateCategoryViewModel>();
             builder.Services.AddTransient<CreateCategoryButtonViewModel>();
             builder.Services.AddTransient<CategorySelectorViewModel>();

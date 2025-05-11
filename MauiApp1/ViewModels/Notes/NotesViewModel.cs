@@ -12,6 +12,8 @@ public class NotesViewModel : BaseViewModel
     private readonly INoteService _noteService;
     
     private readonly IPopupService _popupService;
+
+    private CategoryModel? _selectedCategory;
     
     private ObservableCollection<NoteModel> _notes = new();
     
@@ -50,13 +52,28 @@ public class NotesViewModel : BaseViewModel
     private void LoadNotes()
     {
       
-        Notes = new ObservableCollection<NoteModel>(_noteService.GetNotes());
+        if (_selectedCategory == null)
+        {
+            Notes = new ObservableCollection<NoteModel>(_noteService.GetNotes());
+            return;
+        }
+        
+        Notes = new ObservableCollection<NoteModel>(_noteService.GetNotes().Where(n => n.Category == _selectedCategory));
     
     }
     
     private void OnNoteSelected(NoteModel note)
     {
         _popupService.ShowPopupAsyncWithParameter<NoteView, NoteModel>(note);
+    }
+
+    public void FilterByCategory(CategoryModel? category)
+    {
+       
+        _selectedCategory = category;
+        
+        LoadNotes();
+            
     }
     
 }
