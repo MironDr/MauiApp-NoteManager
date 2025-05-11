@@ -14125,7 +14125,7 @@
         }
       }
     },
-    "net9.0-ios18.2": {
+    "net9.0-ios18.4": {
       "CommunityToolkit.Maui/11.2.0": {
         "type": "package",
         "dependencies": {
@@ -14561,7 +14561,7 @@
         }
       }
     },
-    "net9.0-ios18.2/android-arm64": {
+    "net9.0-ios18.4/android-arm64": {
       "CommunityToolkit.Maui/11.2.0": {
         "type": "package",
         "dependencies": {
@@ -14997,7 +14997,7 @@
         }
       }
     },
-    "net9.0-ios18.2/android-x64": {
+    "net9.0-ios18.4/android-x64": {
       "CommunityToolkit.Maui/11.2.0": {
         "type": "package",
         "dependencies": {
@@ -15433,7 +15433,7 @@
         }
       }
     },
-    "net9.0-ios18.2/iossimulator-x64": {
+    "net9.0-ios18.4/iossimulator-x64": {
       "CommunityToolkit.Maui/11.2.0": {
         "type": "package",
         "dependencies": {
@@ -15869,7 +15869,7 @@
         }
       }
     },
-    "net9.0-ios18.2/maccatalyst-x64": {
+    "net9.0-ios18.4/maccatalyst-x64": {
       "CommunityToolkit.Maui/11.2.0": {
         "type": "package",
         "dependencies": {
@@ -16305,7 +16305,7 @@
         }
       }
     },
-    "net9.0-ios18.2/win10-x64": {
+    "net9.0-ios18.4/win10-x64": {
       "CommunityToolkit.Maui/11.2.0": {
         "type": "package",
         "dependencies": {
@@ -16741,7 +16741,7 @@
         }
       }
     },
-    "net9.0-maccatalyst18.2": {
+    "net9.0-maccatalyst18.4": {
       "CommunityToolkit.Maui/11.2.0": {
         "type": "package",
         "dependencies": {
@@ -17177,7 +17177,7 @@
         }
       }
     },
-    "net9.0-maccatalyst18.2/android-arm64": {
+    "net9.0-maccatalyst18.4/android-arm64": {
       "CommunityToolkit.Maui/11.2.0": {
         "type": "package",
         "dependencies": {
@@ -17613,7 +17613,7 @@
         }
       }
     },
-    "net9.0-maccatalyst18.2/android-x64": {
+    "net9.0-maccatalyst18.4/android-x64": {
       "CommunityToolkit.Maui/11.2.0": {
         "type": "package",
         "dependencies": {
@@ -18049,7 +18049,7 @@
         }
       }
     },
-    "net9.0-maccatalyst18.2/iossimulator-x64": {
+    "net9.0-maccatalyst18.4/iossimulator-x64": {
       "CommunityToolkit.Maui/11.2.0": {
         "type": "package",
         "dependencies": {
@@ -18485,7 +18485,7 @@
         }
       }
     },
-    "net9.0-maccatalyst18.2/maccatalyst-x64": {
+    "net9.0-maccatalyst18.4/maccatalyst-x64": {
       "CommunityToolkit.Maui/11.2.0": {
         "type": "package",
         "dependencies": {
@@ -18921,7 +18921,7 @@
         }
       }
     },
-    "net9.0-maccatalyst18.2/win10-x64": {
+    "net9.0-maccatalyst18.4/win10-x64": {
       "CommunityToolkit.Maui/11.2.0": {
         "type": "package",
         "dependencies": {
@@ -27213,13 +27213,13 @@
       "Microsoft.Maui.Controls >= 9.0.50",
       "Microsoft.NET.ILLink.Tasks >= 9.0.2"
     ],
-    "net9.0-ios18.2": [
+    "net9.0-ios18.4": [
       "CommunityToolkit.Maui >= 11.2.0",
       "Microsoft.Extensions.Logging.Debug >= 9.0.0",
       "Microsoft.Maui.Controls >= 9.0.50",
       "Microsoft.NET.ILLink.Tasks >= 9.0.2"
     ],
-    "net9.0-maccatalyst18.2": [
+    "net9.0-maccatalyst18.4": [
       "CommunityToolkit.Maui >= 11.2.0",
       "Microsoft.Extensions.Logging.Debug >= 9.0.0",
       "Microsoft.Maui.Controls >= 9.0.50",
@@ -27232,8 +27232,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\oxyfa\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\miron\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -27241,17 +27240,12 @@
       "projectUniqueName": "D:\\RiderMAUI\\MauiApp1\\MauiApp1\\MauiApp1.csproj",
       "projectName": "MauiApp1",
       "projectPath": "D:\\RiderMAUI\\MauiApp1\\MauiApp1\\MauiApp1.csproj",
-      "packagesPath": "C:\\Users\\oxyfa\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\miron\\.nuget\\packages\\",
       "outputPath": "D:\\RiderMAUI\\MauiApp1\\MauiApp1\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\oxyfa\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\miron\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0-android",
@@ -27260,8 +27254,7 @@
         "net9.0-windows10.0.19041.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
+        "C:\\Users\\miron\\.dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -27269,11 +27262,11 @@
           "targetAlias": "net9.0-android",
           "projectReferences": {}
         },
-        "net9.0-ios18.2": {
+        "net9.0-ios18.4": {
           "targetAlias": "net9.0-ios",
           "projectReferences": {}
         },
-        "net9.0-maccatalyst18.2": {
+        "net9.0-maccatalyst18.4": {
           "targetAlias": "net9.0-maccatalyst",
           "projectReferences": {}
         },
@@ -27328,6 +27321,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[9.0.4, 9.0.4]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.Android": {
             "privateAssets": "all"
@@ -27336,9 +27335,9 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\miron\\.dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
       },
-      "net9.0-ios18.2": {
+      "net9.0-ios18.4": {
         "targetAlias": "net9.0-ios",
         "dependencies": {
           "CommunityToolkit.Maui": {
@@ -27371,6 +27370,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[9.0.4, 9.0.4]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.iOS": {
             "privateAssets": "all"
@@ -27379,9 +27384,9 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\miron\\.dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
       },
-      "net9.0-maccatalyst18.2": {
+      "net9.0-maccatalyst18.4": {
         "targetAlias": "net9.0-maccatalyst",
         "dependencies": {
           "CommunityToolkit.Maui": {
@@ -27415,6 +27420,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[9.0.4, 9.0.4]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.MacCatalyst": {
             "privateAssets": "all"
@@ -27423,7 +27434,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\miron\\.dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
       },
       "net9.0-windows10.0.19041": {
         "targetAlias": "net9.0-windows10.0.19041.0",
@@ -27466,7 +27477,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\miron\\.dotnet\\sdk\\9.0.200\\RuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {

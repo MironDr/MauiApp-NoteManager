@@ -48,14 +48,50 @@ build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Resources.Styles.
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
 
-[D:/RiderMAUI/MauiApp1/MauiApp1/View/CreateCategoryView.xaml]
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Categories/CategorySelectorView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.View.CreateCategoryView.xaml
-build_metadata.AdditionalFiles.TargetPath = View\CreateCategoryView.xaml
-build_metadata.AdditionalFiles.RelativePath = View\CreateCategoryView.xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Categories.CategorySelectorView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Categories\CategorySelectorView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Categories\CategorySelectorView.xaml
 
-[D:/RiderMAUI/MauiApp1/MauiApp1/View/HorizontalCategoriesView.xaml]
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Categories/CreateCategoryButtonView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.View.HorizontalCategoriesView.xaml
-build_metadata.AdditionalFiles.TargetPath = View\HorizontalCategoriesView.xaml
-build_metadata.AdditionalFiles.RelativePath = View\HorizontalCategoriesView.xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Categories.CreateCategoryButtonView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Categories\CreateCategoryButtonView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Categories\CreateCategoryButtonView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Categories/CreateCategoryView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Categories.CreateCategoryView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Categories\CreateCategoryView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Categories\CreateCategoryView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Categories/HorizontalCategoriesView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Categories.HorizontalCategoriesView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Categories\HorizontalCategoriesView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Categories\HorizontalCategoriesView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/CreateNoteButtonView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.CreateNoteButtonView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Notes\CreateNoteButtonView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Notes\CreateNoteButtonView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/CreateNoteView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.CreateNoteView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Notes\CreateNoteView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Notes\CreateNoteView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/NoteView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.NoteView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Notes\NoteView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Notes\NoteView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/VerticalNotesView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.VerticalNotesView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Notes\VerticalNotesView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Notes\VerticalNotesView.xaml

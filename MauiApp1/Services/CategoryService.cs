@@ -8,13 +8,13 @@ public interface ICategoryService
 {
     event EventHandler CategoriesUpdated;
     List<CategoryModel> GetCategories();
-    void AddCategory(CategoryDTO categoryDTO);
+    void AddCategory(CategoryModel category);
 }
 public class CategoryService : ICategoryService
 {
     private readonly List<CategoryModel> _categories = new();
     
-    public event EventHandler CategoriesUpdated;
+    public event EventHandler CategoriesUpdated = null!;
     
     public CategoryService()
     {
@@ -28,9 +28,9 @@ public class CategoryService : ICategoryService
  
     }
 
-    public void AddCategory(CategoryDTO categoryDTO)
+    public void AddCategory(CategoryModel category)
     {
-        _categories.Add(new CategoryModel{Id = 3, CategoryName = categoryDTO.CategoryName});
+        _categories.Add(category);
         CategoriesUpdated?.Invoke(this, EventArgs.Empty);
     }
     

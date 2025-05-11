@@ -248,6 +248,7 @@ D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\libx
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\libxamarin-dotnet-nativeaot.a
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\libxamarin-dotnet.a
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\libxamarin-dotnet.dylib
+D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-maccatalyst\maccatalyst-x64\MauiApp1.csproj.AssemblyReference.cache
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-maccatalyst\maccatalyst-x64\mauiimage.inputs
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-maccatalyst\maccatalyst-x64\mauifont.inputs
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-maccatalyst\maccatalyst-x64\mauisplash.inputs
@@ -285,7 +286,6 @@ D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-maccatalyst\maccatalyst-x64\core
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-maccatalyst\maccatalyst-x64\coremlc\_BundleResourceWithLogicalName.items
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-maccatalyst\maccatalyst-x64\_ProcessedBundleResourcesPath.items
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-maccatalyst\maccatalyst-x64\_ProcessedContentPath.items
-D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-maccatalyst\maccatalyst-x64\MauiApp1.csproj.AssemblyReference.cache
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-maccatalyst\maccatalyst-x64\MauiApp1.GeneratedMSBuildEditorConfig.editorconfig
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-maccatalyst\maccatalyst-x64\MauiApp1.AssemblyInfoInputs.cache
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-maccatalyst\maccatalyst-x64\MauiApp1.AssemblyInfo.cs

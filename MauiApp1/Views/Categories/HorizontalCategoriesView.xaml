@@ -1,11 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <view:BaseView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:view="clr-namespace:MauiApp1.View"
-             x:Class="MauiApp1.View.HorizontalCategoriesView">
+             x:Class="MauiApp1.Views.Categories.HorizontalCategoriesView">
     <ScrollView Orientation="Horizontal">
-    <StackLayout Orientation="Horizontal">
+    <StackLayout x:Name="MainLayout" Orientation="Horizontal">
         <CollectionView ItemsSource="{Binding Categories}" SelectionMode="None">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Horizontal"/>
@@ -16,8 +16,6 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button Text="+"
-                Command="{Binding CreateCategoryCommand}" Style="{StaticResource ButtonCategoryNotSelected}"/>
     </StackLayout>
     </ScrollView>
 </view:BaseView>

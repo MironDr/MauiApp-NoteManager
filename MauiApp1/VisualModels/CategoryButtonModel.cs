@@ -6,10 +6,10 @@ namespace MauiApp1.VisualModels;
 public class CategoryButtonModel : BaseModel
 {
     
-    public CategoryModel Category { get; set; }
-    public ICommand Command { get; set; }
+    public required CategoryModel Category { get; set; }
+    public required ICommand Command { get; set; }
     
-    private Style _style = (Style)Application.Current.Resources["ButtonCategoryNotSelected"];
+    private Style _style = (Style)Application.Current!.Resources["ButtonCategoryNotSelected"];
 
     public Style Style
     {
@@ -27,7 +27,7 @@ public class CategoryButtonModel : BaseModel
     public void ChangeSelected(bool selected)
     {
         
-        Style = selected ? (Style)Application.Current.Resources["ButtonCategorySelected"] : (Style)Application.Current.Resources["ButtonCategoryNotSelected"];
+        Style = selected ? (Style)Application.Current!.Resources["ButtonCategorySelected"] : (Style)Application.Current!.Resources["ButtonCategoryNotSelected"];
        
 
     }

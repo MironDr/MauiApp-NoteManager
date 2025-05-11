@@ -1,21 +1,17 @@
 ﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Maui.Views;
-using MauiApp1.Base;
-using MauiApp1.Models;
 using MauiApp1.Services;
-using MauiApp1.Utilities;
 using MauiApp1.View;
+using MauiApp1.View.Categories;
 using MauiApp1.VisualModels;
 
-namespace MauiApp1.ViewModels;
+namespace MauiApp1.ViewModels.Categories;
 
 public class MultiCategoriesViewModel : BaseViewModel
 {
     private readonly ICategoryService _categoryService;
-    private readonly IPopupService _popupService;
 
 
-    private ObservableCollection<CategoryButtonModel>? _categories;
+    private ObservableCollection<CategoryButtonModel> _categories = new();
 
     public ObservableCollection<CategoryButtonModel> Categories
     {
@@ -30,17 +26,14 @@ public class MultiCategoriesViewModel : BaseViewModel
         }
     }
 
-    private HashSet<CategoryButtonModel> _selectedCategories = new();
+    private readonly HashSet<CategoryButtonModel> _selectedCategories = new();
     
     
-    public Command CreateCategoryCommand { get; }
-    public MultiCategoriesViewModel(ICategoryService categoryService, IPopupService popupService) : base()
+
+    public MultiCategoriesViewModel(ICategoryService categoryService) : base()
     {
         _categoryService = categoryService;
-        _popupService = popupService;
-        
-        _categoryService.CategoriesUpdated += OnCategoriesUpdated;
-        CreateCategoryCommand = new Command(CreateCategory);
+        _categoryService.CategoriesUpdated += OnCategoriesUpdated!;
         
         LoadCategories();
     }
@@ -78,9 +71,4 @@ public class MultiCategoriesViewModel : BaseViewModel
         
     }
     
-    
-    private void CreateCategory()
-    {
-        _popupService.ShowPopupAsync<CreateCategoryView>();
-    }
 }

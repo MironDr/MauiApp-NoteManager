@@ -1,15 +1,15 @@
 ﻿using MauiApp1.DTOs;
+using MauiApp1.Models;
 using MauiApp1.Services;
-using MauiApp1.Utilities;
 
-namespace MauiApp1.ViewModels;
+namespace MauiApp1.ViewModels.Categories;
 
 public class CreateCategoryViewModel : BaseViewModel
 {
     
     private readonly ICategoryService _categoryService;
     private readonly IPopupService _popupService;
-    public CategoryDTO Category { get; set; } =  new ();
+    public CategoryDto Category { get; } =  new ();
     
     public Command SaveCategoryCommand { get; }
     
@@ -18,11 +18,18 @@ public class CreateCategoryViewModel : BaseViewModel
         SaveCategoryCommand = new Command(SaveCategory);
         _categoryService = categoryService;
         _popupService = popupService;
+
     }
 
     private void SaveCategory()
     {
-        _categoryService.AddCategory(Category);
+        if (string.IsNullOrWhiteSpace(Category.CategoryName))
+        {
+            return;
+        }
+        
+        
+        _categoryService.AddCategory(CategoryModel.CreateCategory(Category));
         _popupService.ClosePopupAsync();
     }
 }

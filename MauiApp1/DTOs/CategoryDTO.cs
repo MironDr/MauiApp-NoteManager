@@ -2,21 +2,8 @@
 
 namespace MauiApp1.DTOs;
 
-public class CategoryDTO : BaseCommon
+public class CategoryDto : BaseCommon
 {
-    private string _categoryName;
-
-
-    public string CategoryName
-    {
-        get => _categoryName;
-        set
-        {
-            _categoryName = value;
-            OnPropertyChanged(nameof(CategoryName));
-        }
-    }
-
-
-  
+    public string CategoryName { get; set; } = string.Empty;
+    
 }

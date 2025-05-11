@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MauiApp1.ViewModels;
+﻿using MauiApp1.ViewModels.Categories;
 
-namespace MauiApp1.View;
+namespace MauiApp1.View.Categories;
 
 public partial class CreateCategoryView : BaseView
 {

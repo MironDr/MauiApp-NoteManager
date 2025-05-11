@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<view:BaseView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:view="clr-namespace:MauiApp1.View"
+             xmlns:categories="clr-namespace:MauiApp1.Views.Categories"
+             x:Class="MauiApp1.Views.Notes.CreateNoteView">
+    <StackLayout>
+        <Label Text="Create Note" FontSize="20" />
+        
+        <Entry Placeholder="Note Title"
+               Text="{Binding Note.Title}" />
+        <Entry Placeholder="Note Description"
+               Text="{Binding Note.Description}" />
+        
+        <categories:CategorySelectorView x:Name="CategorySelectorView"/>
+        
+        <Button Text="Create"
+                Command="{Binding SaveNoteCommand}" />
+        
+    </StackLayout>
+    
+</view:BaseView>

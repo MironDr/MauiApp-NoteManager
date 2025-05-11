@@ -1,10 +1,13 @@
 ﻿using MauiApp1.Services;
-using MauiApp1.View;
-using MauiApp1.ViewModels;
 using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
-using MauiApp1.Utilities;
-using PopupService = MauiApp1.Utilities.PopupService;
+using MauiApp1.View.Categories;
+using MauiApp1.ViewModels.Categories;
+using MauiApp1.ViewModels.Notes;
+using MauiApp1.Views.Categories;
+using MauiApp1.Views.Notes;
+using PopupService = MauiApp1.Services.PopupService;
+
 
 namespace MauiApp1;
 public static class MauiProgram
@@ -22,17 +25,31 @@ public static class MauiProgram
         
         //Register Services
         builder.Services.AddSingleton<ICategoryService, CategoryService>();
+        builder.Services.AddSingleton<INoteService, NoteService>();
         builder.Services.AddSingleton<IPopupService, PopupService>();
         
         //Register ViewModels
-        builder.Services.AddTransient<MultiCategoriesViewModel>();
-        builder.Services.AddTransient<CreateCategoryViewModel>();
-        
+            //Category
+            builder.Services.AddTransient<MultiCategoriesViewModel>();
+            builder.Services.AddTransient<CreateCategoryViewModel>();
+            builder.Services.AddTransient<CreateCategoryButtonViewModel>();
+            builder.Services.AddTransient<CategorySelectorViewModel>();
+            //Note
+            builder.Services.AddTransient<NotesViewModel>();
+            builder.Services.AddTransient<CreateNoteButtonViewModel>();
+            builder.Services.AddTransient<CreateNoteViewModel>();
         
         //Register Views
-        builder.Services.AddTransient<CreateCategoryView>();
-        builder.Services.AddTransient<HorizontalCategoriesView>();
-        
+            //Category
+            builder.Services.AddTransient<CreateCategoryButtonView>();
+            builder.Services.AddTransient<CreateCategoryView>();
+            builder.Services.AddTransient<HorizontalCategoriesView>();
+            builder.Services.AddTransient<CategorySelectorView>();
+            //Note
+            builder.Services.AddTransient<VerticalNotesView>();
+            builder.Services.AddTransient<CreateNoteButtonView>();
+            builder.Services.AddTransient<CreateNoteView>();
+            builder.Services.AddTransient<NoteView>();
         
         
 #if DEBUG

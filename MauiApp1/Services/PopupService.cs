@@ -1,12 +1,13 @@
-﻿using CommunityToolkit.Maui;
-using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Views;
+using MauiApp1.Interfaces;
 using MauiApp1.View;
 
-namespace MauiApp1.Utilities;
+namespace MauiApp1.Services;
 
 public interface IPopupService
 {
     Task ShowPopupAsync<TView>() where TView : BaseView;
+    Task ShowPopupAsyncWithParameter<TView, TParameter>(TParameter parameter) where TView : BaseView;
     Task ClosePopupAsync();
 }
 
@@ -26,6 +27,21 @@ public class PopupService : IPopupService
     public async Task ShowPopupAsync<TView>() where TView : BaseView
     {
         var view = _serviceProvider.GetRequiredService<TView>();
+        
+        
+        _popup = new Popup { Content = view };
+        
+        await Shell.Current.CurrentPage.ShowPopupAsync(_popup);
+    }
+    
+    public async Task ShowPopupAsyncWithParameter<TView, TParameter>(TParameter parameter) where TView : BaseView
+    {
+        var view = _serviceProvider.GetRequiredService<TView>();
+        
+        if (view is IParameterizedView<TParameter> parameterizedView)
+        {
+            parameterizedView.SetData(parameter);
+        }
         
         
         _popup = new Popup { Content = view };
