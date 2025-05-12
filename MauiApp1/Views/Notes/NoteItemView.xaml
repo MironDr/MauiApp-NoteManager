@@ -3,10 +3,10 @@
 <view:BaseView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:view="clr-namespace:MauiApp1.View"
-             xmlns:categories="clr-namespace:MauiApp1.Views.Categories"
              xmlns:notes="clr-namespace:MauiApp1.Views.Notes"
-             x:Class="MauiApp1.Views.Notes.CreateNoteView">
-    <StackLayout>
+             x:Class="MauiApp1.Views.Notes.NoteItemView">
+    <VerticalStackLayout Padding="20">
+        <Switch IsToggled="{Binding IsReadOnly}"/>
         <CollectionView ItemsSource="{Binding Fields}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -14,12 +14,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
-        <categories:CategorySelectorView x:Name="CategorySelectorView"/>
-        
-        <Button Text="Create"
-                Command="{Binding SaveNoteCommand}" />
-        
-    </StackLayout>
-    
+    </VerticalStackLayout>
 </view:BaseView>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<view:BaseView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:view="clr-namespace:MauiApp1.View"
+             x:Class="MauiApp1.Views.Notes.CustomFieldView">
+    <VerticalStackLayout x:Name="MainLayout" IsVisible="{Binding IsNonEmptyField}">
+        <Label Text="{Binding Label}" />
+        <Entry x:Name="EntryField" Text="{Binding Value}" Completed="OnEntryCompleted" IsReadOnly="{Binding IsReadOnly}" ClearButtonVisibility="WhileEditing" >
+            <Entry.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnEntryTapped" />
+            </Entry.GestureRecognizers>
+        </Entry>
+    </VerticalStackLayout>
+</view:BaseView>

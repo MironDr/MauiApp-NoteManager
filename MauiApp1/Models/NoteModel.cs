@@ -17,31 +17,37 @@ public class NoteModel : BaseModel
         }
     }
     
-    public string? Description { get; init; }
+    public string? Description { get; set; }
     
     public DateTime CreatedAt { get; init; }
-    
-    
-    private CategoryModel? _category;
-    
-    public CategoryModel? Category
+
+
+    public int? Category {get; private set; }
+
+
+    public void AddCategory(CategoryModel category)
     {
-        get => _category;
+        if(Category != category.Id)
+            Category = Id;
         
-        set 
+        if (!category.GetNotes().Contains(Id))
         {
-            
-            if (_category != null && _category.GetNotes().Contains(this))
-            {
-                _category.RemoveNote(this);
-            }
-            
-            _category = value;
-              
-            if (_category != null)
-            {
-                _category.AddNote(this);
-            }
+            category.AddNote(this);
+        }
+
+        
+    }
+
+    public void RemoveCategory(CategoryModel category)
+    {
+        if (category.Id == Category)
+        {
+            Category = null;
+        }
+        
+        if (category.GetNotes().Contains(Id))
+        {
+            category.RemoveNote(this); 
         }
     }
     

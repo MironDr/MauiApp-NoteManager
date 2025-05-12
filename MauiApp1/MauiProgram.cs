@@ -41,6 +41,7 @@ public static class MauiProgram
             builder.Services.AddTransient<NotesViewModel>();
             builder.Services.AddTransient<CreateNoteButtonViewModel>();
             builder.Services.AddTransient<CreateNoteViewModel>();
+            builder.Services.AddTransient<NoteItemViewModel>();
         
         //Register Views
             //Category
@@ -52,7 +53,7 @@ public static class MauiProgram
             builder.Services.AddTransient<VerticalNotesView>();
             builder.Services.AddTransient<CreateNoteButtonView>();
             builder.Services.AddTransient<CreateNoteView>();
-            builder.Services.AddTransient<NoteView>();
+            builder.Services.AddTransient<NoteItemView>();
         
         
 #if DEBUG

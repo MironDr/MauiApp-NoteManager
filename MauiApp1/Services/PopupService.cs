@@ -1,13 +1,15 @@
 ﻿using CommunityToolkit.Maui.Views;
 using MauiApp1.Interfaces;
+using MauiApp1.Popups;
 using MauiApp1.View;
 
 namespace MauiApp1.Services;
 
 public interface IPopupService
 {
-    Task ShowPopupAsync<TView>() where TView : BaseView;
-    Task ShowPopupAsyncWithParameter<TView, TParameter>(TParameter parameter) where TView : BaseView;
+    Task ShowPopupAsync<TView>(bool canBeClosed = true) where TView : BaseView;
+    Task ShowPopupAsyncWithParameter<TView, TParameter>(TParameter parameter,bool canBeClosed = true) where TView : BaseView;
+    
     Task ClosePopupAsync();
 }
 
@@ -18,24 +20,34 @@ public class PopupService : IPopupService
     
     private Popup? _popup;
     
+    private bool _isBusy = false;
     public PopupService(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
 
     }
 
-    public async Task ShowPopupAsync<TView>() where TView : BaseView
+    public async Task ShowPopupAsync<TView>(bool canBeClosed = true) where TView : BaseView
     {
+        if(_isBusy)
+            return;
+        
+        _isBusy = true;
         var view = _serviceProvider.GetRequiredService<TView>();
         
         
-        _popup = new Popup { Content = view };
+        _popup = new InstantPopup { Content = view, CanBeDismissedByTappingOutsideOfPopup = canBeClosed };
         
         await Shell.Current.CurrentPage.ShowPopupAsync(_popup);
+        _isBusy = false;
     }
     
-    public async Task ShowPopupAsyncWithParameter<TView, TParameter>(TParameter parameter) where TView : BaseView
+    public async Task ShowPopupAsyncWithParameter<TView, TParameter>(TParameter parameter, bool canBeClosed = true) where TView : BaseView
     {
+        if(_isBusy)
+            return;
+        
+        _isBusy = true;
         var view = _serviceProvider.GetRequiredService<TView>();
         
         if (view is IParameterizedView<TParameter> parameterizedView)
@@ -43,10 +55,10 @@ public class PopupService : IPopupService
             parameterizedView.SetData(parameter);
         }
         
-        
-        _popup = new Popup { Content = view };
+        _popup = new InstantPopup { Content = view, CanBeDismissedByTappingOutsideOfPopup = canBeClosed };
         
         await Shell.Current.CurrentPage.ShowPopupAsync(_popup);
+        _isBusy = false;
     }
 
     public async Task ClosePopupAsync()
@@ -56,5 +68,6 @@ public class PopupService : IPopupService
 
         await _popup.CloseAsync();
     }
+    
     
 }

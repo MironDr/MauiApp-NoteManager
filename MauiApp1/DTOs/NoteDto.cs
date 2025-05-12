@@ -5,9 +5,9 @@ namespace MauiApp1.DTOs;
 
 public class NoteDto : BaseCommon
 {
-    public string Title {get; init; } = string.Empty;
+    public string Title {get; set; } = string.Empty;
 
-    public string? Description { get; init; }
+    public string? Description { get; set; }
     
-    public CategoryModel? Category { get; set; }
+    public int? Category { get; set; }
 }

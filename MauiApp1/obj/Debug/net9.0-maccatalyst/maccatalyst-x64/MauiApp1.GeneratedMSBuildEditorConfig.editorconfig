@@ -84,11 +84,17 @@ build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.Creat
 build_metadata.AdditionalFiles.TargetPath = Views\Notes\CreateNoteView.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\Notes\CreateNoteView.xaml
 
-[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/NoteView.xaml]
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/CustomFieldView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.NoteView.xaml
-build_metadata.AdditionalFiles.TargetPath = Views\Notes\NoteView.xaml
-build_metadata.AdditionalFiles.RelativePath = Views\Notes\NoteView.xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.CustomFieldView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Notes\CustomFieldView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Notes\CustomFieldView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/NoteItemView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.NoteItemView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Notes\NoteItemView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Notes\NoteItemView.xaml
 
 [D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/VerticalNotesView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

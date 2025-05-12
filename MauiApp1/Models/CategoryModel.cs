@@ -9,7 +9,7 @@ public class CategoryModel : BaseModel
        public string CategoryName
        {
               get => _categoryName;
-              set
+              init
               {
                      if (string.IsNullOrWhiteSpace(value))
                             throw new ArgumentException("Cannot be empty.", nameof(CategoryName));
@@ -17,33 +17,32 @@ public class CategoryModel : BaseModel
               }
        }
 
-       private readonly List<NoteModel> _notes = new(); 
+       private readonly List<int> _notes = new(); 
     
        public void AddNote(NoteModel note)
        {
-              if (!_notes.Contains(note))
+              if (!_notes.Contains(note.Id))
               {
-                     _notes.Add(note);
+                     _notes.Add(note.Id);
               }
         
-              if(note.Category != this)
-                     note.Category = this;
+              if(note.Category != Id)
+                     note.AddCategory(this);
        }
 
        public void RemoveNote(NoteModel note)
        {
-              if (_notes.Contains(note))
+              if (_notes.Contains(note.Id))
               {
-                     _notes.Remove(note);
+                     _notes.Remove(note.Id);
               }
         
-              if (note.Category == this)
-              {
-                     note.Category = null;
-              }
+              if (note.Category == Id)
+                     note.RemoveCategory(this);
+              
        }
 
-       public List<NoteModel> GetNotes()
+       public List<int> GetNotes()
        {
               return _notes.ToList();
        }

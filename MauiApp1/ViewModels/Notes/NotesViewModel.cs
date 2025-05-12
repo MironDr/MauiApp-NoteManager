@@ -11,7 +11,11 @@ public class NotesViewModel : BaseViewModel
 {
     private readonly INoteService _noteService;
     
+    private readonly ICategoryService _categoryService;
+    
     private readonly IPopupService _popupService;
+    
+
 
     private CategoryModel? _selectedCategory;
     
@@ -33,10 +37,12 @@ public class NotesViewModel : BaseViewModel
     }
     
     
-    public NotesViewModel(INoteService noteService, IPopupService popupService) : base()
+    public NotesViewModel(INoteService noteService,ICategoryService categoryService, IPopupService popupService) : base()
     {
         _noteService = noteService;
+        _categoryService = categoryService;
         _popupService = popupService;
+
         _noteService.NotesUpdated += OnNotesUpdated!;
         
         NoteSelectedCommand = new Command<NoteModel>(OnNoteSelected);
@@ -58,13 +64,18 @@ public class NotesViewModel : BaseViewModel
             return;
         }
         
-        Notes = new ObservableCollection<NoteModel>(_noteService.GetNotes().Where(n => n.Category == _selectedCategory));
+        Notes = new ObservableCollection<NoteModel>(_noteService.GetNotes().Where(n => n.Category == _selectedCategory.Id));
     
     }
     
     private void OnNoteSelected(NoteModel note)
     {
-        _popupService.ShowPopupAsyncWithParameter<NoteView, NoteModel>(note);
+        string? category = null;
+        if (note.Category is { } categoryId)
+             category = _categoryService.GetCategories().FirstOrDefault(c => c.Id == categoryId)?.CategoryName;
+        
+        NoteItemViewModel noteItem = new NoteItemViewModel(note, category, _popupService);
+        _popupService.ShowPopupAsyncWithParameter<NoteItemView, NoteItemViewModel>(noteItem);
     }
 
     public void FilterByCategory(CategoryModel? category)

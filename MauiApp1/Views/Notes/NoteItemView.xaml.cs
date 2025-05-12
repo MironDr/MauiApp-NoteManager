@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 using MauiApp1.Interfaces;
 using MauiApp1.Models;
 using MauiApp1.View;
+using MauiApp1.ViewModels.Notes;
 
 namespace MauiApp1.Views.Notes;
 
-public partial class NoteView : BaseView, IParameterizedView<NoteModel>
+public partial class NoteItemView : BaseView, IParameterizedView<NoteItemViewModel>
 {
-    public NoteView()
+    public NoteItemView()
     {
         InitializeComponent();
         
     }
 
-    public void SetData(NoteModel data)
+    public void SetData(NoteItemViewModel data)
     {
         BindingContext = data;
     }
