@@ -6,13 +6,14 @@
              xmlns:notes="clr-namespace:MauiApp1.Views.Notes"
              x:Class="MauiApp1.Views.Notes.NoteItemView">
     <VerticalStackLayout Padding="20">
-        <Switch IsToggled="{Binding IsReadOnly}"/>
-        <CollectionView ItemsSource="{Binding Fields}">
+        <Switch IsToggled="False" Toggled="Switch_OnToggled"/>
+        <CollectionView x:Name="ReadModeView" IsVisible="True" ItemsSource="{Binding Fields}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <notes:CustomFieldView />
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <notes:EditNoteView x:Name="EditModeView" IsVisible="False"/>
     </VerticalStackLayout>
 </view:BaseView>

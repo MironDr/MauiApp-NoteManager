@@ -10,4 +10,11 @@ public class NoteDto : BaseCommon
     public string? Description { get; set; }
     
     public int? Category { get; set; }
+
+    public void CompleteNoteDtoByNoteModel(NoteModel noteModel)
+    {
+        Title = noteModel.Title;
+        Description = noteModel.Description;
+        Category = noteModel.Category;
+    }
 }

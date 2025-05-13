@@ -3,6 +3,7 @@ D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Maui
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\MauiApp1.pdb
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\CommunityToolkit.Maui.dll
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\CommunityToolkit.Maui.Core.dll
+D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\CommunityToolkit.Mvvm.dll
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Microsoft.Extensions.Configuration.dll
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Microsoft.Extensions.Configuration.Abstractions.dll
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Microsoft.Extensions.DependencyInjection.dll

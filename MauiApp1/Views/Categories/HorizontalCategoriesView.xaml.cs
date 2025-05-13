@@ -1,5 +1,4 @@
 ﻿using MauiApp1.View;
-using MauiApp1.View.Categories;
 using MauiApp1.ViewModels.Categories;
 
 namespace MauiApp1.Views.Categories;

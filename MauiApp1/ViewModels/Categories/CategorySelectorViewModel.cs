@@ -9,13 +9,28 @@ namespace MauiApp1.ViewModels.Categories;
 public class CategorySelectorViewModel : BaseViewModel
 {
     private readonly ICategoryService _categoryService;
-    
+    public CreateCategoryViewModel CreateCategoryViewModel { get; }
+
     public ICommand CategorySelectedCommand { get; }
     
     private ObservableCollection<CategoryModel> _categories = new();
     private CategoryModel? _selectedCategory;
     private string _selectedCategoryName = "Select a Category";
 
+    private bool _isListVisible = false;
+
+    public bool IsListVisible
+    {
+        get => _isListVisible;
+        set
+        {
+            if (value != _isListVisible)
+            {
+                _isListVisible = value;
+                OnPropertyChanged(nameof(IsListVisible));
+            }
+        }
+    }
 
     public string SelectedCategoryName
     {
@@ -58,28 +73,32 @@ public class CategorySelectorViewModel : BaseViewModel
     
     public ICommand ToggleCategoryListCommand { get; }
 
-    public CategorySelectorViewModel(ICategoryService categoryService)
+    public CategorySelectorViewModel(ICategoryService categoryService, CreateCategoryViewModel createCategoryViewModel)
     {
         CategorySelectedCommand = new Command<CategoryModel>(OnCategorySelected);
         _categoryService = categoryService;
+        CreateCategoryViewModel = createCategoryViewModel;
+        CreateCategoryViewModel.ClosePopup = false;
         
-        Categories = new();
+        
+        Categories = new ObservableCollection<CategoryModel>(_categoryService.GetCategories().Where(c => c.Id != SelectedCategory?.Id));
 
         ToggleCategoryListCommand = new Command(() =>
         {
-            if (Categories.Count > 0)
-            {
-                Categories.Clear();
-                return;
-            }
-
-            Categories = new ObservableCollection<CategoryModel>(categoryService.GetCategories());
+           IsListVisible = !IsListVisible; 
         });
     }
 
-    private void OnCategorySelected(CategoryModel category)
+    public void SelectCategoryById(int? categoryId)
+    {
+        if(categoryId != null)
+            SelectedCategory = _categories.FirstOrDefault(c => c.Id == categoryId);
+    }
+    
+    public void OnCategorySelected(CategoryModel category)
     {
         SelectedCategory = category;
-        Categories.Clear();
+        Categories = new ObservableCollection<CategoryModel>(_categoryService.GetCategories().Where(c => c.Id != SelectedCategory?.Id));
+        IsListVisible = false; 
     }
 }

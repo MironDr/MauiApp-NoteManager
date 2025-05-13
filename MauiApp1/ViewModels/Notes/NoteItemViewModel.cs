@@ -9,8 +9,8 @@ namespace MauiApp1.ViewModels.Notes;
 
 public class NoteItemViewModel : BaseViewModel
 {
-    private readonly IPopupService _popupService;
-    private NoteModel _note;
+
+    public NoteModel Note {get;}
     private string? _categoryName;
 
     public ObservableCollection<CustomFieldViewModel> Fields { get; set; } = new();
@@ -18,7 +18,8 @@ public class NoteItemViewModel : BaseViewModel
 
 
     private bool _isReadOnly = true;
-
+    public bool IsEdit => !_isReadOnly;
+    
     public bool IsReadOnly
     {
         get => _isReadOnly;
@@ -39,22 +40,20 @@ public class NoteItemViewModel : BaseViewModel
     
 
 
-    public NoteItemViewModel(NoteModel data, string? categoryName, IPopupService popupService)
+    public NoteItemViewModel(NoteModel data, string? categoryName)
     {
-        _note = data;
+        Note = data;
         _categoryName = categoryName;
-        _popupService = popupService;
         ReloadFields();
-
-     
+        
     }
 
     private void ReloadFields()
     {
         Fields.Clear();
-        Fields.Add(new CustomFieldViewModel("Title", _note.Title, s => _note.Title = s!, _isReadOnly));
-        Fields.Add(new CustomFieldViewModel("Description", _note.Description, s => _note.Description = s, _isReadOnly));
-        Fields.Add(new CustomFieldViewModel("CreatedAt", _note.CreatedAt.ToShortDateString(), null, _isReadOnly));
+        Fields.Add(new CustomFieldViewModel("Title", Note.Title, s => Note.Title = s!, _isReadOnly));
+        Fields.Add(new CustomFieldViewModel("Description", Note.Description, s => Note.Description = s, _isReadOnly));
+        Fields.Add(new CustomFieldViewModel("CreatedAt", Note.CreatedAt.ToShortDateString(), null, _isReadOnly));
         Fields.Add(new CustomFieldViewModel("Category", _categoryName,  null, _isReadOnly));
  
     }

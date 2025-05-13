@@ -28,7 +28,13 @@ public class NoteService : INoteService
 
     public void AddNote(NoteModel note)
     {
-        _notes.Add(note);
+        if(_notes.FindIndex(n => n.Id == note.Id) is var index)
+            if(index != -1)
+                _notes[index] = note;
+            else
+                _notes.Add(note);
+        
+        
         NotesUpdated?.Invoke(this, EventArgs.Empty);
     }
     

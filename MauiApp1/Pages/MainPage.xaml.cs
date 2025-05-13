@@ -2,7 +2,6 @@
 using CommunityToolkit.Maui.Views;
 using MauiApp1.Models;
 using MauiApp1.View;
-using MauiApp1.View.Categories;
 using MauiApp1.ViewModels;
 using MauiApp1.Views.Categories;
 using MauiApp1.Views.Notes;

@@ -5,6 +5,8 @@ namespace MauiApp1.Models;
 public class NoteModel : BaseModel
 {
     private string _title = null!;
+    
+    private static int _idCounter = 0;
 
     public string Title
     {
@@ -19,7 +21,7 @@ public class NoteModel : BaseModel
     
     public string? Description { get; set; }
     
-    public DateTime CreatedAt { get; init; }
+    public DateTime CreatedAt { get; private init; }
 
 
     public int? Category {get; private set; }
@@ -54,7 +56,15 @@ public class NoteModel : BaseModel
     
     public static NoteModel CreateNote(NoteDto noteDto)
     {
-        return new NoteModel{Id = 3, Title = noteDto.Title, CreatedAt = DateTime.Now, Description = noteDto.Description, Category = noteDto.Category};
+        return new NoteModel{Id = _idCounter++, Title = noteDto.Title, CreatedAt = DateTime.Now, Description = noteDto.Description, Category = noteDto.Category};
+    }
+
+    public NoteModel EditNote(NoteDto noteDto)
+    {
+        Title = noteDto.Title;
+        Description = noteDto.Description;
+        Category = noteDto.Category;
+        return this;
     }
 
 }

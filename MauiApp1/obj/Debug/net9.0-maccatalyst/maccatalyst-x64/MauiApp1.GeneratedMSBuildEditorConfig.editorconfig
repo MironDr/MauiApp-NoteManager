@@ -3,6 +3,11 @@ build_property.EnableAotAnalyzer =
 build_property.EnableSingleFileAnalyzer = 
 build_property.EnableTrimAnalyzer = false
 build_property.IncludeAllContentForSelfExtract = 
+build_property.MvvmToolkitEnableINotifyPropertyChangingSupport = true
+build_property._MvvmToolkitIsUsingWindowsRuntimePack = false
+build_property.CsWinRTComponent = 
+build_property.CsWinRTAotOptimizerEnabled = 
+build_property.CsWinRTAotWarningLevel = 
 build_property.TargetFramework = net9.0-maccatalyst
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = 
@@ -89,6 +94,12 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.CustomFieldView.xaml
 build_metadata.AdditionalFiles.TargetPath = Views\Notes\CustomFieldView.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\Notes\CustomFieldView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/EditNoteView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.EditNoteView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Notes\EditNoteView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Notes\EditNoteView.xaml
 
 [D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/NoteItemView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

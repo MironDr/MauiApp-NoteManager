@@ -1,5 +1,4 @@
 ﻿using MauiApp1.Services;
-using MauiApp1.View.Categories;
 using CreateNoteView = MauiApp1.Views.Notes.CreateNoteView;
 
 namespace MauiApp1.ViewModels.Notes;

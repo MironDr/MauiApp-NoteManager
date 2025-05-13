@@ -13,6 +13,10 @@ public class CreateCategoryViewModel : BaseViewModel
     
     public Command SaveCategoryCommand { get; }
     
+    public bool ClosePopup { get; set; } = true;
+
+    public event Action<CategoryModel> CategorySaved;
+    
     public CreateCategoryViewModel(ICategoryService categoryService, IPopupService popupService)
     {
         SaveCategoryCommand = new Command(SaveCategory);
@@ -27,9 +31,12 @@ public class CreateCategoryViewModel : BaseViewModel
         {
             return;
         }
+
+        CategoryModel category = CategoryModel.CreateCategory(Category);
+        _categoryService.AddCategory(category);
+        CategorySaved?.Invoke(category);
         
-        
-        _categoryService.AddCategory(CategoryModel.CreateCategory(Category));
-        _popupService.ClosePopupAsync();
+        if (ClosePopup)
+         _popupService.ClosePopupAsync();
     }
 }

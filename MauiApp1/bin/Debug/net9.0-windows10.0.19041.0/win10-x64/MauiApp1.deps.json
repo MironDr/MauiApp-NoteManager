@@ -10,6 +10,7 @@
       "MauiApp1/1.0": {
         "dependencies": {
           "CommunityToolkit.Maui": "11.2.0",
+          "CommunityToolkit.Mvvm": "8.4.0",
           "Microsoft.Extensions.Logging.Debug": "9.0.0",
           "Microsoft.Maui.Controls": "9.0.50",
           "Microsoft.Web.WebView2.Core.Projection": "1.0.2903.40",
@@ -53,6 +54,14 @@
           "lib/net9.0-windows10.0.19041/CommunityToolkit.Maui.Core.dll": {
             "assemblyVersion": "11.2.0.0",
             "fileVersion": "11.2.0.0"
+          }
+        }
+      },
+      "CommunityToolkit.Mvvm/8.4.0": {
+        "runtime": {
+          "lib/net8.0-windows10.0.17763/CommunityToolkit.Mvvm.dll": {
+            "assemblyVersion": "8.4.0.0",
+            "fileVersion": "8.4.0.1"
           }
         }
       },
@@ -509,6 +518,13 @@
       "sha512": "sha512-uQC6rvxEBMJKFuTi2zYgONjgqAOYhF3VlRxe6J9KbO926ywRdxVL3twVO31lJJB3FVYDrRyc9sE+rawFwwalkw==",
       "path": "communitytoolkit.maui.core/11.2.0",
       "hashPath": "communitytoolkit.maui.core.11.2.0.nupkg.sha512"
+    },
+    "CommunityToolkit.Mvvm/8.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tqVU8yc/ADO9oiTRyTnwhFN68hCwvkliMierptWOudIAvWY1mWCh5VFh+guwHJmpMwfg0J0rY+yyd5Oy7ty9Uw==",
+      "path": "communitytoolkit.mvvm/8.4.0",
+      "hashPath": "communitytoolkit.mvvm.8.4.0.nupkg.sha512"
     },
     "Microsoft.Extensions.Configuration/9.0.0": {
       "type": "package",

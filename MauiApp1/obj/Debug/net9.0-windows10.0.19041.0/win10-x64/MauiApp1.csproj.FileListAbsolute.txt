@@ -295,6 +295,7 @@ D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\re
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\Microsoft.Web.WebView2.Core.dll
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\CommunityToolkit.Maui.dll
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\CommunityToolkit.Maui.Core.dll
+D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\CommunityToolkit.Mvvm.dll
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\Microsoft.Extensions.Configuration.dll
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\Microsoft.Extensions.Configuration.Abstractions.dll
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\Microsoft.Extensions.DependencyInjection.dll

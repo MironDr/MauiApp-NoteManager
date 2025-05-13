@@ -1,7 +1,6 @@
 ﻿using MauiApp1.Services;
 using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
-using MauiApp1.View.Categories;
 using MauiApp1.ViewModels;
 using MauiApp1.ViewModels.Categories;
 using MauiApp1.ViewModels.Notes;
@@ -40,7 +39,7 @@ public static class MauiProgram
             //Note
             builder.Services.AddTransient<NotesViewModel>();
             builder.Services.AddTransient<CreateNoteButtonViewModel>();
-            builder.Services.AddTransient<CreateNoteViewModel>();
+            builder.Services.AddTransient<ManageNoteViewModel>();
             builder.Services.AddTransient<NoteItemViewModel>();
         
         //Register Views
