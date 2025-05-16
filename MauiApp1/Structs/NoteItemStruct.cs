@@ -1,9 +1,11 @@
-﻿using MauiApp1.ViewModels.Notes;
+﻿using MauiApp1.Interfaces;
+using MauiApp1.ViewModels.Notes;
 
 namespace MauiApp1.Structs;
 
 public struct NoteItemStruct
 {
-    public NoteItemViewModel NoteItemView;
-    public ManageNoteViewModel NoteItemEdit;
+    public NoteItemViewModel NoteItemView { get; set; }
+    
+    public IEditableNoteViewModel NoteItemEdit { get; set; }
 }

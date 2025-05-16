@@ -44,11 +44,9 @@ public class NoteItemViewModel : BaseViewModel
     {
         Note = data;
         _categoryName = categoryName;
-        ReloadFields();
-        
     }
 
-    private void ReloadFields()
+    protected virtual void ReloadFields()
     {
         Fields.Clear();
         Fields.Add(new CustomFieldViewModel("Title", Note.Title, s => Note.Title = s!, _isReadOnly));

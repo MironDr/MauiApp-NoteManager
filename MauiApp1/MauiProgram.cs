@@ -1,6 +1,8 @@
 ﻿using MauiApp1.Services;
 using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
+using MauiApp1.Factories;
+using MauiApp1.Interfaces;
 using MauiApp1.ViewModels;
 using MauiApp1.ViewModels.Categories;
 using MauiApp1.ViewModels.Notes;
@@ -28,7 +30,14 @@ public static class MauiProgram
         builder.Services.AddSingleton<INoteService, NoteService>();
         builder.Services.AddSingleton<IPopupService, PopupService>();
         
+        
+        //Factories
+        builder.Services.AddSingleton<NoteItemFactoryManager>();
+        builder.Services.AddSingleton<INoteItemFactory, TextNoteItemFactory>();
+        
         //Register ViewModels
+            builder.Services.AddTransient<BaseViewModel>();
+             
             //Page
             builder.Services.AddTransient<MainPageViewModel>();
             //Category
@@ -39,7 +48,7 @@ public static class MauiProgram
             //Note
             builder.Services.AddTransient<NotesViewModel>();
             builder.Services.AddTransient<CreateNoteButtonViewModel>();
-            builder.Services.AddTransient<ManageNoteViewModel>();
+            builder.Services.AddTransient<ManageTextNoteViewModel>();
             builder.Services.AddTransient<NoteItemViewModel>();
         
         //Register Views

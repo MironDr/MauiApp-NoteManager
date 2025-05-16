@@ -1,9 +1,16 @@
 ﻿using MauiApp1.DTOs;
 
 namespace MauiApp1.Models;
-
+public enum NoteType
+{
+    Text,
+    Account,
+  
+}
 public class NoteModel : BaseModel
 {
+    public NoteType Type { get; }
+    
     private string _title = null!;
     
     private static int _idCounter = 0;
@@ -24,7 +31,7 @@ public class NoteModel : BaseModel
     public DateTime CreatedAt { get; private init; }
 
 
-    public int? Category {get; private set; }
+    public int? Category {get; protected set; }
 
 
     public void AddCategory(CategoryModel category)
@@ -59,7 +66,7 @@ public class NoteModel : BaseModel
         return new NoteModel{Id = _idCounter++, Title = noteDto.Title, CreatedAt = DateTime.Now, Description = noteDto.Description, Category = noteDto.Category};
     }
 
-    public NoteModel EditNote(NoteDto noteDto)
+    public virtual NoteModel EditNote(NoteDto noteDto)
     {
         Title = noteDto.Title;
         Description = noteDto.Description;

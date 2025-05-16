@@ -11,10 +11,25 @@ public class NoteDto : BaseCommon
     
     public int? Category { get; set; }
 
-    public void CompleteNoteDtoByNoteModel(NoteModel noteModel)
+    public virtual void CompleteNoteDtoByNoteModel(NoteModel noteModel)
     {
         Title = noteModel.Title;
         Description = noteModel.Description;
         Category = noteModel.Category;
+        Console.WriteLine("NoteDto.CompleteNoteDtoByNoteModel");
+    }
+}
+
+public class TextNoteDto : NoteDto
+{
+    public string? TextContent { get; set; }
+    
+    public override void CompleteNoteDtoByNoteModel(NoteModel noteModel)
+    {
+        base.CompleteNoteDtoByNoteModel(noteModel);
+        Console.WriteLine("TextNoteDto.CompleteNoteDtoByNoteModel");
+        var textNote = noteModel as TextNoteModel;
+        TextContent = textNote.TextContent;
+        
     }
 }

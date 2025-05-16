@@ -1,4 +1,5 @@
-﻿using MauiApp1.Models;
+﻿using MauiApp1.Interfaces;
+using MauiApp1.Models;
 using MauiApp1.View;
 using MauiApp1.ViewModels;
 using MauiApp1.ViewModels.Categories;
@@ -7,15 +8,14 @@ using MauiApp1.Views.Categories;
 
 namespace MauiApp1.Views.Notes;
 
-public sealed partial class CreateNoteView : BaseView
+public sealed partial class CreateNoteView : BaseView, IParameterizedView<BaseViewModel>
 {
-    private ManageNoteViewModel? _viewModel;
-    public CreateNoteView(ManageNoteViewModel viewModel)
+    private BaseViewModel? _viewModel;
+
+    public CreateNoteView(BaseViewModel viewModel)
     {
-        
         InitializeComponent();
         SetBindingContext(viewModel);
-       
     }
 
     public CreateNoteView()
@@ -25,19 +25,27 @@ public sealed partial class CreateNoteView : BaseView
 
     public override void SetBindingContext(BaseViewModel baseViewModel)
     {
-        if (baseViewModel is ManageNoteViewModel viewModel)
+        _viewModel = baseViewModel;
+        BindingContext = _viewModel;
+
+        if (baseViewModel is ICategorySelectable selectable)
         {
-            _viewModel = viewModel;
-            BindingContext = _viewModel;
-            CategorySelectorView.SetBindingContext(_viewModel.CategorySelectorViewModel);
+            CategorySelectorView.SetBindingContext(selectable.CategorySelectorViewModel);
         }
     }
 
     public void GoToEditMode(NoteModel noteModel)
     {
-        _viewModel?.GoToEditMode(noteModel);
-        SaveButton.Text = "Edit";
+        if (_viewModel is IEditableNoteViewModel editable)
+        {
+            editable.GoToEditMode(noteModel);
+            SaveButton.Text = "Edit";
+        }
     }
 
-    
+
+    public void SetData(BaseViewModel data)
+    {
+        SetBindingContext(data);
+    }
 }

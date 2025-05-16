@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using MauiApp1.Factories;
 using MauiApp1.Models;
 using MauiApp1.Services;
 using MauiApp1.Structs;
@@ -16,7 +17,7 @@ public class NotesViewModel : BaseViewModel
     
     private readonly IPopupService _popupService;
     
-    private readonly ManageNoteViewModel _manageNoteManageViewModelModel;
+    private readonly NoteItemFactoryManager _factoryManager;
 
 
     private CategoryModel? _selectedCategory;
@@ -39,12 +40,12 @@ public class NotesViewModel : BaseViewModel
     }
     
     
-    public NotesViewModel(INoteService noteService,ICategoryService categoryService, IPopupService popupService, ManageNoteViewModel noteManageViewModel) : base()
+    public NotesViewModel(INoteService noteService,ICategoryService categoryService, IPopupService popupService, NoteItemFactoryManager factoryManager) : base()
     {
         _noteService = noteService;
         _categoryService = categoryService;
         _popupService = popupService;
-        _manageNoteManageViewModelModel = noteManageViewModel;
+        _factoryManager = factoryManager;
 
         _noteService.NotesUpdated += OnNotesUpdated!;
         
@@ -73,16 +74,8 @@ public class NotesViewModel : BaseViewModel
     
     private void OnNoteSelected(NoteModel note)
     {
-        string? category = null;
-        if (note.Category is { } categoryId)
-             category = _categoryService.GetCategories().FirstOrDefault(c => c.Id == categoryId)?.CategoryName;
+        NoteItemStruct noteItemStruct = (NoteItemStruct)_factoryManager.Create(note)!;
         
-        NoteItemViewModel noteItem = new NoteItemViewModel(note, category);
-        NoteItemStruct noteItemStruct = new NoteItemStruct
-        {
-            NoteItemView = noteItem,
-            NoteItemEdit = _manageNoteManageViewModelModel
-        };
         _popupService.ShowPopupAsyncWithParameter<NoteItemView, NoteItemStruct>(noteItemStruct);
     }
 
