@@ -6,6 +6,7 @@ using MauiApp1.Interfaces;
 using MauiApp1.ViewModels;
 using MauiApp1.ViewModels.Categories;
 using MauiApp1.ViewModels.Notes;
+using MauiApp1.ViewModels.Notes.Managers;
 using MauiApp1.Views.Categories;
 using MauiApp1.Views.Notes;
 using PopupService = MauiApp1.Services.PopupService;
@@ -31,37 +32,50 @@ public static class MauiProgram
         builder.Services.AddSingleton<IPopupService, PopupService>();
         
         
-        //Factories
-        builder.Services.AddSingleton<NoteItemFactoryManager>();
-        builder.Services.AddSingleton<INoteItemFactory, TextNoteItemFactory>();
-        
         //Register ViewModels
-            builder.Services.AddTransient<BaseViewModel>();
+        builder.Services.AddTransient<BaseViewModel>();
              
-            //Page
-            builder.Services.AddTransient<MainPageViewModel>();
-            //Category
-            builder.Services.AddTransient<CategoriesViewModel>();
-            builder.Services.AddTransient<CreateCategoryViewModel>();
-            builder.Services.AddTransient<CreateCategoryButtonViewModel>();
-            builder.Services.AddTransient<CategorySelectorViewModel>();
-            //Note
-            builder.Services.AddTransient<NotesViewModel>();
-            builder.Services.AddTransient<CreateNoteButtonViewModel>();
-            builder.Services.AddTransient<ManageTextNoteViewModel>();
-            builder.Services.AddTransient<NoteItemViewModel>();
+        //Page
+        builder.Services.AddTransient<MainPageViewModel>();
+        //Category
+        builder.Services.AddTransient<CategoriesViewModel>();
+        builder.Services.AddTransient<CreateCategoryViewModel>();
+        builder.Services.AddTransient<CreateCategoryButtonViewModel>();
+        builder.Services.AddTransient<CategorySelectorViewModel>();
+        //Note
+        builder.Services.AddTransient<NotesViewModel>();
+        builder.Services.AddTransient<CreateNoteButtonViewModel>();
+        builder.Services.AddTransient<ManageTextNoteViewModel>();
+        builder.Services.AddTransient<ManageAccountNoteViewModel>();
+        builder.Services.AddTransient<NoteItemViewModel>();
+        builder.Services.AddTransient<TextNoteItemViewModel>();
+        builder.Services.AddTransient<AccountNoteItemFactory>();
+        builder.Services.AddTransient<NoteTypeSelectorViewModel>();
+        builder.Services.AddTransient<TextBlocksViewModel>();
         
         //Register Views
-            //Category
-            builder.Services.AddTransient<CreateCategoryButtonView>();
-            builder.Services.AddTransient<CreateCategoryView>();
-            builder.Services.AddTransient<HorizontalCategoriesView>();
-            builder.Services.AddTransient<CategorySelectorView>();
-            //Note
-            builder.Services.AddTransient<VerticalNotesView>();
-            builder.Services.AddTransient<CreateNoteButtonView>();
-            builder.Services.AddTransient<CreateNoteView>();
-            builder.Services.AddTransient<NoteItemView>();
+        //Category
+        builder.Services.AddTransient<CreateCategoryButtonView>();
+        builder.Services.AddTransient<CreateCategoryView>();
+        builder.Services.AddTransient<HorizontalCategoriesView>();
+        builder.Services.AddTransient<CategorySelectorView>();
+        //Note
+        builder.Services.AddTransient<VerticalNotesView>();
+        builder.Services.AddTransient<CreateNoteButtonView>();
+        builder.Services.AddTransient<CreateNoteView>();
+        builder.Services.AddTransient<NoteItemView>();
+        builder.Services.AddTransient<NoteTypeSelectorView>();
+        builder.Services.AddTransient<INoteSubView, TextBlocksView>();
+        
+        //Factories
+        builder.Services.AddSingleton<INoteItemFactory, TextNoteItemFactory>();
+        builder.Services.AddSingleton<INoteItemFactory, AccountNoteItemFactory>();
+        builder.Services.AddSingleton<SubViewFactory>();
+        builder.Services.AddSingleton<NoteItemFactoryManager>();
+
+        
+        
+     
         
         
 #if DEBUG

@@ -6,7 +6,7 @@ public class TextNoteModel : NoteModel
 {
     public string? TextContent { get; set; }
     
-    public new NoteType Type => NoteType.Text;
+    public override NoteType Type => NoteType.Text;
 
     public override NoteModel EditNote(NoteDto dto)
     { 
@@ -20,6 +20,7 @@ public class TextNoteModel : NoteModel
         var textDto = dto as TextNoteDto;
         return new TextNoteModel
         {
+            Id = _idCounter++,
             Title = textDto.Title,
             Description = textDto.Description,
             Category = textDto.Category,

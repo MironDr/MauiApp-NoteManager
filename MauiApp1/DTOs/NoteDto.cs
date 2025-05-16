@@ -16,7 +16,7 @@ public class NoteDto : BaseCommon
         Title = noteModel.Title;
         Description = noteModel.Description;
         Category = noteModel.Category;
-        Console.WriteLine("NoteDto.CompleteNoteDtoByNoteModel");
+       
     }
 }
 
@@ -27,9 +27,24 @@ public class TextNoteDto : NoteDto
     public override void CompleteNoteDtoByNoteModel(NoteModel noteModel)
     {
         base.CompleteNoteDtoByNoteModel(noteModel);
-        Console.WriteLine("TextNoteDto.CompleteNoteDtoByNoteModel");
         var textNote = noteModel as TextNoteModel;
         TextContent = textNote.TextContent;
         
+    }
+}
+
+public class AccountNoteDto : NoteDto
+{
+    public string Login { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
+    
+    public override void CompleteNoteDtoByNoteModel(NoteModel noteModel)
+    {
+        base.CompleteNoteDtoByNoteModel(noteModel);
+        if (noteModel is AccountNoteModel textNote)
+        {
+            Login = textNote.Login;
+            Password = textNote.Password;
+        }
     }
 }

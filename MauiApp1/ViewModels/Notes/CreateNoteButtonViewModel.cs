@@ -10,18 +10,22 @@ public class CreateNoteButtonViewModel : BaseViewModel
 {
     private readonly IPopupService _popupService;
     private readonly NoteItemFactoryManager _factoryManager;
-    public Command CreateNoteCommand { get; }
+    private readonly NoteTypeSelectorViewModel _noteTypeSelectorViewModel;
     
-    public CreateNoteButtonViewModel(IPopupService popupService, NoteItemFactoryManager factoryManager)
+    public Command CreateNoteCommand { get; }
+
+    public CreateNoteButtonViewModel(IPopupService popupService, NoteItemFactoryManager factoryManager, NoteTypeSelectorViewModel noteTypeSelectorViewModel)
     {
         _popupService = popupService;
         _factoryManager = factoryManager;
-        CreateNoteCommand = new Command(CreateNote);
+        _noteTypeSelectorViewModel = noteTypeSelectorViewModel;
+     
+        CreateNoteCommand = new Command(ShowTypeSelectorPopup);
     }
-    
-    private void CreateNote()
+
+    private void ShowTypeSelectorPopup()
     {
-        var view = _factoryManager.GetEditorViewModel(NoteType.Text);
-        if (view != null) _popupService.ShowPopupAsyncWithParameter<CreateNoteView, BaseViewModel>(view);
+        var selectorViewModel = _noteTypeSelectorViewModel;
+        _popupService.ShowPopupAsyncWithParameter<NoteTypeSelectorView, NoteTypeSelectorViewModel>(selectorViewModel);
     }
 }

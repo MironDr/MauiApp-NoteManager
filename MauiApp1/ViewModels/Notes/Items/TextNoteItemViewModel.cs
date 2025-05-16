@@ -21,8 +21,8 @@ public sealed class TextNoteItemViewModel : NoteItemViewModel
 
         Fields.Add(new CustomFieldViewModel(
             "Text",
-            _model.TextContent,
-            s => _model.TextContent = s!,
+            _model!.TextContent,
+            null,
             IsReadOnly
         ));
     }

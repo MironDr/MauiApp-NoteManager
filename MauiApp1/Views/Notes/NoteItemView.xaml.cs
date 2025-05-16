@@ -20,7 +20,7 @@ public partial class NoteItemView : BaseView, IParameterizedView<NoteItemStruct>
     public void SetData(NoteItemStruct data)
     {
         BindingContext = data.NoteItemView;
-        EditModeView.SetBindingContext(data.NoteItemEdit as ManageTextNoteViewModel);
+        EditModeView.SetBindingContext(data.NoteItemEdit);
         EditModeView.SetDataToEdit(data.NoteItemView.Note);
     }
 

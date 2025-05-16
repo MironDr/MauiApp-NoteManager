@@ -7,15 +7,15 @@
              xmlns:notes="clr-namespace:MauiApp1.Views.Notes"
              x:Class="MauiApp1.Views.Notes.CreateNoteView">
     <StackLayout>
-        
-        <CollectionView ItemsSource="{Binding Fields}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <notes:CustomFieldView />
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
+        <StackLayout x:Name="MainLayout">
+            <CollectionView ItemsSource="{Binding Fields}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <notes:CustomFieldView />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
         <categories:CategorySelectorView x:Name="CategorySelectorView"/>
         
         <Button Text="Create"

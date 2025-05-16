@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<view:BaseView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:view="clr-namespace:MauiApp1.View"
+             xmlns:notes="clr-namespace:MauiApp1.Views.Notes"
+             x:Class="MauiApp1.Views.Notes.TextBlocksView">
+    <VerticalStackLayout>
+        <CollectionView ItemsSource="{Binding Blocks}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <notes:CustomFieldView />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+    
+</view:BaseView>

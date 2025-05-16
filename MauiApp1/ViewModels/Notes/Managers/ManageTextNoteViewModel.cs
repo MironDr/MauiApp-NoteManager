@@ -3,12 +3,18 @@ using MauiApp1.Models;
 using MauiApp1.Services;
 using MauiApp1.ViewModels.Categories;
 
-namespace MauiApp1.ViewModels.Notes;
+namespace MauiApp1.ViewModels.Notes.Managers;
 
 public class ManageTextNoteViewModel : ManageNoteViewModel<TextNoteDto, TextNoteModel>
 {
-    public ManageTextNoteViewModel(INoteService noteService, IPopupService popupService, CategorySelectorViewModel selectorViewModel)
-        : base(noteService, popupService, selectorViewModel) { }
+    public TextBlocksViewModel TextBlocksViewModel;
+
+    public ManageTextNoteViewModel(INoteService noteService, IPopupService popupService,
+        CategorySelectorViewModel selectorViewModel, TextBlocksViewModel textBlocksViewModel)
+        : base(noteService, popupService, selectorViewModel)
+    {
+        TextBlocksViewModel = textBlocksViewModel;
+    }
 
     protected override void ReloadFields()
     {

@@ -53,12 +53,13 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
         CategorySelectorViewModel.SelectCategoryById(Note.Category);
     }
 
-    protected async Task SaveNoteAsync()
+    private async Task SaveNoteAsync()
     {
         if (string.IsNullOrWhiteSpace(Note.Title))
             return;
 
         Note.Category = CategorySelectorViewModel.SelectedCategory?.Id;
+        
 
         if (!_editMode)
             _noteService.AddNote(CreateNoteFromDto());

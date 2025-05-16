@@ -9,8 +9,8 @@ public interface IPopupService
 {
     Task ShowPopupAsync<TView>(bool canBeClosed = true) where TView : BaseView;
     Task ShowPopupAsyncWithParameter<TView, TParameter>(TParameter parameter,bool canBeClosed = true) where TView : BaseView;
-    
     Task ClosePopupAsync();
+    void AddViewToPopup(BaseView view);
 }
 
 
@@ -56,7 +56,6 @@ public class PopupService : IPopupService
         }
         
         _popup = new InstantPopup { Content = view, CanBeDismissedByTappingOutsideOfPopup = canBeClosed };
-        
         await Shell.Current.CurrentPage.ShowPopupAsync(_popup);
         _isBusy = false;
     }
@@ -68,6 +67,14 @@ public class PopupService : IPopupService
 
         await _popup.CloseAsync();
     }
-    
+
+    public void AddViewToPopup(BaseView view)
+    {
+     
+        if (_popup?.Content is IViewAddable addableView)
+        {
+            addableView.AddView(view);
+        }
+    }
     
 }

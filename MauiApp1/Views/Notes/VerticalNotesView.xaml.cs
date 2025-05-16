@@ -3,7 +3,7 @@ using MauiApp1.ViewModels.Notes;
 
 namespace MauiApp1.Views.Notes;
 
-public partial class VerticalNotesView : BaseView
+public sealed partial class VerticalNotesView : BaseView
 {
     public VerticalNotesView(NotesViewModel viewModel, CreateNoteButtonView createNoteView)
     {

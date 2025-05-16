@@ -13,7 +13,6 @@ public class NotesViewModel : BaseViewModel
 {
     private readonly INoteService _noteService;
     
-    private readonly ICategoryService _categoryService;
     
     private readonly IPopupService _popupService;
     
@@ -40,10 +39,9 @@ public class NotesViewModel : BaseViewModel
     }
     
     
-    public NotesViewModel(INoteService noteService,ICategoryService categoryService, IPopupService popupService, NoteItemFactoryManager factoryManager) : base()
+    public NotesViewModel(INoteService noteService, IPopupService popupService, NoteItemFactoryManager factoryManager) : base()
     {
         _noteService = noteService;
-        _categoryService = categoryService;
         _popupService = popupService;
         _factoryManager = factoryManager;
 
@@ -65,17 +63,17 @@ public class NotesViewModel : BaseViewModel
         if (_selectedCategory == null)
         {
             Notes = new ObservableCollection<NoteModel>(_noteService.GetNotes());
+
             return;
         }
         
         Notes = new ObservableCollection<NoteModel>(_noteService.GetNotes().Where(n => n.Category == _selectedCategory.Id));
-    
+        
     }
     
     private void OnNoteSelected(NoteModel note)
     {
         NoteItemStruct noteItemStruct = (NoteItemStruct)_factoryManager.Create(note)!;
-        
         _popupService.ShowPopupAsyncWithParameter<NoteItemView, NoteItemStruct>(noteItemStruct);
     }
 

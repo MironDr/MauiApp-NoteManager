@@ -9,11 +9,11 @@ public enum NoteType
 }
 public class NoteModel : BaseModel
 {
-    public NoteType Type { get; }
+    public virtual NoteType Type { get; }
     
     private string _title = null!;
     
-    private static int _idCounter = 0;
+    protected static int _idCounter = 0;
 
     public string Title
     {

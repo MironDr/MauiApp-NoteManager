@@ -8,7 +8,7 @@ using MauiApp1.Views.Categories;
 
 namespace MauiApp1.Views.Notes;
 
-public sealed partial class CreateNoteView : BaseView, IParameterizedView<BaseViewModel>
+public sealed partial class CreateNoteView : BaseView, IParameterizedView<BaseViewModel>, IViewAddable
 {
     private BaseViewModel? _viewModel;
 
@@ -47,5 +47,10 @@ public sealed partial class CreateNoteView : BaseView, IParameterizedView<BaseVi
     public void SetData(BaseViewModel data)
     {
         SetBindingContext(data);
+    }
+
+    public void AddView(BaseView view)
+    {
+        MainLayout.Add(view);
     }
 }
