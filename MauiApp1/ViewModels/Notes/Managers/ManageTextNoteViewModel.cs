@@ -1,4 +1,5 @@
 ﻿using MauiApp1.DTOs;
+using MauiApp1.Interfaces;
 using MauiApp1.Models;
 using MauiApp1.Services;
 using MauiApp1.ViewModels.Categories;
@@ -9,9 +10,9 @@ public class ManageTextNoteViewModel : ManageNoteViewModel<TextNoteDto, TextNote
 {
     public TextBlocksViewModel TextBlocksViewModel;
 
-    public ManageTextNoteViewModel(INoteService noteService, IPopupService popupService,
+    public ManageTextNoteViewModel(INoteService noteService, IModalService modalService,
         CategorySelectorViewModel selectorViewModel, TextBlocksViewModel textBlocksViewModel)
-        : base(noteService, popupService, selectorViewModel)
+        : base(noteService, modalService, selectorViewModel)
     {
         TextBlocksViewModel = textBlocksViewModel;
     }
@@ -31,4 +32,5 @@ public class ManageTextNoteViewModel : ManageNoteViewModel<TextNoteDto, TextNote
     {
         return (TextNoteModel)_noteToEdit.EditNote(Note);
     }
+    
 }

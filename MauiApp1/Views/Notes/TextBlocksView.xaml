@@ -6,10 +6,14 @@
              xmlns:notes="clr-namespace:MauiApp1.Views.Notes"
              x:Class="MauiApp1.Views.Notes.TextBlocksView">
     <VerticalStackLayout>
+        <HorizontalStackLayout HorizontalOptions="Center" IsVisible="{Binding IsEdit}">
+            <Label Text="Text Blocks" HorizontalOptions="Start" VerticalOptions="Center" Padding="50,0"/>
+            <Button Command="{Binding AddNewBlockCommand}" Text="+" VerticalOptions="Center" HorizontalOptions="End" Padding="50,0"/>
+        </HorizontalStackLayout>
         <CollectionView ItemsSource="{Binding Blocks}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <notes:CustomFieldView />
+                    <notes:CustomEditorView />
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

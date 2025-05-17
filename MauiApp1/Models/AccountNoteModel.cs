@@ -8,6 +8,10 @@ public class AccountNoteModel : NoteModel
     public string Password { get; set; } = string.Empty;
     
     public override NoteType Type => NoteType.Account;
+    
+    protected AccountNoteModel() : base()
+    {
+    }
 
     public override NoteModel EditNote(NoteDto dto)
     { 

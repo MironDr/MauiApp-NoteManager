@@ -12,8 +12,10 @@ public class NoteModel : BaseModel
     public virtual NoteType Type { get; }
     
     private string _title = null!;
-    
-    protected static int _idCounter = 0;
+
+    protected NoteModel() : base()
+    {
+    }
 
     public string Title
     {

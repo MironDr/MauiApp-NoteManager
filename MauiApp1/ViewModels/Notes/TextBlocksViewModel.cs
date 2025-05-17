@@ -1,26 +1,57 @@
 ﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.Input;
+using MauiApp1.Interfaces;
 
 namespace MauiApp1.ViewModels.Notes;
 
-public class TextBlocksViewModel : BaseViewModel
+public class TextBlocksViewModel : BaseViewModel, ISwitchable
 {
     public ObservableCollection<CustomFieldViewModel> Blocks { get; } = new();
 
-    private List<string?> _blocksContent = new();
+    public IAsyncRelayCommand AddNewBlockCommand { get; }
+
+    private readonly List<string?> _blocksContent = new();
+    
+    
+    private bool _isReadOnly = false;
+    public bool IsEdit => !_isReadOnly;
+    
+    public bool IsReadOnly
+    {
+        get => _isReadOnly;
+        set
+        {
+            if (_isReadOnly != value)
+            {
+                _isReadOnly = value;
+                foreach (var field in Blocks)
+                {
+                    field.IsReadOnly = _isReadOnly;
+                }
+                OnPropertyChanged(nameof(IsReadOnly));
+            }
+        }
+    }
+
     public TextBlocksViewModel()
+    {
+        AddNewBlockCommand = new AsyncRelayCommand(AddNewBlock);
+    }
+
+    private Task AddNewBlock()
     {
         _blocksContent.Add(string.Empty);
         Blocks.Add(new CustomFieldViewModel(
-            "Text",
-            _blocksContent[0],
-            s => _blocksContent[0] = s
+            $"Block N{_blocksContent.Count}",
+            _blocksContent[^1],
+            s => _blocksContent[^1] = s,
+            IsReadOnly
         ));
-        
-        _blocksContent.Add(string.Empty);
-        Blocks.Add(new CustomFieldViewModel(
-            "Text1",
-            _blocksContent[1],
-            s => _blocksContent[0] = s
-        ));
+        return Task.CompletedTask;
+    }
+
+    public void Switch(bool state = false)
+    {
+        IsReadOnly = !state;
     }
 }

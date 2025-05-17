@@ -32,6 +32,8 @@ public sealed partial class CreateNoteView : BaseView, IParameterizedView<BaseVi
         {
             CategorySelectorView.SetBindingContext(selectable.CategorySelectorViewModel);
         }
+
+       
     }
 
     public void GoToEditMode(NoteModel noteModel)
@@ -51,6 +53,8 @@ public sealed partial class CreateNoteView : BaseView, IParameterizedView<BaseVi
 
     public void AddView(BaseView view)
     {
-        MainLayout.Add(view);
+        DynamicContentArea.Add(view);
     }
+    
+   
 }

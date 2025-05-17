@@ -18,11 +18,14 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
-        builder.UseMauiApp<App>().ConfigureFonts(fonts =>
-        {
-            fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-            fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-        }).UseMauiCommunityToolkit();
+        builder
+            .UseMauiApp(serviceProvider => new App(serviceProvider))
+            .ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+            })
+            .UseMauiCommunityToolkit();
        
         
         
@@ -30,6 +33,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<ICategoryService, CategoryService>();
         builder.Services.AddSingleton<INoteService, NoteService>();
         builder.Services.AddSingleton<IPopupService, PopupService>();
+        builder.Services.AddSingleton<IModalService, ModalService>();
         
         
         //Register ViewModels
@@ -66,6 +70,7 @@ public static class MauiProgram
         builder.Services.AddTransient<NoteItemView>();
         builder.Services.AddTransient<NoteTypeSelectorView>();
         builder.Services.AddTransient<INoteSubView, TextBlocksView>();
+        builder.Services.AddTransient<TextBlocksView>();
         
         //Factories
         builder.Services.AddSingleton<INoteItemFactory, TextNoteItemFactory>();

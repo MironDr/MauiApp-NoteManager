@@ -7,9 +7,9 @@ using MauiApp1.View;
 
 namespace MauiApp1.Views.Notes;
 
-public partial class CustomFieldView : BaseView
+public partial class CustomEntryView : BaseView
 {
-    public CustomFieldView()
+    public CustomEntryView()
     {
         InitializeComponent();
     }

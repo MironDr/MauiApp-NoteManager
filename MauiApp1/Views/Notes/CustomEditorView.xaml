@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.Views.Notes.CustomEditorView">
+    <VerticalStackLayout x:Name="MainLayout" IsVisible="{Binding IsNonEmptyField}">
+        <Label Text="{Binding Label}" />
+        <Border Padding="0">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnEditorTapped" />
+            </Border.GestureRecognizers>
+        <Editor AutoSize="TextChanges" x:Name="EditorField" Text="{Binding Value}" Completed="OnEditorCompleted" IsReadOnly="{Binding IsReadOnly}"/>
+        </Border>
+    </VerticalStackLayout>
+</ContentView>

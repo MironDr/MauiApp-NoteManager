@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
+using MauiApp1.Interfaces;
 using MauiApp1.Models;
 using MauiApp1.Services;
 
@@ -8,10 +10,13 @@ namespace MauiApp1.ViewModels.Categories;
 
 public class CategorySelectorViewModel : BaseViewModel
 {
-    private readonly ICategoryService _categoryService;
-    public CreateCategoryViewModel CreateCategoryViewModel { get; }
+    private readonly ICategoryService _categoryService; 
+    private readonly IPopupService _popupService;
+    public CreateCategoryButtonViewModel CreateCategoryButtonViewModel { get; }
 
     public ICommand CategorySelectedCommand { get; }
+    
+    public AsyncRelayCommand CreateCategoryCommand { get; }
     
     private ObservableCollection<CategoryModel> _categories = new();
     private CategoryModel? _selectedCategory;
@@ -73,19 +78,21 @@ public class CategorySelectorViewModel : BaseViewModel
     
     public ICommand ToggleCategoryListCommand { get; }
 
-    public CategorySelectorViewModel(ICategoryService categoryService, CreateCategoryViewModel createCategoryViewModel)
+    public CategorySelectorViewModel(ICategoryService categoryService,IPopupService popupService, CreateCategoryButtonViewModel createCategoryButtonViewModel)
     {
         CategorySelectedCommand = new Command<CategoryModel>(OnCategorySelected);
         _categoryService = categoryService;
-        CreateCategoryViewModel = createCategoryViewModel;
-        CreateCategoryViewModel.ClosePopup = false;
+        _popupService = popupService;
+        CreateCategoryButtonViewModel = createCategoryButtonViewModel;
+        
         
         
         Categories = new ObservableCollection<CategoryModel>(_categoryService.GetCategories().Where(c => c.Id != SelectedCategory?.Id));
 
         ToggleCategoryListCommand = new Command(() =>
         {
-           IsListVisible = !IsListVisible; 
+            Categories = new ObservableCollection<CategoryModel>(_categoryService.GetCategories().Where(c => c.Id != SelectedCategory?.Id));
+            IsListVisible = !IsListVisible; 
         });
     }
 
@@ -101,4 +108,6 @@ public class CategorySelectorViewModel : BaseViewModel
         Categories = new ObservableCollection<CategoryModel>(_categoryService.GetCategories().Where(c => c.Id != SelectedCategory?.Id));
         IsListVisible = false; 
     }
+
+   
 }

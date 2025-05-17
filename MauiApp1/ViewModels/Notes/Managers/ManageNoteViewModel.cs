@@ -14,7 +14,7 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
     where TModel : NoteModel
 {
     protected readonly INoteService _noteService;
-    protected readonly IPopupService _popupService;
+    protected readonly IModalService _modalService;
 
     public CategorySelectorViewModel CategorySelectorViewModel { get; }
 
@@ -27,10 +27,10 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
     protected bool _editMode = false;
     protected TModel _noteToEdit;
 
-    protected ManageNoteViewModel(INoteService noteService, IPopupService popupService, CategorySelectorViewModel selectorViewModel)
+    protected ManageNoteViewModel(INoteService noteService, IModalService modalService, CategorySelectorViewModel selectorViewModel)
     {
         _noteService = noteService;
-        _popupService = popupService;
+        _modalService = modalService;
         CategorySelectorViewModel = selectorViewModel;
 
         SaveNoteCommand = new AsyncRelayCommand(SaveNoteAsync);
@@ -66,7 +66,7 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
         else
             _noteService.AddNote(EditNoteFromDto());
 
-        await _popupService.ClosePopupAsync();
+        await _modalService.CloseModalAsync();
     }
 
     protected abstract TModel CreateNoteFromDto();

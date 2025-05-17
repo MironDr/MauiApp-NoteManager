@@ -22,10 +22,8 @@
                     </ScrollView>
                 </StackLayout>
         
-                <StackLayout x:Name="LayoutCreate" IsVisible="False">
-                    <categories:CreateCategoryView x:Name="CreateCategory"/>
-                </StackLayout>
+                <categories:CreateCategoryButtonView x:Name="CategoryButtonView"/>
         
-                <Button x:Name="ToggleModeButton" Text="Create new" Clicked="ToggleButton_Clicked"/>
+               
     </VerticalStackLayout>
 </view:BaseView>

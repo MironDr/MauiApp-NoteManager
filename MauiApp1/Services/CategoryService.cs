@@ -23,8 +23,14 @@ public class CategoryService : ICategoryService
 
     private void LoadCategories()
     {
-        _categories.Add(new CategoryModel{Id = 1, CategoryName = "Products"});
-        _categories.Add(new CategoryModel{Id = 2, CategoryName = "Foods"});
+        _categories.Add(CategoryModel.CreateCategory(new CategoryDto()
+        {
+            CategoryName = "Category 1"
+        }));
+        _categories.Add(CategoryModel.CreateCategory(new CategoryDto()
+        {
+            CategoryName = "Category 2"
+        }));
  
     }
 

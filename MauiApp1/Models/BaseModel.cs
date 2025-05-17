@@ -6,4 +6,11 @@ namespace MauiApp1.Models;
 public class BaseModel : BaseCommon
 {
     public int Id { get; set; }
+    
+    protected static int _idCounter = 2;
+
+    protected BaseModel()
+    {
+        
+    }
 }

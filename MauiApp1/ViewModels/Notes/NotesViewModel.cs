@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using MauiApp1.Factories;
 using MauiApp1.Models;
 using MauiApp1.Services;
@@ -14,7 +15,9 @@ public class NotesViewModel : BaseViewModel
     private readonly INoteService _noteService;
     
     
-    private readonly IPopupService _popupService;
+    private readonly IModalService _modalService;
+    
+    private readonly SubViewFactory _subViewFactory;
     
     private readonly NoteItemFactoryManager _factoryManager;
 
@@ -23,7 +26,7 @@ public class NotesViewModel : BaseViewModel
     
     private ObservableCollection<NoteModel> _notes = new();
     
-    public ICommand NoteSelectedCommand { get; }
+    public AsyncRelayCommand<NoteModel> NoteSelectedCommand { get; }
 
     public ObservableCollection<NoteModel> Notes
     {
@@ -39,15 +42,16 @@ public class NotesViewModel : BaseViewModel
     }
     
     
-    public NotesViewModel(INoteService noteService, IPopupService popupService, NoteItemFactoryManager factoryManager) : base()
+    public NotesViewModel(INoteService noteService, IModalService modalService, NoteItemFactoryManager factoryManager, SubViewFactory subViewFactory) : base()
     {
         _noteService = noteService;
-        _popupService = popupService;
+        _modalService = modalService;
         _factoryManager = factoryManager;
-
+        _subViewFactory = subViewFactory;
+        
         _noteService.NotesUpdated += OnNotesUpdated!;
         
-        NoteSelectedCommand = new Command<NoteModel>(OnNoteSelected);
+        NoteSelectedCommand = new AsyncRelayCommand<NoteModel>(OnNoteSelected!);
         
         LoadNotes();
     }
@@ -71,10 +75,21 @@ public class NotesViewModel : BaseViewModel
         
     }
     
-    private void OnNoteSelected(NoteModel note)
+    private async Task OnNoteSelected(NoteModel note)
     {
-        NoteItemStruct noteItemStruct = (NoteItemStruct)_factoryManager.Create(note)!;
-        _popupService.ShowPopupAsyncWithParameter<NoteItemView, NoteItemStruct>(noteItemStruct);
+        var noteItemStruct = (NoteItemStruct)_factoryManager.Create(note)!;
+        
+        await _modalService.ShowModalAsyncWithParameter<NoteItemView, NoteItemStruct>(noteItemStruct);
+        
+        var editorVm = noteItemStruct.NoteItemEdit;
+        
+        var view = _subViewFactory.GetViewForType(note.Type, editorVm);
+            
+        if (view != null)
+        {
+            _modalService.AddViewToModal(view);
+        }
+        
     }
 
     public void FilterByCategory(CategoryModel? category)

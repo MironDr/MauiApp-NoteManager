@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.Input;
 using MauiApp1.Factories;
 using MauiApp1.Models;
 using MauiApp1.Services;
@@ -9,32 +10,42 @@ namespace MauiApp1.ViewModels.Notes;
 public class NoteTypeSelectorViewModel : BaseViewModel
 {
     private readonly IPopupService _popupService;
+    private readonly IModalService _modalService;
     private readonly NoteItemFactoryManager _factoryManager;
     private readonly SubViewFactory _factorySubView;
 
     public ObservableCollection<NoteType> NoteTypes { get; }
-    public Command<NoteType> SelectNoteTypeCommand { get; }
+    public AsyncRelayCommand<NoteType> SelectNoteTypeCommand { get; }
 
-    public NoteTypeSelectorViewModel(IPopupService popupService, NoteItemFactoryManager factoryManager, SubViewFactory factorySubView)
+    public NoteTypeSelectorViewModel(
+        IPopupService popupService,
+        IModalService modalService,
+        NoteItemFactoryManager factoryManager,
+        SubViewFactory factorySubView)
     {
         _popupService = popupService;
+        _modalService = modalService;
         _factoryManager = factoryManager;
         _factorySubView = factorySubView;
-     
 
         NoteTypes = new ObservableCollection<NoteType>(Enum.GetValues<NoteType>());
-        SelectNoteTypeCommand = new Command<NoteType>(OnNoteTypeSelected);
+        SelectNoteTypeCommand = new AsyncRelayCommand<NoteType>(OnNoteTypeSelected);
     }
 
-    private void OnNoteTypeSelected(NoteType selectedType)
+    private async Task OnNoteTypeSelected(NoteType selectedType)
     {
         var editorVm = _factoryManager.GetEditorViewModel(selectedType);
         if (editorVm != null)
         {
-            _popupService.ClosePopupAsync(); 
-            _popupService.ShowPopupAsyncWithParameter<CreateNoteView, BaseViewModel>(editorVm);
+            await _popupService.ClosePopupAsync();
+            await _modalService.ShowModalAsyncWithParameter<CreateNoteView, BaseViewModel>(editorVm);
+
             var view = _factorySubView.GetViewForType(selectedType, editorVm);
-            if (view != null) _popupService.AddViewToPopup(view);
+            
+            if (view != null)
+            {
+                _modalService.AddViewToModal(view);
+            }
         }
     }
 }

@@ -14,20 +14,20 @@ public class TextNoteItemFactory : INoteItemFactory
     public NoteType NoteType => NoteType.Text;
 
     private readonly INoteService _noteService;
-    private readonly IPopupService _popupService;
+    private readonly IModalService _modalService;
     private readonly ICategoryService _categoryService;
     private readonly CategorySelectorViewModel _categorySelector;
     private readonly TextBlocksViewModel _textBlocksViewModel;
 
     public TextNoteItemFactory(
         INoteService noteService,
-        IPopupService popupService,
+        IModalService modalService,
         ICategoryService categoryService,
         CategorySelectorViewModel categorySelector,
         TextBlocksViewModel textBlocksViewModel)
     {
         _noteService = noteService;
-        _popupService = popupService;
+        _modalService = modalService;
         _categoryService = categoryService;
         _categorySelector = categorySelector;
         _textBlocksViewModel = textBlocksViewModel;
@@ -53,6 +53,6 @@ public class TextNoteItemFactory : INoteItemFactory
 
     public BaseViewModel GetEditorViewModel()
     {
-        return new ManageTextNoteViewModel(_noteService, _popupService, _categorySelector, _textBlocksViewModel);
+        return new ManageTextNoteViewModel(_noteService, _modalService, _categorySelector, _textBlocksViewModel);
     }
 }

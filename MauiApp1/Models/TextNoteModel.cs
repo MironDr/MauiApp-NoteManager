@@ -8,6 +8,9 @@ public class TextNoteModel : NoteModel
     
     public override NoteType Type => NoteType.Text;
 
+    protected TextNoteModel() : base()
+    {
+    }
     public override NoteModel EditNote(NoteDto dto)
     { 
         base.EditNote(dto);

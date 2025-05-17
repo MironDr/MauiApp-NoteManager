@@ -5,6 +5,10 @@ namespace MauiApp1.Models;
 public class CategoryModel : BaseModel
 {
        private string _categoryName = null!;
+       
+       protected CategoryModel() : base()
+       {
+       }
 
        public string CategoryName
        {
@@ -50,7 +54,7 @@ public class CategoryModel : BaseModel
        
        public static CategoryModel CreateCategory(CategoryDto categoryDto)
        {
-              return new CategoryModel{Id = 3, CategoryName = categoryDto.CategoryName};
+              return new CategoryModel{Id = _idCounter++, CategoryName = categoryDto.CategoryName};
        }
 
 }

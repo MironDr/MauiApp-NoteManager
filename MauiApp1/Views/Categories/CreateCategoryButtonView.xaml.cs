@@ -1,3 +1,4 @@
+using MauiApp1.Interfaces;
 using MauiApp1.View;
 using MauiApp1.ViewModels.Categories;
 
@@ -14,6 +15,7 @@ public sealed partial class CreateCategoryButtonView : BaseView
     {
         InitializeComponent();
     }
-    
+
+  
 }
 
