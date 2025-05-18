@@ -4,7 +4,6 @@ namespace MauiApp1.Models;
 
 public class TextNoteModel : NoteModel
 {
-    public string? TextContent { get; set; }
     
     public override NoteType Type => NoteType.Text;
 
@@ -14,7 +13,7 @@ public class TextNoteModel : NoteModel
     public override NoteModel EditNote(NoteDto dto)
     { 
         base.EditNote(dto);
-        TextContent = (dto as TextNoteDto)?.TextContent;
+       
         return this;
     }
 
@@ -27,7 +26,7 @@ public class TextNoteModel : NoteModel
             Title = textDto.Title,
             Description = textDto.Description,
             Category = textDto.Category,
-            TextContent = textDto.TextContent
+            
         };
     }
 }

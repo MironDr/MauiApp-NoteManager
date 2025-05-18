@@ -1,10 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
 using MauiApp1.Interfaces;
+using MauiApp1.Models;
 
 namespace MauiApp1.ViewModels.Notes;
 
-public class TextBlocksViewModel : BaseViewModel, ISwitchable
+public class TextBlocksViewModel : BaseViewModel
 {
     public ObservableCollection<CustomFieldViewModel> Blocks { get; } = new();
 
@@ -50,8 +51,10 @@ public class TextBlocksViewModel : BaseViewModel, ISwitchable
         return Task.CompletedTask;
     }
 
-    public void Switch(bool state = false)
+
+    public void SetReadOnly()
     {
-        IsReadOnly = !state;
+        IsReadOnly = true;
     }
+  
 }

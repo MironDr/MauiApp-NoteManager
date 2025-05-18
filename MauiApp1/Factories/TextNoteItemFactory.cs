@@ -17,20 +17,23 @@ public class TextNoteItemFactory : INoteItemFactory
     private readonly IModalService _modalService;
     private readonly ICategoryService _categoryService;
     private readonly CategorySelectorViewModel _categorySelector;
-    private readonly TextBlocksViewModel _textBlocksViewModel;
+    private readonly TextBlocksViewModel _textBlocksViewModelEdit;
+    private readonly TextBlocksViewModel _textBlocksViewModelView;
 
     public TextNoteItemFactory(
         INoteService noteService,
         IModalService modalService,
         ICategoryService categoryService,
         CategorySelectorViewModel categorySelector,
-        TextBlocksViewModel textBlocksViewModel)
+        TextBlocksViewModel textBlocksViewModelEdit,
+        TextBlocksViewModel textBlocksViewModelView)
     {
         _noteService = noteService;
         _modalService = modalService;
         _categoryService = categoryService;
         _categorySelector = categorySelector;
-        _textBlocksViewModel = textBlocksViewModel;
+        _textBlocksViewModelEdit = textBlocksViewModelEdit;
+        _textBlocksViewModelView = textBlocksViewModelView;
     }
 
     public NoteItemStruct Create(NoteModel note)
@@ -44,15 +47,17 @@ public class TextNoteItemFactory : INoteItemFactory
         var manager = GetEditorViewModel() as ManageTextNoteViewModel;
         manager!.GoToEditMode(model);
 
+        _textBlocksViewModelView.SetReadOnly();
+        
         return new NoteItemStruct
         {
-            NoteItemView = new TextNoteItemViewModel(model, categoryName),
+            NoteItemView = new TextNoteItemViewModel(model, categoryName, _textBlocksViewModelView),
             NoteItemEdit = manager
         };
     }
 
     public BaseViewModel GetEditorViewModel()
     {
-        return new ManageTextNoteViewModel(_noteService, _modalService, _categorySelector, _textBlocksViewModel);
+        return new ManageTextNoteViewModel(_noteService, _modalService, _categorySelector, _textBlocksViewModelEdit);
     }
 }

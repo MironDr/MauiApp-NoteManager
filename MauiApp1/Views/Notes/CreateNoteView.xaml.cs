@@ -25,12 +25,21 @@ public sealed partial class CreateNoteView : BaseView, IParameterizedView<BaseVi
 
     public override void SetBindingContext(BaseViewModel baseViewModel)
     {
+        
+      
+        
         _viewModel = baseViewModel;
         BindingContext = _viewModel;
 
         if (baseViewModel is ICategorySelectable selectable)
         {
             CategorySelectorView.SetBindingContext(selectable.CategorySelectorViewModel);
+        }
+        
+        if (baseViewModel is ICompositeViewModel composite)
+        {
+            foreach (var view in composite.GetEmbeddedViews())
+                AddView(view);
         }
 
        

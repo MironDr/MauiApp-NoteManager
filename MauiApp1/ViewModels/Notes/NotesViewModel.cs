@@ -81,14 +81,6 @@ public class NotesViewModel : BaseViewModel
         
         await _modalService.ShowModalAsyncWithParameter<NoteItemView, NoteItemStruct>(noteItemStruct);
         
-        var editorVm = noteItemStruct.NoteItemEdit;
-        
-        var view = _subViewFactory.GetViewForType(note.Type, editorVm);
-            
-        if (view != null)
-        {
-            _modalService.AddViewToModal(view);
-        }
         
     }
 

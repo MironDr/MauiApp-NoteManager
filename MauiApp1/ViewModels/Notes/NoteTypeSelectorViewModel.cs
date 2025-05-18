@@ -12,21 +12,19 @@ public class NoteTypeSelectorViewModel : BaseViewModel
     private readonly IPopupService _popupService;
     private readonly IModalService _modalService;
     private readonly NoteItemFactoryManager _factoryManager;
-    private readonly SubViewFactory _factorySubView;
-
+    
     public ObservableCollection<NoteType> NoteTypes { get; }
     public AsyncRelayCommand<NoteType> SelectNoteTypeCommand { get; }
 
     public NoteTypeSelectorViewModel(
         IPopupService popupService,
         IModalService modalService,
-        NoteItemFactoryManager factoryManager,
-        SubViewFactory factorySubView)
+        NoteItemFactoryManager factoryManager)
     {
         _popupService = popupService;
         _modalService = modalService;
         _factoryManager = factoryManager;
-        _factorySubView = factorySubView;
+
 
         NoteTypes = new ObservableCollection<NoteType>(Enum.GetValues<NoteType>());
         SelectNoteTypeCommand = new AsyncRelayCommand<NoteType>(OnNoteTypeSelected);
@@ -39,13 +37,7 @@ public class NoteTypeSelectorViewModel : BaseViewModel
         {
             await _popupService.ClosePopupAsync();
             await _modalService.ShowModalAsyncWithParameter<CreateNoteView, BaseViewModel>(editorVm);
-
-            var view = _factorySubView.GetViewForType(selectedType, editorVm);
             
-            if (view != null)
-            {
-                _modalService.AddViewToModal(view);
-            }
         }
     }
 }

@@ -11,14 +11,13 @@ namespace MauiApp1.Views.Notes;
 
 public partial class NoteItemView : BaseView, IParameterizedView<NoteItemStruct>, IViewAddable
 {
-    private readonly SubViewFactory _subViewFactory;
+   
     
 
     
     public NoteItemView()
     {
         InitializeComponent();
-        _subViewFactory = App.Services.GetRequiredService<SubViewFactory>();
         
     }
    
@@ -29,16 +28,15 @@ public partial class NoteItemView : BaseView, IParameterizedView<NoteItemStruct>
         EditModeView.SetBindingContext(data.NoteItemEdit);
         EditModeView.SetDataToEdit(data.NoteItemView.Note);
 
-    
-        
-        
-        var viewType = data.NoteItemView.Note.Type;
-        var subView = _subViewFactory.GetViewForType(viewType, data.NoteItemEdit);
 
-        if (subView != null && EditModeView is IViewAddable addable)
+
+        if (data.NoteItemView is ICompositeViewModel compositeViewModel)
         {
-            addable.AddView(subView);
+            foreach (var view in compositeViewModel.GetEmbeddedViews())
+                AddView(view);
         }
+        
+     
     }
 
     private void Switch_OnToggled(object? sender, ToggledEventArgs e)
