@@ -23,13 +23,13 @@ public sealed class AccountNoteItemViewModel : NoteItemViewModel
             "Login",
             _model!.Login,
             null,
-            IsReadOnly
+            true
         ));
         Fields.Add(new CustomFieldViewModel(
             "Password",
             _model!.Password,
             null,
-            IsReadOnly
+            true
         ));
     }
 }

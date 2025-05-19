@@ -14,7 +14,7 @@ public interface IModalService
 public class ModalService : IModalService
 {
     private readonly IServiceProvider _serviceProvider;
-    private ContentPage? _modalPage;
+    private readonly Stack<ContentPage?> _modalPages = new();
     private bool _isBusy = false;
 
     public ModalService(IServiceProvider serviceProvider)
@@ -31,12 +31,12 @@ public class ModalService : IModalService
 
         var view = _serviceProvider.GetRequiredService<TView>();
 
-        _modalPage = new ContentPage
+        _modalPages.Push(new ContentPage
         {
             Content = view
-        };
+        });
 
-        await Shell.Current.Navigation.PushModalAsync(_modalPage);
+        await Shell.Current.Navigation.PushModalAsync(_modalPages.Peek());
         _isBusy = false;
     }
 
@@ -51,30 +51,33 @@ public class ModalService : IModalService
 
         if (view is IParameterizedView<TParameter> parameterizedView)
         {
+         
             parameterizedView.SetData(parameter);
+
         }
 
-        _modalPage = new ContentPage
+        _modalPages.Push(new ContentPage
         {
             Content = view
-        };
+        });
 
-        await Shell.Current.Navigation.PushModalAsync(_modalPage);
+        await Shell.Current.Navigation.PushModalAsync(_modalPages.Peek());
+        
         _isBusy = false;
     }
 
     public async Task CloseModalAsync()
     {
-        if (_modalPage == null)
+        if (_modalPages.Count == 0)
             return;
 
         await Shell.Current.Navigation.PopModalAsync();
-        _modalPage = null;
+        _modalPages.Pop();
     }
 
     public void AddViewToModal(BaseView view, bool switchMode = false)
     {
-        if (_modalPage?.Content is IViewAddable addableView)
+        if (_modalPages.Peek()?.Content is IViewAddable addableView)
         {
             
             addableView.AddView(view);

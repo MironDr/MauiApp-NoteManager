@@ -3,12 +3,16 @@ using MauiApp1.Models;
 using MauiApp1.Services;
 using MauiApp1.ViewModels.Categories;
 
-namespace MauiApp1.ViewModels.Notes;
+namespace MauiApp1.ViewModels.Notes.Managers;
 
-public class ManageAccountNoteViewModel : ManageNoteViewModel<AccountNoteDto, AccountNoteModel>
+public sealed class ManageAccountNoteViewModel : ManageNoteViewModel<AccountNoteDto, AccountNoteModel>
 {
-    public ManageAccountNoteViewModel(INoteService noteService, IModalService modalService, CategorySelectorViewModel selectorViewModel)
-        : base(noteService, modalService, selectorViewModel) { }
+    public ManageAccountNoteViewModel(INoteService noteService, IModalService modalService,
+        CategorySelectorViewModel selectorViewModel)
+        : base(noteService, modalService, selectorViewModel)
+    {
+        ReloadFields();
+    }
 
     protected override void ReloadFields()
     {

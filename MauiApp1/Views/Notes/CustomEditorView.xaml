@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp1.Views.Notes.CustomEditorView">
     <VerticalStackLayout x:Name="MainLayout" IsVisible="{Binding IsNonEmptyField}">
-        <Label Text="{Binding Label}" />
+        <Entry Text="{Binding Label}"  Completed="OnEditorCompleted" IsReadOnly="{Binding IsReadOnly}"/>
         <Border Padding="0">
             <Border.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnEditorTapped" />

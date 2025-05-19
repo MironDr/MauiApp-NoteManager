@@ -16,24 +16,19 @@ public class TextNoteItemFactory : INoteItemFactory
     private readonly INoteService _noteService;
     private readonly IModalService _modalService;
     private readonly ICategoryService _categoryService;
-    private readonly CategorySelectorViewModel _categorySelector;
-    private readonly TextBlocksViewModel _textBlocksViewModelEdit;
-    private readonly TextBlocksViewModel _textBlocksViewModelView;
+    private readonly IServiceProvider _serviceProvider;
 
     public TextNoteItemFactory(
         INoteService noteService,
         IModalService modalService,
         ICategoryService categoryService,
-        CategorySelectorViewModel categorySelector,
-        TextBlocksViewModel textBlocksViewModelEdit,
-        TextBlocksViewModel textBlocksViewModelView)
+        IServiceProvider serviceProvider)
     {
         _noteService = noteService;
         _modalService = modalService;
         _categoryService = categoryService;
-        _categorySelector = categorySelector;
-        _textBlocksViewModelEdit = textBlocksViewModelEdit;
-        _textBlocksViewModelView = textBlocksViewModelView;
+        _serviceProvider = serviceProvider;
+        
     }
 
     public NoteItemStruct Create(NoteModel note)
@@ -41,23 +36,28 @@ public class TextNoteItemFactory : INoteItemFactory
         var model = (TextNoteModel)note;
 
         string? categoryName = model.Category is { } categoryId
-            ? _categoryService.GetCategories().FirstOrDefault(c => c.Id == categoryId)?.CategoryName
+            ? _categoryService.GetById(categoryId)?.CategoryName
             : null;
 
         var manager = GetEditorViewModel() as ManageTextNoteViewModel;
         manager!.GoToEditMode(model);
 
-        _textBlocksViewModelView.SetReadOnly();
+        TextBlocksViewModel textBlocksViewModelForView = _serviceProvider.GetRequiredService<TextBlocksViewModel>();
+        CustomQuotesContainerViewModel customQuotesContainerViewModel = _serviceProvider.GetRequiredService<CustomQuotesContainerViewModel>();
+        textBlocksViewModelForView.SetReadOnly();
         
         return new NoteItemStruct
         {
-            NoteItemView = new TextNoteItemViewModel(model, categoryName, _textBlocksViewModelView),
+            NoteItemView = new TextNoteItemViewModel(model, categoryName, textBlocksViewModelForView, customQuotesContainerViewModel),
             NoteItemEdit = manager
         };
     }
 
     public BaseViewModel GetEditorViewModel()
     {
-        return new ManageTextNoteViewModel(_noteService, _modalService, _categorySelector, _textBlocksViewModelEdit);
+        TextBlocksViewModel textBlocksViewModelForEdit = _serviceProvider.GetRequiredService<TextBlocksViewModel>();
+        CategorySelectorViewModel categorySelectorViewModel = _serviceProvider.GetRequiredService<CategorySelectorViewModel>();
+        
+        return new ManageTextNoteViewModel(_noteService, _modalService, categorySelectorViewModel, textBlocksViewModelForEdit);
     }
 }

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<view:BaseView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:view="clr-namespace:MauiApp1.View"
+             x:Class="MauiApp1.Views.Notes.CustomDatePickerView">
+    <DatePicker 
+        Date="{Binding SelectedDate}" 
+        MinimumDate="1500-01-01" 
+        MaximumDate="2100-12-31"
+        Format="dd.MM.yyyy"
+        HorizontalOptions="Center" />
+</view:BaseView>

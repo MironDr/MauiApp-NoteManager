@@ -5,6 +5,7 @@ public enum NoteType
 {
     Text,
     Account,
+    Source
   
 }
 public class NoteModel : BaseModel
@@ -20,7 +21,7 @@ public class NoteModel : BaseModel
     public string Title
     {
         get => _title;
-        set
+        protected set
         {
             if (string.IsNullOrWhiteSpace(value))
                 throw new ArgumentException("Cannot be empty.", nameof(Title));
@@ -28,9 +29,9 @@ public class NoteModel : BaseModel
         }
     }
     
-    public string? Description { get; set; }
+    public string? Description { get; protected set; }
     
-    public DateTime CreatedAt { get; private init; }
+    public DateTime CreatedAt { get; protected init; }
 
 
     public int? Category {get; protected set; }

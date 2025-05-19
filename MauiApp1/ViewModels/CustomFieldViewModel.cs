@@ -2,7 +2,19 @@
 
 public class CustomFieldViewModel : BaseViewModel
 {
-    public string Label { get; set; } 
+    private string? _label;
+    public string? Label
+    {
+        get => _label;
+        set
+        {
+            if (_label != value)
+            {
+                _label = value;
+                OnPropertyChanged(nameof(Label));
+            }
+        }
+    }
     
     private string? _value;
     public string? Value
@@ -30,6 +42,7 @@ public class CustomFieldViewModel : BaseViewModel
             {
                 _isReadOnly = value;
                 OnPropertyChanged(nameof(Value));
+                
             }
         }
     }
@@ -38,7 +51,7 @@ public class CustomFieldViewModel : BaseViewModel
 
     private Action<string?>? OnValueChanged { get; set; }
 
-    public CustomFieldViewModel(string label, string? initialValue, Action<string?>? onValueChanged, bool isReadOnly = false)
+    public CustomFieldViewModel(string? label, string? initialValue, Action<string?>? onValueChanged, bool isReadOnly = false)
     {
         Label = label;
         Value = initialValue;

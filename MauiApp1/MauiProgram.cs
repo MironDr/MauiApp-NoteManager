@@ -51,11 +51,17 @@ public static class MauiProgram
         builder.Services.AddTransient<CreateNoteButtonViewModel>();
         builder.Services.AddTransient<ManageTextNoteViewModel>();
         builder.Services.AddTransient<ManageAccountNoteViewModel>();
+        builder.Services.AddTransient<ManageSourceNoteViewModel>();
         builder.Services.AddTransient<NoteItemViewModel>();
         builder.Services.AddTransient<TextNoteItemViewModel>();
-        builder.Services.AddTransient<AccountNoteItemFactory>();
+        builder.Services.AddTransient<SourceNoteItemViewModel>();
         builder.Services.AddTransient<NoteTypeSelectorViewModel>();
         builder.Services.AddTransient<TextBlocksViewModel>();
+        builder.Services.AddTransient<CreateNoteWithSourceViewModel>();
+        builder.Services.AddTransient<CreateNoteWithSourceButtonViewModel>();
+        builder.Services.AddTransient<SpecificNoteSelectorViewModel>();
+        builder.Services.AddTransient<CustomInfoViewModel>();
+        builder.Services.AddTransient<CustomQuotesContainerViewModel>();
         
         //Register Views
         //Category
@@ -66,15 +72,21 @@ public static class MauiProgram
         //Note
         builder.Services.AddTransient<VerticalNotesView>();
         builder.Services.AddTransient<CreateNoteButtonView>();
+        builder.Services.AddTransient<CreateNoteWithSourceButtonView>();
         builder.Services.AddTransient<CreateNoteView>();
         builder.Services.AddTransient<NoteItemView>();
-        builder.Services.AddTransient<NoteTypeSelectorView>();
+        builder.Services.AddTransient<CustomTypeSelectorView>();
         builder.Services.AddTransient<INoteSubView, TextBlocksView>();
         builder.Services.AddTransient<TextBlocksView>();
+        builder.Services.AddTransient<CreateNoteWithSourceView>();
+        builder.Services.AddTransient<SpecificNoteSelectorView>();
+        builder.Services.AddTransient<CustomQuotesContainerView>();
+        builder.Services.AddTransient<CustomInfoView>();
         
         //Factories
         builder.Services.AddSingleton<INoteItemFactory, TextNoteItemFactory>();
         builder.Services.AddSingleton<INoteItemFactory, AccountNoteItemFactory>();
+        builder.Services.AddSingleton<INoteItemFactory, SourceNoteItemFactory>();
         builder.Services.AddSingleton<SubViewFactory>();
         builder.Services.AddSingleton<NoteItemFactoryManager>();
 

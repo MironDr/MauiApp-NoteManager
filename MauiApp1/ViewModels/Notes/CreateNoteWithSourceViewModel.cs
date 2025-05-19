@@ -1,0 +1,109 @@
+﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.Input;
+using MauiApp1.DTOs;
+using MauiApp1.Models;
+using MauiApp1.Services;
+using MauiApp1.ViewModels.Categories;
+using MP01.Models;
+
+namespace MauiApp1.ViewModels.Notes;
+
+public sealed class CreateNoteWithSourceViewModel : BaseViewModel
+{
+    private readonly INoteService _noteService;
+    private readonly IModalService _modalService;
+
+    public SpecificNoteSelectorViewModel SourceNoteSelectorViewModel;
+    public SpecificNoteSelectorViewModel TextNoteSelectorViewModel;
+    
+    private SourceNoteModel? _sourceNote;
+    public SourceNoteModel? SourceNote
+    {
+        get => _sourceNote;
+        set
+        {
+            if (_sourceNote != value)
+            {
+                _sourceNote = value;
+                OnPropertyChanged(nameof(SourceNote));
+                SourceNoteSelectorViewModel.SelectedNote = _sourceNote;
+            }
+        }
+    }
+
+    private TextNoteModel? _textNote;
+    public TextNoteModel? TextNote
+    {
+        get => _textNote;
+        set
+        {
+            if (_textNote != value)
+            {
+                _textNote = value;
+                OnPropertyChanged(nameof(TextNote));
+                TextNoteSelectorViewModel.SelectedNote = _textNote;
+            }
+        }
+    }
+
+    public ObservableCollection<CustomFieldViewModel> Fields { get; set; } = new();
+
+    private NoteWithSourceDto Note { get; set; } = new();
+
+    public IAsyncRelayCommand SaveNoteCommand { get; }
+    
+    public event Action? OnModelCreated;
+    
+
+    public CreateNoteWithSourceViewModel(INoteService noteService, IModalService modalService)
+    {
+        _noteService = noteService;
+        _modalService = modalService;
+        
+        SourceNoteSelectorViewModel = new SpecificNoteSelectorViewModel(_noteService.GetNotes().OfType<SourceNoteModel>(), SourceNote)
+        {
+            SelectedNoteName = "Select a Source Note"
+        };
+        TextNoteSelectorViewModel = new SpecificNoteSelectorViewModel(_noteService.GetNotes().OfType<TextNoteModel>(), TextNote)
+        {
+            SelectedNoteName = "Select a Text Note"
+        };
+        
+        
+        SaveNoteCommand = new AsyncRelayCommand(SaveNoteAsync);
+        ReloadFields();
+        
+    }
+
+  
+
+    private void ReloadFields()
+    {
+        Fields.Clear();
+        Fields.Add(new CustomFieldViewModel("Quote", Note.Quote, s => Note.Quote = s!));
+        Fields.Add(new CustomFieldViewModel("Comment", Note.Comment, s => Note.Comment = s));
+        
+    }
+
+    private async Task SaveNoteAsync()
+    {
+        Note.SourceNote = SourceNoteSelectorViewModel.SelectedNote as SourceNoteModel;
+        Note.Note = TextNoteSelectorViewModel.SelectedNote as TextNoteModel;
+        
+        
+        if (Note.SourceNote == null || Note.Note == null)
+            return;
+        
+        var ns = NoteWithSourceModel.Create(Note);
+        
+        _noteService.AddNote(ns.SourceNote!);
+        _noteService.AddNote(ns.Note!);
+        
+        OnModelCreated?.Invoke();
+        
+        await _modalService.CloseModalAsync();
+    }
+
+
+   
+}

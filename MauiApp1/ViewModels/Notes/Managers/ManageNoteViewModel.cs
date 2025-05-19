@@ -34,7 +34,7 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
         CategorySelectorViewModel = selectorViewModel;
 
         SaveNoteCommand = new AsyncRelayCommand(SaveNoteAsync);
-        ReloadFields();
+        
     }
 
     public void GoToEditMode(NoteModel noteModel)

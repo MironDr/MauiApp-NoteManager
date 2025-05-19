@@ -11,10 +11,6 @@ namespace MauiApp1.Views.Notes;
 
 public partial class NoteItemView : BaseView, IParameterizedView<NoteItemStruct>, IViewAddable
 {
-   
-    
-
-    
     public NoteItemView()
     {
         InitializeComponent();
@@ -24,12 +20,12 @@ public partial class NoteItemView : BaseView, IParameterizedView<NoteItemStruct>
 
     public void SetData(NoteItemStruct data)
     {
+        
         BindingContext = data.NoteItemView;
+       
         EditModeView.SetBindingContext(data.NoteItemEdit);
         EditModeView.SetDataToEdit(data.NoteItemView.Note);
-
-
-
+        
         if (data.NoteItemView is ICompositeViewModel compositeViewModel)
         {
             foreach (var view in compositeViewModel.GetEmbeddedViews())

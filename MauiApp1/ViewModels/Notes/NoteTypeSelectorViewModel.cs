@@ -9,12 +9,15 @@ namespace MauiApp1.ViewModels.Notes;
 
 public class NoteTypeSelectorViewModel : BaseViewModel
 {
+    
+    public bool ShowSelectedInfo => false;
+    
     private readonly IPopupService _popupService;
     private readonly IModalService _modalService;
     private readonly NoteItemFactoryManager _factoryManager;
     
-    public ObservableCollection<NoteType> NoteTypes { get; }
-    public AsyncRelayCommand<NoteType> SelectNoteTypeCommand { get; }
+    public ObservableCollection<NoteType> Types { get; }
+    public AsyncRelayCommand<NoteType> SelectTypeCommand { get; }
 
     public NoteTypeSelectorViewModel(
         IPopupService popupService,
@@ -26,18 +29,22 @@ public class NoteTypeSelectorViewModel : BaseViewModel
         _factoryManager = factoryManager;
 
 
-        NoteTypes = new ObservableCollection<NoteType>(Enum.GetValues<NoteType>());
-        SelectNoteTypeCommand = new AsyncRelayCommand<NoteType>(OnNoteTypeSelected);
+        Types = new ObservableCollection<NoteType>(Enum.GetValues<NoteType>());
+        SelectTypeCommand = new AsyncRelayCommand<NoteType>(OnNoteTypeSelected);
     }
 
     private async Task OnNoteTypeSelected(NoteType selectedType)
     {
+        
+        
         var editorVm = _factoryManager.GetEditorViewModel(selectedType);
+       
         if (editorVm != null)
         {
             await _popupService.ClosePopupAsync();
+      
             await _modalService.ShowModalAsyncWithParameter<CreateNoteView, BaseViewModel>(editorVm);
-            
+           
         }
     }
 }

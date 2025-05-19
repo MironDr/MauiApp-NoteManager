@@ -9,6 +9,8 @@ public interface ICategoryService
     event EventHandler CategoriesUpdated;
     List<CategoryModel> GetCategories();
     void AddCategory(CategoryModel category);
+    
+    CategoryModel? GetById(int id);
 }
 public class CategoryService : ICategoryService
 {
@@ -45,5 +47,9 @@ public class CategoryService : ICategoryService
         return _categories;
     }
     
+    public CategoryModel? GetById(int id)
+    {
+        return _categories.FirstOrDefault(c => c.Id == id);
+    }
     
 }

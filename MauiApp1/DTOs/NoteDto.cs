@@ -22,14 +22,18 @@ public class NoteDto : BaseCommon
 
 public class TextNoteDto : NoteDto
 {
-    public string? TextContent { get; set; }
+    public IEnumerable<string?> BlocksTitles { get; set; } = new List<string?>();
+    public IEnumerable<string?> BlocksContent { get; set; } = new List<string?>();
     
     public override void CompleteNoteDtoByNoteModel(NoteModel noteModel)
     {
         base.CompleteNoteDtoByNoteModel(noteModel);
         var textNote = noteModel as TextNoteModel;
-        TextContent = textNote.TextContent;
-        
+        if (textNote != null)
+        {
+            BlocksTitles = textNote.GetBlocksTitles();
+            BlocksContent = textNote.GetBlocksContents();
+        }
     }
 }
 
@@ -45,6 +49,27 @@ public class AccountNoteDto : NoteDto
         {
             Login = textNote.Login;
             Password = textNote.Password;
+        }
+    }
+}
+
+public class SourceNoteDto : NoteDto
+{
+    public ReferenceType SourceType { get; set; } 
+    public string Source { get; set; } = string.Empty;
+    public string? Author { get; set; } 
+    public DateTime PublishedDate { get; set; }
+    
+    public override void CompleteNoteDtoByNoteModel(NoteModel noteModel)
+    {
+        base.CompleteNoteDtoByNoteModel(noteModel);
+        if (noteModel is SourceNoteModel sourceNote)
+        {
+            SourceType = sourceNote.SourceType;
+            Source = sourceNote.Source;
+            Author = sourceNote.Author;
+            PublishedDate = sourceNote.PublishedDate;
+          
         }
     }
 }

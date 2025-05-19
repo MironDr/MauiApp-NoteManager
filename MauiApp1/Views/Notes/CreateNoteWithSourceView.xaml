@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<view:BaseView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:view="clr-namespace:MauiApp1.View"
+             xmlns:notes="clr-namespace:MauiApp1.Views.Notes"
+             x:Class="MauiApp1.Views.Notes.CreateNoteWithSourceView">
+    <ScrollView>
+        <VerticalStackLayout Padding="10" x:Name="MainLayout" Spacing="10">
+
+            <notes:SpecificNoteSelectorView x:Name="SourceNotesView"/>
+            <notes:SpecificNoteSelectorView x:Name="TextNotesView"/>
+             
+            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Fields}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <notes:CustomEntryView />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+            
+            <Button Text="Create"
+                    Command="{Binding SaveNoteCommand}"
+                    x:Name="SaveButton" />
+        </VerticalStackLayout>
+    </ScrollView>
+</view:BaseView>

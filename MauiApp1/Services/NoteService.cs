@@ -9,6 +9,7 @@ public interface INoteService
     event EventHandler NotesUpdated;
     List<NoteModel> GetNotes();
     void AddNote(NoteModel note);
+    NoteModel? GetById(int id);
 }
 public class NoteService : INoteService
 {
@@ -42,6 +43,10 @@ public class NoteService : INoteService
     {
         return _notes;
     }
-    
+
+    public NoteModel? GetById(int id)
+    {
+        return _notes.FirstOrDefault(n => n.Id == id);
+    }
     
 }

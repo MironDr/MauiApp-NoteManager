@@ -43,7 +43,7 @@ public class TextBlocksViewModel : BaseViewModel
     {
         _blocksContent.Add(string.Empty);
         Blocks.Add(new CustomFieldViewModel(
-            $"Block N{_blocksContent.Count}",
+            "Block",
             _blocksContent[^1],
             s => _blocksContent[^1] = s,
             IsReadOnly

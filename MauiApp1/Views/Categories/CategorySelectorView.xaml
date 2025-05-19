@@ -6,24 +6,20 @@
              xmlns:categories="clr-namespace:MauiApp1.Views.Categories"
              x:Class="MauiApp1.Views.Categories.CategorySelectorView">
     <VerticalStackLayout x:Name="MainLayout" Padding="20">
-            
-                <StackLayout x:Name="LayoutList"  IsVisible="True">
-                    <Button Text="{Binding SelectedCategoryName}" Command="{Binding ToggleCategoryListCommand}"/>
-                    <ScrollView IsVisible="{Binding IsListVisible}">
-                        <CollectionView ItemsSource="{Binding Categories}" SelectionMode="None">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Button Text="{Binding CategoryName}" 
-                                            Command="{Binding BindingContext.CategorySelectedCommand, Source={x:Reference MainLayout}}"
-                                            CommandParameter="{Binding .}" />
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </ScrollView>
-                </StackLayout>
         
-                <categories:CreateCategoryButtonView x:Name="CategoryButtonView"/>
+        <Button Text="{Binding SelectedCategoryName}" Command="{Binding ToggleCategoryListCommand}"/>
         
-               
+        <CollectionView ItemsSource="{Binding Categories}" SelectionMode="None"  IsVisible="{Binding IsListVisible}" HeightRequest="100">
+          <CollectionView.ItemTemplate>
+             <DataTemplate>
+                <Button Text="{Binding CategoryName}" 
+                   Command="{Binding BindingContext.CategorySelectedCommand, Source={x:Reference MainLayout}}"
+                   CommandParameter="{Binding .}" />
+             </DataTemplate>
+         </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+        <categories:CreateCategoryButtonView x:Name="CategoryButtonView"/>
+                
     </VerticalStackLayout>
 </view:BaseView>

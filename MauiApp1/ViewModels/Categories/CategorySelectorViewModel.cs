@@ -11,12 +11,11 @@ namespace MauiApp1.ViewModels.Categories;
 public class CategorySelectorViewModel : BaseViewModel
 {
     private readonly ICategoryService _categoryService; 
-    private readonly IPopupService _popupService;
+  
     public CreateCategoryButtonViewModel CreateCategoryButtonViewModel { get; }
 
     public ICommand CategorySelectedCommand { get; }
     
-    public AsyncRelayCommand CreateCategoryCommand { get; }
     
     private ObservableCollection<CategoryModel> _categories = new();
     private CategoryModel? _selectedCategory;
@@ -78,11 +77,11 @@ public class CategorySelectorViewModel : BaseViewModel
     
     public ICommand ToggleCategoryListCommand { get; }
 
-    public CategorySelectorViewModel(ICategoryService categoryService,IPopupService popupService, CreateCategoryButtonViewModel createCategoryButtonViewModel)
+    public CategorySelectorViewModel(ICategoryService categoryService, CreateCategoryButtonViewModel createCategoryButtonViewModel)
     {
         CategorySelectedCommand = new Command<CategoryModel>(OnCategorySelected);
         _categoryService = categoryService;
-        _popupService = popupService;
+      
         CreateCategoryButtonViewModel = createCategoryButtonViewModel;
         
         

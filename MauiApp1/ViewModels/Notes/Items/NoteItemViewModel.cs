@@ -17,26 +17,7 @@ public class NoteItemViewModel : BaseViewModel
     
 
 
-    private bool _isReadOnly = true;
-    public bool IsEdit => !_isReadOnly;
     
-    public bool IsReadOnly
-    {
-        get => _isReadOnly;
-        set
-        {
-            if (_isReadOnly != value)
-            {
-                _isReadOnly = value;
-                foreach (var field in Fields)
-                {
-                    field.IsReadOnly = _isReadOnly;
-                }
-                ReloadFields();
-                OnPropertyChanged(nameof(IsReadOnly));
-            }
-        }
-    }
     
 
 
@@ -49,10 +30,10 @@ public class NoteItemViewModel : BaseViewModel
     protected virtual void ReloadFields()
     {
         Fields.Clear();
-        Fields.Add(new CustomFieldViewModel("Title", Note.Title, s => Note.Title = s!, _isReadOnly));
-        Fields.Add(new CustomFieldViewModel("Description", Note.Description, s => Note.Description = s, _isReadOnly));
-        Fields.Add(new CustomFieldViewModel("CreatedAt", Note.CreatedAt.ToShortDateString(), null, _isReadOnly));
-        Fields.Add(new CustomFieldViewModel("Category", _categoryName,  null, _isReadOnly));
+        Fields.Add(new CustomFieldViewModel("Title", Note.Title, null, true));
+        Fields.Add(new CustomFieldViewModel("Description", Note.Description, null, true));
+        Fields.Add(new CustomFieldViewModel("CreatedAt", Note.CreatedAt.ToShortDateString(), null, true));
+        Fields.Add(new CustomFieldViewModel("Category", _categoryName,  null, true));
  
     }
     

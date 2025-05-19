@@ -18,11 +18,10 @@
                 </BindableLayout.ItemTemplate>
             </VerticalStackLayout>
 
+            <categories:CategorySelectorView x:Name="CategorySelectorView" />
             
             <VerticalStackLayout x:Name="DynamicContentArea" />
-         
-            <categories:CategorySelectorView x:Name="CategorySelectorView" />
-
+            
          
             <Button Text="Create"
                     Command="{Binding SaveNoteCommand}"

@@ -3,7 +3,7 @@ using MauiApp1.ViewModels.Categories;
 
 namespace MauiApp1.Views.Categories;
 
-public partial class HorizontalCategoriesView : BaseView
+public sealed partial class HorizontalCategoriesView : BaseView
 {
     public HorizontalCategoriesView(CategoriesViewModel viewModel, CreateCategoryButtonView createCategoryView)
     {

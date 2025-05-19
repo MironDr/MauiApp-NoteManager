@@ -5,6 +5,7 @@ using MauiApp1.Structs;
 using MauiApp1.ViewModels;
 using MauiApp1.ViewModels.Categories;
 using MauiApp1.ViewModels.Notes;
+using MauiApp1.ViewModels.Notes.Managers;
 
 namespace MauiApp1.Factories;
 
@@ -15,18 +16,18 @@ public class AccountNoteItemFactory: INoteItemFactory
     private readonly INoteService _noteService;
     private readonly IModalService _modalService;
     private readonly ICategoryService _categoryService;
-    private readonly CategorySelectorViewModel _categorySelector;
+    private readonly IServiceProvider _serviceProvider;
 
     public AccountNoteItemFactory(
         INoteService noteService,
         IModalService modalService,
         ICategoryService categoryService,
-        CategorySelectorViewModel categorySelector)
+        IServiceProvider serviceProvider)
     {
         _noteService = noteService;
         _modalService = modalService;
         _categoryService = categoryService;
-        _categorySelector = categorySelector;
+        _serviceProvider = serviceProvider;
     }
 
     public NoteItemStruct Create(NoteModel note)
@@ -34,7 +35,7 @@ public class AccountNoteItemFactory: INoteItemFactory
         var model = (AccountNoteModel)note;
 
         string? categoryName = model.Category is { } categoryId
-            ? _categoryService.GetCategories().FirstOrDefault(c => c.Id == categoryId)?.CategoryName
+            ? _categoryService.GetById(categoryId)?.CategoryName
             : null;
 
         var manager = GetEditorViewModel() as ManageAccountNoteViewModel;
@@ -49,6 +50,7 @@ public class AccountNoteItemFactory: INoteItemFactory
 
     public BaseViewModel GetEditorViewModel()
     {
-        return new ManageAccountNoteViewModel(_noteService, _modalService, _categorySelector);
+        CategorySelectorViewModel categorySelectorViewModel = _serviceProvider.GetRequiredService<CategorySelectorViewModel>();
+        return new ManageAccountNoteViewModel(_noteService, _modalService, categorySelectorViewModel);
     }
 }

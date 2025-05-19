@@ -30,6 +30,7 @@ public class AccountNoteModel : NoteModel
             Title = textDto.Title,
             Description = textDto.Description,
             Category = textDto.Category,
+            CreatedAt = DateTime.Now,
             Login = textDto.Login,
             Password = textDto.Password
         };
