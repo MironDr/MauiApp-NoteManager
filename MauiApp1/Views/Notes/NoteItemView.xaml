@@ -8,7 +8,7 @@
     <ScrollView>
         <VerticalStackLayout Padding="10" x:Name="MainLayout" Spacing="10">
 
-            <Switch IsToggled="False" Toggled="Switch_OnToggled"/>
+            <Switch IsToggled="False" Toggled="Switch_OnToggled" x:Name="SwitchView"/>
             <VerticalStackLayout  x:Name="ReadModeView" IsVisible="True">
                 <VerticalStackLayout BindableLayout.ItemsSource="{Binding Fields}">
                     <BindableLayout.ItemTemplate>

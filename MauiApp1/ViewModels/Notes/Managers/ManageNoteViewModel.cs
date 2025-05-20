@@ -6,10 +6,9 @@ using MauiApp1.Models;
 using MauiApp1.Services;
 using MauiApp1.ViewModels.Categories;
 
+namespace MauiApp1.ViewModels.Notes.Managers;
 
-namespace MauiApp1.ViewModels.Notes;
-
-public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditableNoteViewModel, ICategorySelectable
+public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditableNoteViewModel, ICategorySelectable, IEventHandler
     where TDto : NoteDto, new()
     where TModel : NoteModel
 {
@@ -27,6 +26,8 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
     protected bool _editMode = false;
     protected TModel _noteToEdit;
 
+    
+    
     protected ManageNoteViewModel(INoteService noteService, IModalService modalService, CategorySelectorViewModel selectorViewModel)
     {
         _noteService = noteService;
@@ -59,16 +60,23 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
             return;
 
         Note.Category = CategorySelectorViewModel.SelectedCategory?.Id;
-        
+
 
         if (!_editMode)
+        {
             _noteService.AddNote(CreateNoteFromDto());
+            await _modalService.CloseModalAsync();
+        }
         else
             _noteService.AddNote(EditNoteFromDto());
 
-        await _modalService.CloseModalAsync();
+        OnEventInvoke?.Invoke();
+       
     }
 
     protected abstract TModel CreateNoteFromDto();
     protected abstract TModel EditNoteFromDto();
+
+
+    public event Action? OnEventInvoke;
 }
