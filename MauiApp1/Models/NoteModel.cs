@@ -5,7 +5,8 @@ public enum NoteType
 {
     Text,
     Account,
-    Source
+    Source,
+    CheckList,
   
 }
 public class NoteModel : BaseModel

@@ -10,13 +10,13 @@ namespace MauiApp1.ViewModels.Notes.Managers;
 
 public sealed class ManageTextNoteViewModel : ManageNoteViewModel<TextNoteDto, TextNoteModel>, ICompositeViewModel
 {
-    public TextBlocksViewModel TextBlocksViewModel;
+    private readonly TextBlocksViewModel _textBlocksViewModel;
 
     public ManageTextNoteViewModel(INoteService noteService, IModalService modalService,
         CategorySelectorViewModel selectorViewModel, TextBlocksViewModel textBlocksViewModel)
         : base(noteService, modalService, selectorViewModel)
     {
-        TextBlocksViewModel = textBlocksViewModel;
+        _textBlocksViewModel = textBlocksViewModel;
         ReloadFields();
     }
 
@@ -24,11 +24,11 @@ public sealed class ManageTextNoteViewModel : ManageNoteViewModel<TextNoteDto, T
     {
         base.ReloadFields();
         
-        TextBlocksViewModel.Blocks.Clear();
+        _textBlocksViewModel.Blocks.Clear();
         
         for (int i = 0; i < Note.BlocksTitles.Count(); i++)
         {
-            TextBlocksViewModel.Blocks.Add(new CustomFieldViewModel(
+            _textBlocksViewModel.Blocks.Add(new CustomFieldViewModel(
                 Note.BlocksTitles.ElementAt(i),
                 Note.BlocksContent.ElementAt(i),
                 null
@@ -55,14 +55,14 @@ public sealed class ManageTextNoteViewModel : ManageNoteViewModel<TextNoteDto, T
 
     private void CompleteNote()
     {
-        Note.BlocksContent = TextBlocksViewModel.Blocks.Select(b => b.Value);
-        Note.BlocksTitles = TextBlocksViewModel.Blocks.Select(b => b.Label);
+        Note.BlocksContent = _textBlocksViewModel.Blocks.Select(b => b.Value);
+        Note.BlocksTitles = _textBlocksViewModel.Blocks.Select(b => b.Label);
     }
 
     public IEnumerable<BaseView> GetEmbeddedViews()
     {
         List<BaseView> views = [
-            new TextBlocksView(TextBlocksViewModel)
+            new TextBlocksView(_textBlocksViewModel)
         ];
         
         return views;

@@ -13,7 +13,7 @@ using MauiApp1.ViewModels.Notes.Managers;
 
 namespace MauiApp1.Views.Notes;
 
-public partial class TextBlocksView : BaseView, INoteSubView
+public partial class TextBlocksView : BaseView
 {
     public NoteType Type => NoteType.Text;
     
@@ -28,17 +28,7 @@ public partial class TextBlocksView : BaseView, INoteSubView
         BindingContext = viewModel;
     }
 
-    public BaseView GetView(BaseViewModel parentViewModel)
-    {
-        if (parentViewModel is ManageTextNoteViewModel vm)
-        {
-            var view = this;
-            view.SetBindingContext(vm.TextBlocksViewModel);
-            return view;
-        }
-
-        throw new ArgumentException("Incorrect type ViewModel");
-    }
+   
 
    
 }

@@ -11,6 +11,8 @@ namespace MauiApp1.Views.Notes;
 
 public partial class NoteItemView : BaseView, IParameterizedView<NoteItemStruct>, IViewAddable
 {
+
+    private NoteModel _model;
     public NoteItemView()
     {
         InitializeComponent();
@@ -22,9 +24,9 @@ public partial class NoteItemView : BaseView, IParameterizedView<NoteItemStruct>
     {
         
         BindingContext = data.NoteItemView;
-       
+        _model = data.NoteItemView.Note;
         EditModeView.SetBindingContext(data.NoteItemEdit);
-        EditModeView.SetDataToEdit(data.NoteItemView.Note);
+        EditModeView.SetDataToEdit(_model);
         
         if (data.NoteItemView is ICompositeViewModel compositeViewModel)
         {
@@ -38,6 +40,9 @@ public partial class NoteItemView : BaseView, IParameterizedView<NoteItemStruct>
     private void Switch_OnToggled(object? sender, ToggledEventArgs e)
     {
         ReadModeView.IsVisible = !ReadModeView.IsVisible;
+        if(!ReadModeView.IsVisible)
+            EditModeView.SetDataToEdit(_model);
+        
         EditModeView.IsVisible = !ReadModeView.IsVisible;
         
     }

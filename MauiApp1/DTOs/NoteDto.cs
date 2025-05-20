@@ -28,8 +28,7 @@ public class TextNoteDto : NoteDto
     public override void CompleteNoteDtoByNoteModel(NoteModel noteModel)
     {
         base.CompleteNoteDtoByNoteModel(noteModel);
-        var textNote = noteModel as TextNoteModel;
-        if (textNote != null)
+        if (noteModel is TextNoteModel textNote)
         {
             BlocksTitles = textNote.GetBlocksTitles();
             BlocksContent = textNote.GetBlocksContents();
@@ -70,6 +69,22 @@ public class SourceNoteDto : NoteDto
             Author = sourceNote.Author;
             PublishedDate = sourceNote.PublishedDate;
           
+        }
+    }
+}
+
+public class CheckListNoteDto : NoteDto
+{
+    public IEnumerable<string?> BoxTitles { get; set; } = new List<string>();
+    public IEnumerable<bool> BoxStatuses { get; set; } = new List<bool>();
+    
+    public override void CompleteNoteDtoByNoteModel(NoteModel noteModel)
+    {
+        base.CompleteNoteDtoByNoteModel(noteModel);
+        if (noteModel is CheckListNoteModel checkListNoteModel)
+        {
+            BoxTitles = checkListNoteModel.GetBoxTitles();
+            BoxStatuses = checkListNoteModel.GetBoxStatuses();
         }
     }
 }

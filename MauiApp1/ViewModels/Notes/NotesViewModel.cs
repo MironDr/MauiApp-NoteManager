@@ -17,7 +17,6 @@ public class NotesViewModel : BaseViewModel
     
     private readonly IModalService _modalService;
     
-    private readonly SubViewFactory _subViewFactory;
     
     private readonly NoteItemFactoryManager _factoryManager;
 
@@ -42,12 +41,12 @@ public class NotesViewModel : BaseViewModel
     }
     
     
-    public NotesViewModel(INoteService noteService, IModalService modalService, NoteItemFactoryManager factoryManager, SubViewFactory subViewFactory) : base()
+    public NotesViewModel(INoteService noteService, IModalService modalService, NoteItemFactoryManager factoryManager) : base()
     {
         _noteService = noteService;
         _modalService = modalService;
         _factoryManager = factoryManager;
-        _subViewFactory = subViewFactory;
+
         
         _noteService.NotesUpdated += OnNotesUpdated!;
         

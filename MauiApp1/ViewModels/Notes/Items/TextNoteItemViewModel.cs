@@ -9,15 +9,15 @@ namespace MauiApp1.ViewModels.Notes;
 public sealed class TextNoteItemViewModel : NoteItemViewModel, ICompositeViewModel
 {
     private TextNoteModel? _model;
-    
-    public TextBlocksViewModel TextBlocksViewModel { get; }
+
+    private readonly TextBlocksViewModel _textBlocksViewModel;
     public CustomQuotesContainerViewModel CustomQuotesContainerViewModel { get; }
     public TextNoteItemViewModel(NoteModel data, string? categoryName, TextBlocksViewModel textBlocksViewModel, CustomQuotesContainerViewModel customQuotesContainerViewModel) 
         : base(data, categoryName)
     {
         if (data is not TextNoteModel textModel)
             throw new ArgumentException("Type is not TextNoteModel.", nameof(data));
-        TextBlocksViewModel = textBlocksViewModel;
+        _textBlocksViewModel = textBlocksViewModel;
         CustomQuotesContainerViewModel = customQuotesContainerViewModel;
         _model = textModel;
         CustomQuotesContainerViewModel.CreateButtonViewModel.CreateNoteWithSourceViewModel.TextNote = _model;
@@ -29,11 +29,11 @@ public sealed class TextNoteItemViewModel : NoteItemViewModel, ICompositeViewMod
     {
         base.ReloadFields();
 
-        TextBlocksViewModel.Blocks.Clear();
+        _textBlocksViewModel.Blocks.Clear();
 
         for (int i = 0; i < _model!.GetBlocksTitles().Count(); i++)
         {
-            TextBlocksViewModel.Blocks.Add(new CustomFieldViewModel(
+            _textBlocksViewModel.Blocks.Add(new CustomFieldViewModel(
                 _model!.GetBlocksTitles().ElementAt(i),
                 _model!.GetBlocksContents().ElementAt(i),
                 null,
@@ -60,7 +60,7 @@ public sealed class TextNoteItemViewModel : NoteItemViewModel, ICompositeViewMod
     public IEnumerable<BaseView> GetEmbeddedViews()
     {
         List<BaseView> views = [
-            new TextBlocksView(TextBlocksViewModel),
+            new TextBlocksView(_textBlocksViewModel),
             new CustomQuotesContainerView(CustomQuotesContainerViewModel)
         ];
         

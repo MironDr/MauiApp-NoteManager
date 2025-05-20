@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<view:BaseView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:view="clr-namespace:MauiApp1.View"
+             xmlns:notes="clr-namespace:MauiApp1.Views.Notes"
+             x:Class="MauiApp1.Views.Notes.CheckListView">
+    <VerticalStackLayout>
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Label Text="Check List" HorizontalOptions="Start" VerticalOptions="Center" Padding="50,0"/>
+            <Button Command="{Binding AddNewBoxCommand}" Text="+" VerticalOptions="Center" HorizontalOptions="End" Padding="50,0"  IsVisible="{Binding IsEdit}"/>
+        </HorizontalStackLayout>
+        <CollectionView ItemsSource="{Binding Boxes}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <notes:CustomCheckBoxView />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</view:BaseView>
