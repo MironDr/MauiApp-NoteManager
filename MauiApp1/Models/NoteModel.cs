@@ -1,4 +1,5 @@
 ﻿using MauiApp1.DTOs;
+using MauiApp1.Utilities;
 
 namespace MauiApp1.Models;
 public enum NoteType
@@ -156,4 +157,6 @@ public class NoteModel : BaseModel
         
         return this;
     }
+    
+   
 }

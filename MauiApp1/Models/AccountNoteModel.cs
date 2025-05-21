@@ -1,4 +1,5 @@
 ﻿using MauiApp1.DTOs;
+using MauiApp1.Utilities;
 
 namespace MauiApp1.Models;
 
@@ -36,4 +37,5 @@ public class AccountNoteModel : NoteModel
             Password = accountNoteDto.Password
         };
     }
+
 }

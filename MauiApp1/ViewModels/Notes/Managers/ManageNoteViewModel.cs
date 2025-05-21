@@ -4,6 +4,7 @@ using MauiApp1.DTOs;
 using MauiApp1.Interfaces;
 using MauiApp1.Models;
 using MauiApp1.Services;
+using MauiApp1.Utilities;
 using MauiApp1.ViewModels.Categories;
 
 namespace MauiApp1.ViewModels.Notes.Managers;

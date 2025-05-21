@@ -31,7 +31,7 @@ public partial class GroupItemView : BaseView, IParameterizedView<GroupItemStruc
     {
         _groupModel = data.Group;
         _factoryManager = data.ItemFactory;
-        
+        BindingContext = _groupModel;
         
         Reload();
     }

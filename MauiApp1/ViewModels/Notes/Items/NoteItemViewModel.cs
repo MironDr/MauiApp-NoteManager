@@ -3,6 +3,7 @@ using System.Windows.Input;
 using MauiApp1.Interfaces;
 using MauiApp1.Models;
 using MauiApp1.Services;
+using MauiApp1.Utilities;
 using MauiApp1.Views.Notes;
 
 
@@ -36,6 +37,11 @@ public class NoteItemViewModel : BaseViewModel, IEditableNoteViewModel
 
     public void GoToEditMode(NoteModel noteModel)
     {
+        if (Note.GetType() == noteModel.GetType() && 
+            ObjectUtils.AreEqualByProperties(Note, noteModel)) 
+            return;
+        
+        
         Note = noteModel;
         _categoryName = Note.Category?.CategoryName;
         ReloadFields();
