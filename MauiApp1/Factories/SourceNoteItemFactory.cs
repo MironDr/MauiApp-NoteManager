@@ -33,11 +33,7 @@ public class SourceNoteItemFactory : INoteItemFactory
     public NoteItemStruct Create(NoteModel note)
     {
         var model = (SourceNoteModel)note;
-
-        string? categoryName = model.Category is { } categoryId
-            ? _categoryService.GetById(categoryId)?.CategoryName
-            : null;
-
+        
         var manager = GetEditorViewModel() as ManageSourceNoteViewModel;
         manager!.GoToEditMode(model);
 
@@ -45,14 +41,14 @@ public class SourceNoteItemFactory : INoteItemFactory
         
         return new NoteItemStruct
         {
-            NoteItemView = new SourceNoteItemViewModel(model, categoryName, customQuotesContainerViewModel),
+            NoteItemView = new SourceNoteItemViewModel(model, customQuotesContainerViewModel),
             NoteItemEdit = manager
         };
     }
 
     public BaseViewModel GetEditorViewModel()
     {
-        CategorySelectorViewModel categorySelectorViewModel = _serviceProvider.GetRequiredService<CategorySelectorViewModel>();
-        return new ManageSourceNoteViewModel(_noteService, _modalService, categorySelectorViewModel);
+        ClassifierSelectorViewModel classifierSelectorViewModel = _serviceProvider.GetRequiredService<ClassifierSelectorViewModel>();
+        return new ManageSourceNoteViewModel(_noteService, _modalService, classifierSelectorViewModel);
     }
 }

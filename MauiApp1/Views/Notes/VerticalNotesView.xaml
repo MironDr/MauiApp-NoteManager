@@ -4,7 +4,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:view="clr-namespace:MauiApp1.View"
              x:Class="MauiApp1.Views.Notes.VerticalNotesView">
-    <ScrollView Orientation="Vertical">
         <StackLayout x:Name="MainLayout" Orientation="Vertical">
             <CollectionView ItemsSource="{Binding Notes}" SelectionMode="None">
                 <CollectionView.ItemsLayout>
@@ -20,5 +19,4 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </StackLayout>
-    </ScrollView>
 </view:BaseView>

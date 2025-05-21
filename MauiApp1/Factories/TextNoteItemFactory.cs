@@ -34,10 +34,7 @@ public class TextNoteItemFactory : INoteItemFactory
     public NoteItemStruct Create(NoteModel note)
     {
         var model = (TextNoteModel)note;
-
-        string? categoryName = model.Category is { } categoryId
-            ? _categoryService.GetById(categoryId)?.CategoryName
-            : null;
+        
 
         var manager = GetEditorViewModel() as ManageTextNoteViewModel;
         manager!.GoToEditMode(model);
@@ -48,7 +45,7 @@ public class TextNoteItemFactory : INoteItemFactory
         
         return new NoteItemStruct
         {
-            NoteItemView = new TextNoteItemViewModel(model, categoryName, textBlocksViewModelForView, customQuotesContainerViewModel),
+            NoteItemView = new TextNoteItemViewModel(model, textBlocksViewModelForView, customQuotesContainerViewModel),
             NoteItemEdit = manager
         };
     }
@@ -56,8 +53,8 @@ public class TextNoteItemFactory : INoteItemFactory
     public BaseViewModel GetEditorViewModel()
     {
         TextBlocksViewModel textBlocksViewModelForEdit = _serviceProvider.GetRequiredService<TextBlocksViewModel>();
-        CategorySelectorViewModel categorySelectorViewModel = _serviceProvider.GetRequiredService<CategorySelectorViewModel>();
+        ClassifierSelectorViewModel classifierSelectorViewModel = _serviceProvider.GetRequiredService<ClassifierSelectorViewModel>();
         
-        return new ManageTextNoteViewModel(_noteService, _modalService, categorySelectorViewModel, textBlocksViewModelForEdit);
+        return new ManageTextNoteViewModel(_noteService, _modalService, classifierSelectorViewModel, textBlocksViewModelForEdit);
     }
 }

@@ -4,5 +4,5 @@ namespace MauiApp1.Interfaces;
 
 public interface ICategorySelectable
 {
-    CategorySelectorViewModel CategorySelectorViewModel { get; }
+    ClassifierSelectorViewModel ClassifierSelectorViewModel { get; }
 }

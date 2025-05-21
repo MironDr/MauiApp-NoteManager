@@ -97,6 +97,7 @@ public class SourceNoteModel : NoteModel
             Description = sourceDto.Description,
             CreatedAt = DateTime.Now,
             Category = sourceDto.Category,
+            Group = sourceDto.Group,
             Source = sourceDto.Source,
             Author = sourceDto.Author,
             PublishedDate = sourceDto.PublishedDate,

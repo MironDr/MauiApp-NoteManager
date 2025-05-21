@@ -38,6 +38,7 @@ public class TextNoteModel : NoteModel
             Title = textDto.Title,
             Description = textDto.Description,
             Category = textDto.Category,
+            Group = textDto.Group,
             CreatedAt = DateTime.Now
         };
 

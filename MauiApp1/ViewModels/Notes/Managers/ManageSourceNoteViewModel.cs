@@ -14,7 +14,7 @@ public sealed class ManageSourceNoteViewModel : ManageNoteViewModel<SourceNoteDt
     private readonly CustomDatePickerViewModel _datePicker;
     private readonly SourceTypeSelectorViewModel _sourceTypeSelector;
     public ManageSourceNoteViewModel(INoteService noteService, IModalService modalService,
-        CategorySelectorViewModel selectorViewModel)
+        ClassifierSelectorViewModel selectorViewModel)
         : base(noteService, modalService, selectorViewModel)
     {
         _datePicker = new CustomDatePickerViewModel(d => Note.PublishedDate = d);

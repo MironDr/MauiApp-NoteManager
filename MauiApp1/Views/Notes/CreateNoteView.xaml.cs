@@ -33,7 +33,7 @@ public sealed partial class CreateNoteView : BaseView, IParameterizedView<BaseVi
 
         if (baseViewModel is ICategorySelectable selectable)
         {
-            CategorySelectorView.SetBindingContext(selectable.CategorySelectorViewModel);
+            CategorySelectorView.SetBindingContext(selectable.ClassifierSelectorViewModel);
         }
         
         if (baseViewModel is ICompositeViewModel composite)

@@ -9,6 +9,8 @@ public interface IModalService
     Task ShowModalAsyncWithParameter<TView, TParameter>(TParameter parameter) where TView : BaseView;
     Task CloseModalAsync();
     void AddViewToModal(BaseView view, bool switchMode = false);
+    
+    BaseView? GetViewFromModal();
 }
 
 public class ModalService : IModalService
@@ -82,5 +84,10 @@ public class ModalService : IModalService
             
             addableView.AddView(view);
         }
+    }
+
+    public BaseView? GetViewFromModal()
+    {
+        return _modalPages.Peek()?.Content as BaseView;
     }
 }

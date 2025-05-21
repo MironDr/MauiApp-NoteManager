@@ -6,14 +6,14 @@ using MP01.Models;
 
 namespace MauiApp1.ViewModels.Notes;
 
-public sealed class TextNoteItemViewModel : NoteItemViewModel, ICompositeViewModel
+public sealed class TextNoteItemViewModel : NoteItemViewModel, ICompositeViewModel, IEventHandler
 {
     private TextNoteModel? _model;
 
     private readonly TextBlocksViewModel _textBlocksViewModel;
     public CustomQuotesContainerViewModel CustomQuotesContainerViewModel { get; }
-    public TextNoteItemViewModel(NoteModel data, string? categoryName, TextBlocksViewModel textBlocksViewModel, CustomQuotesContainerViewModel customQuotesContainerViewModel) 
-        : base(data, categoryName)
+    public TextNoteItemViewModel(NoteModel data, TextBlocksViewModel textBlocksViewModel, CustomQuotesContainerViewModel customQuotesContainerViewModel) 
+        : base(data)
     {
         if (data is not TextNoteModel textModel)
             throw new ArgumentException("Type is not TextNoteModel.", nameof(data));
@@ -54,7 +54,7 @@ public sealed class TextNoteItemViewModel : NoteItemViewModel, ICompositeViewMod
                 new CustomInfoStruct("Comment: " , _ns[i].Comment)
             }));
         }
-        
+        OnEventInvoke?.Invoke();
     }
 
     public IEnumerable<BaseView> GetEmbeddedViews()
@@ -67,4 +67,6 @@ public sealed class TextNoteItemViewModel : NoteItemViewModel, ICompositeViewMod
         return views;
         
     }
+
+    public event Action? OnEventInvoke;
 }

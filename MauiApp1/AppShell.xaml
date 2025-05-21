@@ -5,12 +5,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MauiApp1"
     xmlns:view="clr-namespace:MauiApp1.View"
+    xmlns:pages="clr-namespace:MauiApp1.Pages"
     Shell.FlyoutBehavior="Flyout"
     Title="MauiApp1">
 
     <ShellContent
-        Title="Home"
+        Title="Categories"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+    
+    <ShellContent
+        Title="Groups"
+        ContentTemplate="{DataTemplate pages:GroupsPage}"
+        Route="GroupsPage" />
 
 </Shell>

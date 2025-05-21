@@ -34,23 +34,20 @@ public class AccountNoteItemFactory: INoteItemFactory
     {
         var model = (AccountNoteModel)note;
 
-        string? categoryName = model.Category is { } categoryId
-            ? _categoryService.GetById(categoryId)?.CategoryName
-            : null;
 
         var manager = GetEditorViewModel() as ManageAccountNoteViewModel;
         manager!.GoToEditMode(model);
 
         return new NoteItemStruct
         {
-            NoteItemView = new AccountNoteItemViewModel(model, categoryName),
+            NoteItemView = new AccountNoteItemViewModel(model),
             NoteItemEdit = manager
         };
     }
 
     public BaseViewModel GetEditorViewModel()
     {
-        CategorySelectorViewModel categorySelectorViewModel = _serviceProvider.GetRequiredService<CategorySelectorViewModel>();
-        return new ManageAccountNoteViewModel(_noteService, _modalService, categorySelectorViewModel);
+        ClassifierSelectorViewModel classifierSelectorViewModel = _serviceProvider.GetRequiredService<ClassifierSelectorViewModel>();
+        return new ManageAccountNoteViewModel(_noteService, _modalService, classifierSelectorViewModel);
     }
 }

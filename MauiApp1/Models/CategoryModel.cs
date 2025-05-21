@@ -30,8 +30,8 @@ public class CategoryModel : BaseModel
                      _notes.Add(note.Id);
               }
         
-              if(note.Category != Id)
-                     note.AddCategory(this);
+              if(note.Category?.Id != Id)
+                     note.Category = this;
        }
 
        public void RemoveNote(NoteModel note)
@@ -41,8 +41,8 @@ public class CategoryModel : BaseModel
                      _notes.Remove(note.Id);
               }
         
-              if (note.Category == Id)
-                     note.RemoveCategory(this);
+              if (note.Category?.Id == Id)
+                     note.Category = null;
               
        }
 

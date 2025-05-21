@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<view:BaseView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:view="clr-namespace:MauiApp1.View"
+             x:Class="MauiApp1.Views.Groups.CreateGroupView">
+    <StackLayout>
+        <Label Text="Create Group" FontSize="20" />
+        
+        <Entry Placeholder="Group Name"
+               Text="{Binding Group.GroupName}" />
+        <Button Text="Create"
+                Command="{Binding SaveGroupCommand}" />
+        
+    </StackLayout>
+
+</view:BaseView>

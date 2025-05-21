@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<view:BaseView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:notes="clr-namespace:MauiApp1.Views.Notes"
+             xmlns:view="clr-namespace:MauiApp1.View"
+             x:Class="MauiApp1.Views.Groups.GroupItemView">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Label Text="{Binding GroupName}" 
+                   HorizontalOptions="Center"
+                   FontSize="Title"
+                   FontAttributes="Bold"
+                   Margin="0,10,0,20"/>
+            <VerticalStackLayout x:Name="MainStack" Padding="10" Spacing="10" />
+        </VerticalStackLayout>
+    </ScrollView>
+</view:BaseView>

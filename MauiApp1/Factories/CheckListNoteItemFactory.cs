@@ -36,9 +36,7 @@ public class CheckListNoteItemFactory : INoteItemFactory
     {
         var model = (CheckListNoteModel)note;
 
-        string? categoryName = model.Category is { } categoryId
-            ? _categoryService.GetById(categoryId)?.CategoryName
-            : null;
+       
 
         var manager = GetEditorViewModel() as ManageCheckListNoteViewModel;
         manager!.GoToEditMode(model);
@@ -48,7 +46,7 @@ public class CheckListNoteItemFactory : INoteItemFactory
         
         return new NoteItemStruct
         {
-            NoteItemView = new CheckListNoteItemViewModel(model, categoryName, checkListViewModel),
+            NoteItemView = new CheckListNoteItemViewModel(model, checkListViewModel),
             NoteItemEdit = manager
         };
     }
@@ -56,8 +54,8 @@ public class CheckListNoteItemFactory : INoteItemFactory
     public BaseViewModel GetEditorViewModel()
     {
         CheckListViewModel checkListViewModel = _serviceProvider.GetRequiredService<CheckListViewModel>();
-        CategorySelectorViewModel categorySelectorViewModel = _serviceProvider.GetRequiredService<CategorySelectorViewModel>();
+        ClassifierSelectorViewModel classifierSelectorViewModel = _serviceProvider.GetRequiredService<ClassifierSelectorViewModel>();
         
-        return new ManageCheckListNoteViewModel(_noteService, _modalService, categorySelectorViewModel, checkListViewModel);
+        return new ManageCheckListNoteViewModel(_noteService, _modalService, classifierSelectorViewModel, checkListViewModel);
     }
 }

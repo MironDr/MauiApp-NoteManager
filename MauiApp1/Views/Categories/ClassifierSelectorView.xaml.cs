@@ -6,21 +6,22 @@ using MauiApp1.ViewModels.Notes;
 
 namespace MauiApp1.Views.Categories;
 
-public partial class CategorySelectorView : BaseView
+public partial class ClassifierSelectorView : BaseView
 {
     
     
-    public CategorySelectorView()
+    public ClassifierSelectorView()
     {
         InitializeComponent();
     }
     
     public override void SetBindingContext(BaseViewModel baseViewModel)
     {
-        if (baseViewModel is CategorySelectorViewModel viewModel)
+        if (baseViewModel is ClassifierSelectorViewModel viewModel)
         {
             BindingContext = viewModel;
             CategoryButtonView.SetBindingContext(viewModel.CreateCategoryButtonViewModel);
+            GroupButtonView.SetBindingContext(viewModel.CreateGroupButtonViewModel);
         }
     }
 

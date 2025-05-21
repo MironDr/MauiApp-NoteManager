@@ -35,6 +35,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.AppShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
+[D:/RiderMAUI/MauiApp1/MauiApp1/Pages/GroupsPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Pages.GroupsPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\GroupsPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\GroupsPage.xaml
+
 [D:/RiderMAUI/MauiApp1/MauiApp1/Pages/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Pages.MainPage.xaml
@@ -53,11 +59,11 @@ build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Resources.Styles.
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
 
-[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Categories/CategorySelectorView.xaml]
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Categories/ClassifierSelectorView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Categories.CategorySelectorView.xaml
-build_metadata.AdditionalFiles.TargetPath = Views\Categories\CategorySelectorView.xaml
-build_metadata.AdditionalFiles.RelativePath = Views\Categories\CategorySelectorView.xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Categories.ClassifierSelectorView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Categories\ClassifierSelectorView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Categories\ClassifierSelectorView.xaml
 
 [D:/RiderMAUI/MauiApp1/MauiApp1/Views/Categories/CreateCategoryButtonView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
@@ -76,6 +82,78 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Categories.HorizontalCategoriesView.xaml
 build_metadata.AdditionalFiles.TargetPath = Views\Categories\HorizontalCategoriesView.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\Categories\HorizontalCategoriesView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/ElementsViews/CustomCheckBoxView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.ElementsViews.CustomCheckBoxView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ElementsViews\CustomCheckBoxView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ElementsViews\CustomCheckBoxView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/ElementsViews/CustomDatePickerView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.ElementsViews.CustomDatePickerView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ElementsViews\CustomDatePickerView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ElementsViews\CustomDatePickerView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/ElementsViews/CustomEditorView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.ElementsViews.CustomEditorView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ElementsViews\CustomEditorView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ElementsViews\CustomEditorView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/ElementsViews/CustomEntryView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.ElementsViews.CustomEntryView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ElementsViews\CustomEntryView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ElementsViews\CustomEntryView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/ElementsViews/CustomInfoView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.ElementsViews.CustomInfoView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ElementsViews\CustomInfoView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ElementsViews\CustomInfoView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/ElementsViews/CustomQuotesContainerView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.ElementsViews.CustomQuotesContainerView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ElementsViews\CustomQuotesContainerView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ElementsViews\CustomQuotesContainerView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/ElementsViews/CustomTypeSelectorView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.ElementsViews.CustomTypeSelectorView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ElementsViews\CustomTypeSelectorView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ElementsViews\CustomTypeSelectorView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/ElementsViews/TextBlocksView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.ElementsViews.TextBlocksView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ElementsViews\TextBlocksView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ElementsViews\TextBlocksView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Groups/CreateGroupButtonView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Groups.CreateGroupButtonView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Groups\CreateGroupButtonView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Groups\CreateGroupButtonView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Groups/CreateGroupView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Groups.CreateGroupView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Groups\CreateGroupView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Groups\CreateGroupView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Groups/GroupItemView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Groups.GroupItemView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Groups\GroupItemView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Groups\GroupItemView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Groups/VerticalGroupsView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Groups.VerticalGroupsView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Groups\VerticalGroupsView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Groups\VerticalGroupsView.xaml
 
 [D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/CheckListView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
@@ -107,48 +185,6 @@ build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.Creat
 build_metadata.AdditionalFiles.TargetPath = Views\Notes\CreateNoteWithSourceView.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\Notes\CreateNoteWithSourceView.xaml
 
-[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/CustomCheckBoxView.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.CustomCheckBoxView.xaml
-build_metadata.AdditionalFiles.TargetPath = Views\Notes\CustomCheckBoxView.xaml
-build_metadata.AdditionalFiles.RelativePath = Views\Notes\CustomCheckBoxView.xaml
-
-[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/CustomDatePickerView.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.CustomDatePickerView.xaml
-build_metadata.AdditionalFiles.TargetPath = Views\Notes\CustomDatePickerView.xaml
-build_metadata.AdditionalFiles.RelativePath = Views\Notes\CustomDatePickerView.xaml
-
-[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/CustomEditorView.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.CustomEditorView.xaml
-build_metadata.AdditionalFiles.TargetPath = Views\Notes\CustomEditorView.xaml
-build_metadata.AdditionalFiles.RelativePath = Views\Notes\CustomEditorView.xaml
-
-[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/CustomEntryView.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.CustomEntryView.xaml
-build_metadata.AdditionalFiles.TargetPath = Views\Notes\CustomEntryView.xaml
-build_metadata.AdditionalFiles.RelativePath = Views\Notes\CustomEntryView.xaml
-
-[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/CustomInfoView.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.CustomInfoView.xaml
-build_metadata.AdditionalFiles.TargetPath = Views\Notes\CustomInfoView.xaml
-build_metadata.AdditionalFiles.RelativePath = Views\Notes\CustomInfoView.xaml
-
-[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/CustomQuotesContainerView.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.CustomQuotesContainerView.xaml
-build_metadata.AdditionalFiles.TargetPath = Views\Notes\CustomQuotesContainerView.xaml
-build_metadata.AdditionalFiles.RelativePath = Views\Notes\CustomQuotesContainerView.xaml
-
-[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/CustomTypeSelectorView.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.CustomTypeSelectorView.xaml
-build_metadata.AdditionalFiles.TargetPath = Views\Notes\CustomTypeSelectorView.xaml
-build_metadata.AdditionalFiles.RelativePath = Views\Notes\CustomTypeSelectorView.xaml
-
 [D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/EditNoteView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.EditNoteView.xaml
@@ -166,12 +202,6 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.SpecificNoteSelectorView.xaml
 build_metadata.AdditionalFiles.TargetPath = Views\Notes\SpecificNoteSelectorView.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\Notes\SpecificNoteSelectorView.xaml
-
-[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/TextBlocksView.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.TextBlocksView.xaml
-build_metadata.AdditionalFiles.TargetPath = Views\Notes\TextBlocksView.xaml
-build_metadata.AdditionalFiles.RelativePath = Views\Notes\TextBlocksView.xaml
 
 [D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/VerticalNotesView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

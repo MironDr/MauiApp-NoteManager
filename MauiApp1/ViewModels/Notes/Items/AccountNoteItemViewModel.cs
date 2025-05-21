@@ -5,8 +5,8 @@ namespace MauiApp1.ViewModels.Notes;
 public sealed class AccountNoteItemViewModel : NoteItemViewModel
 {
     private AccountNoteModel? _model;
-    public AccountNoteItemViewModel(NoteModel data, string? categoryName) 
-        : base(data, categoryName)
+    public AccountNoteItemViewModel(NoteModel data) 
+        : base(data)
     {
         if (data is not AccountNoteModel accountModel)
             throw new ArgumentException("Type is not TextNoteModel.", nameof(data));

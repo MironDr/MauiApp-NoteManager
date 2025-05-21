@@ -13,7 +13,7 @@ public sealed class ManageTextNoteViewModel : ManageNoteViewModel<TextNoteDto, T
     private readonly TextBlocksViewModel _textBlocksViewModel;
 
     public ManageTextNoteViewModel(INoteService noteService, IModalService modalService,
-        CategorySelectorViewModel selectorViewModel, TextBlocksViewModel textBlocksViewModel)
+        ClassifierSelectorViewModel selectorViewModel, TextBlocksViewModel textBlocksViewModel)
         : base(noteService, modalService, selectorViewModel)
     {
         _textBlocksViewModel = textBlocksViewModel;

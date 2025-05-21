@@ -91,6 +91,30 @@
       <MauiXaml Update="View\Notes\CreateNoteButtonView.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
+      <MauiXaml Update="Views\ElementsViews\CustomInfoView.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+      <MauiXaml Update="Views\ElementsViews\CustomQuotesContainerView.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+      <MauiXaml Update="Views\ElementsViews\CustomTypeSelectorView.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+      <MauiXaml Update="Views\ElementsViews\TextBlocksView.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+      <MauiXaml Update="Views\ElementsViews\CustomEntryView.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+      <MauiXaml Update="Views\ElementsViews\CustomEditorView.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+      <MauiXaml Update="Views\ElementsViews\CustomDatePickerView.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+      <MauiXaml Update="Views\ElementsViews\CustomCheckBoxView.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
@@ -116,6 +140,38 @@
       </Compile>
       <Compile Update="View\Notes\CreateNoteButtonView.xaml.cs">
         <DependentUpon>CreateCategoryButtonView.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\ElementsViews\CustomInfoView.xaml.cs">
+        <DependentUpon>CustomInfoView.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\ElementsViews\CustomQuotesContainerView.xaml.cs">
+        <DependentUpon>CustomQuotesContainerView.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\ElementsViews\CustomTypeSelectorView.xaml.cs">
+        <DependentUpon>CustomTypeSelectorView.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\ElementsViews\TextBlocksView.xaml.cs">
+        <DependentUpon>TextBlocksView.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\ElementsViews\CustomEntryView.xaml.cs">
+        <DependentUpon>CustomEntryView.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\ElementsViews\CustomEditorView.xaml.cs">
+        <DependentUpon>CustomEditorView.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\ElementsViews\CustomDatePickerView.xaml.cs">
+        <DependentUpon>CustomDatePickerView.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\ElementsViews\CustomCheckBoxView.xaml.cs">
+        <DependentUpon>CustomCheckBoxView.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>

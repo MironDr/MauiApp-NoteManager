@@ -8,9 +8,6 @@
     <ScrollView>
         <VerticalStackLayout x:Name="Layout"
             Spacing="25">
-
-
-
         </VerticalStackLayout>
     </ScrollView>
 

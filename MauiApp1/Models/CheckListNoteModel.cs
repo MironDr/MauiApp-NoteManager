@@ -38,6 +38,7 @@ public class CheckListNoteModel : NoteModel
             Title = checkListNoteDto.Title,
             Description = checkListNoteDto.Description,
             Category = checkListNoteDto.Category,
+            Group = checkListNoteDto.Group,
             CreatedAt = DateTime.Now
         };
 

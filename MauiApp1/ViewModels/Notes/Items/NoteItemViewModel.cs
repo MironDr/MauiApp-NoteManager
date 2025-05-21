@@ -16,16 +16,11 @@ public class NoteItemViewModel : BaseViewModel, IEditableNoteViewModel
 
     public ObservableCollection<CustomFieldViewModel> Fields { get; set; } = new();
     
-
-
     
-    
-
-
-    public NoteItemViewModel(NoteModel data, string? categoryName)
+    public NoteItemViewModel(NoteModel data)
     {
         Note = data;
-        _categoryName = categoryName;
+        _categoryName = Note.Category?.CategoryName;
     }
 
     protected virtual void ReloadFields()
@@ -42,6 +37,9 @@ public class NoteItemViewModel : BaseViewModel, IEditableNoteViewModel
     public void GoToEditMode(NoteModel noteModel)
     {
         Note = noteModel;
+        _categoryName = Note.Category?.CategoryName;
         ReloadFields();
     }
+
+  
 }

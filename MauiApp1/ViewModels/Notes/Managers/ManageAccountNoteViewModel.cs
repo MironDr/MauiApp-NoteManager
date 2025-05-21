@@ -8,7 +8,7 @@ namespace MauiApp1.ViewModels.Notes.Managers;
 public sealed class ManageAccountNoteViewModel : ManageNoteViewModel<AccountNoteDto, AccountNoteModel>
 {
     public ManageAccountNoteViewModel(INoteService noteService, IModalService modalService,
-        CategorySelectorViewModel selectorViewModel)
+        ClassifierSelectorViewModel selectorViewModel)
         : base(noteService, modalService, selectorViewModel)
     {
         ReloadFields();

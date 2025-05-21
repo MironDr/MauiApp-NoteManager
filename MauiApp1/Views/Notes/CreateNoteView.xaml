@@ -18,7 +18,7 @@
                 </BindableLayout.ItemTemplate>
             </VerticalStackLayout>
 
-            <categories:CategorySelectorView x:Name="CategorySelectorView" />
+            <categories:ClassifierSelectorView x:Name="CategorySelectorView" />
             
             <VerticalStackLayout x:Name="DynamicContentArea" />
             

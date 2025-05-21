@@ -65,12 +65,12 @@ public class NotesViewModel : BaseViewModel
       
         if (_selectedCategory == null)
         {
-            Notes = new ObservableCollection<NoteModel>(_noteService.GetNotes());
+            Notes = new ObservableCollection<NoteModel>(_noteService.GetNotes().Where(n => n.Group == null));
 
             return;
         }
         
-        Notes = new ObservableCollection<NoteModel>(_noteService.GetNotes().Where(n => n.Category == _selectedCategory.Id));
+        Notes = new ObservableCollection<NoteModel>(_noteService.GetNotes().Where(n => n.Category?.Id == _selectedCategory.Id));
         
     }
     

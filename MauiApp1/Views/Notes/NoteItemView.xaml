@@ -16,7 +16,6 @@
                             <notes:CustomEntryView />
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
-                 
                 </VerticalStackLayout>
                 <VerticalStackLayout x:Name="DynamicContentArea" />
             </VerticalStackLayout>

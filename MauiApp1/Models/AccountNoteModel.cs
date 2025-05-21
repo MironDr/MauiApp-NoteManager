@@ -23,16 +23,17 @@ public class AccountNoteModel : NoteModel
 
     public new static AccountNoteModel CreateNote(NoteDto dto)
     {
-        var textDto = dto as AccountNoteDto;
+        var accountNoteDto = dto as AccountNoteDto;
         return new AccountNoteModel
         {
             Id = _idCounter++,
-            Title = textDto.Title,
-            Description = textDto.Description,
-            Category = textDto.Category,
+            Title = accountNoteDto.Title,
+            Description = accountNoteDto.Description,
+            Category = accountNoteDto.Category,
+            Group = accountNoteDto.Group,
             CreatedAt = DateTime.Now,
-            Login = textDto.Login,
-            Password = textDto.Password
+            Login = accountNoteDto.Login,
+            Password = accountNoteDto.Password
         };
     }
 }

@@ -11,8 +11,8 @@ public sealed class CheckListNoteItemViewModel : NoteItemViewModel, ICompositeVi
     
     private readonly CheckListViewModel _checkListViewModel;
     
-    public CheckListNoteItemViewModel(NoteModel data, string? categoryName, CheckListViewModel checkListViewModel) 
-        : base(data, categoryName)
+    public CheckListNoteItemViewModel(NoteModel data, CheckListViewModel checkListViewModel) 
+        : base(data)
     {
         if (data is not CheckListNoteModel checkListNoteModel)
             throw new ArgumentException("Type is not CheckListNoteModel.", nameof(data));

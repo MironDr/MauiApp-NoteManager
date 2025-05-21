@@ -9,13 +9,16 @@ public class NoteDto : BaseCommon
 
     public string? Description { get; set; }
     
-    public int? Category { get; set; }
+    public CategoryModel? Category { get; set; }
+    
+    public GroupModel? Group { get; set; }
 
     public virtual void CompleteNoteDtoByNoteModel(NoteModel noteModel)
     {
         Title = noteModel.Title;
         Description = noteModel.Description;
         Category = noteModel.Category;
+        Group = noteModel.Group;
        
     }
 }

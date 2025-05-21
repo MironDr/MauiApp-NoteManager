@@ -15,7 +15,7 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
     protected readonly INoteService _noteService;
     protected readonly IModalService _modalService;
 
-    public CategorySelectorViewModel CategorySelectorViewModel { get; }
+    public ClassifierSelectorViewModel ClassifierSelectorViewModel { get; }
 
     public ObservableCollection<CustomFieldViewModel> Fields { get; set; } = new();
 
@@ -28,11 +28,11 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
 
     
     
-    protected ManageNoteViewModel(INoteService noteService, IModalService modalService, CategorySelectorViewModel selectorViewModel)
+    protected ManageNoteViewModel(INoteService noteService, IModalService modalService, ClassifierSelectorViewModel selectorViewModel)
     {
         _noteService = noteService;
         _modalService = modalService;
-        CategorySelectorViewModel = selectorViewModel;
+        ClassifierSelectorViewModel = selectorViewModel;
 
         SaveNoteCommand = new AsyncRelayCommand(SaveNoteAsync);
         
@@ -51,7 +51,8 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
         Fields.Clear();
         Fields.Add(new CustomFieldViewModel("Title", Note.Title, s => Note.Title = s!));
         Fields.Add(new CustomFieldViewModel("Description", Note.Description, s => Note.Description = s));
-        CategorySelectorViewModel.SelectCategoryById(Note.Category);
+        ClassifierSelectorViewModel.SelectCategory(Note.Category);
+        ClassifierSelectorViewModel.SelectGroup(Note.Group);
     }
 
     private async Task SaveNoteAsync()
@@ -59,9 +60,11 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
         if (string.IsNullOrWhiteSpace(Note.Title))
             return;
 
-        Note.Category = CategorySelectorViewModel.SelectedCategory?.Id;
-
-
+        Note.Category = ClassifierSelectorViewModel.SelectedCategory;
+       
+        Note.Group = ClassifierSelectorViewModel.SelectedGroup;
+        
+        
         if (!_editMode)
         {
             _noteService.AddNote(CreateNoteFromDto());

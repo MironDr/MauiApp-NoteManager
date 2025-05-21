@@ -50,6 +50,7 @@ public partial class NoteItemView : BaseView, IParameterizedView<NoteItemStruct>
     private void Switch_OnToggled(object? sender, ToggledEventArgs e)
     {
         ReadModeView.IsVisible = !ReadModeView.IsVisible;
+        
         if(!ReadModeView.IsVisible)
             EditModeView.SetDataToEdit(_model);
         else

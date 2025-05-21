@@ -7,14 +7,14 @@ using MP01.Models;
 namespace MauiApp1.ViewModels.Notes;
 
 
-public sealed class SourceNoteItemViewModel : NoteItemViewModel, ICompositeViewModel
+public sealed class SourceNoteItemViewModel : NoteItemViewModel, ICompositeViewModel, IEventHandler
 {
     private SourceNoteModel? _model;
     
     public CustomQuotesContainerViewModel CustomQuotesContainerViewModel { get; }
  
-    public SourceNoteItemViewModel(NoteModel data, string? categoryName, CustomQuotesContainerViewModel customQuotesContainerViewModel) 
-        : base(data, categoryName)
+    public SourceNoteItemViewModel(NoteModel data, CustomQuotesContainerViewModel customQuotesContainerViewModel) 
+        : base(data)
     {
         if (data is not SourceNoteModel sourceModel)
             throw new ArgumentException("Type is not SourceNoteModel.", nameof(data));
@@ -48,7 +48,7 @@ public sealed class SourceNoteItemViewModel : NoteItemViewModel, ICompositeViewM
             }));
         }
 
-        
+        OnEventInvoke?.Invoke();
         
     }
 
@@ -61,4 +61,6 @@ public sealed class SourceNoteItemViewModel : NoteItemViewModel, ICompositeViewM
         
         return views;
     }
+
+    public event Action? OnEventInvoke;
 }

@@ -5,10 +5,12 @@ using MauiApp1.Factories;
 using MauiApp1.Interfaces;
 using MauiApp1.ViewModels;
 using MauiApp1.ViewModels.Categories;
+using MauiApp1.ViewModels.Groups;
 using MauiApp1.ViewModels.Notes;
 using MauiApp1.ViewModels.Notes.Items;
 using MauiApp1.ViewModels.Notes.Managers;
 using MauiApp1.Views.Categories;
+using MauiApp1.Views.Groups;
 using MauiApp1.Views.Notes;
 using PopupService = MauiApp1.Services.PopupService;
 
@@ -35,6 +37,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<INoteService, NoteService>();
         builder.Services.AddSingleton<IPopupService, PopupService>();
         builder.Services.AddSingleton<IModalService, ModalService>();
+        builder.Services.AddSingleton<IGroupService, GroupService>();
         
         
         //Register ViewModels
@@ -42,11 +45,16 @@ public static class MauiProgram
              
         //Page
         builder.Services.AddTransient<MainPageViewModel>();
+        builder.Services.AddTransient<GroupsPageViewModel>();
+        //Group
+        builder.Services.AddTransient<GroupsViewModel>();
+        builder.Services.AddTransient<CreateGroupViewModel>();
+        builder.Services.AddTransient<CreateGroupButtonViewModel>();
         //Category
         builder.Services.AddTransient<CategoriesViewModel>();
         builder.Services.AddTransient<CreateCategoryViewModel>();
         builder.Services.AddTransient<CreateCategoryButtonViewModel>();
-        builder.Services.AddTransient<CategorySelectorViewModel>();
+        builder.Services.AddTransient<ClassifierSelectorViewModel>();
         //Note
         builder.Services.AddTransient<NotesViewModel>();
         builder.Services.AddTransient<CreateNoteButtonViewModel>();
@@ -69,11 +77,16 @@ public static class MauiProgram
         
         
         //Register Views
+        //Group
+        builder.Services.AddTransient<GroupItemView>();
+        builder.Services.AddTransient<VerticalGroupsView>();
+        builder.Services.AddTransient<CreateGroupView>();
+        builder.Services.AddTransient<CreateGroupButtonView>();
         //Category
         builder.Services.AddTransient<CreateCategoryButtonView>();
         builder.Services.AddTransient<CreateCategoryView>();
         builder.Services.AddTransient<HorizontalCategoriesView>();
-        builder.Services.AddTransient<CategorySelectorView>();
+        builder.Services.AddTransient<ClassifierSelectorView>();
         //Note
         builder.Services.AddTransient<VerticalNotesView>();
         builder.Services.AddTransient<CreateNoteButtonView>();
