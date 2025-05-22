@@ -10,14 +10,33 @@ using MauiApp1.Views.Notes;
 
 namespace MauiApp1.ViewModels.Notes;
 
+public enum ListType
+{
+    Note,
+    Category
+}
+
 public class NotesViewModel : BaseViewModel
 {
-    private readonly INoteService _noteService;
+    protected readonly INoteService _noteService;
     
     
-    private readonly IModalService _modalService;
-    
-    
+    protected readonly IModalService _modalService;
+
+    private ListType _listType = ListType.Note;
+    public ListType ListType
+    {
+        get => _listType;
+        set
+        {
+            if (value != _listType)
+            {
+                _listType = value;
+                LoadNotes();
+            }
+        }
+    }
+
     private readonly NoteItemFactoryManager _factoryManager;
 
 
@@ -60,21 +79,28 @@ public class NotesViewModel : BaseViewModel
         LoadNotes();
     }
     
-    private void LoadNotes()
+    protected virtual void LoadNotes()
     {
-      
-        if (_selectedCategory == null)
+        switch (ListType)
         {
-            Notes = new ObservableCollection<NoteModel>(_noteService.GetNotes().Where(n => n.Group == null));
+            case ListType.Category:
+                Notes = new ObservableCollection<NoteModel>(
+                    _noteService.GetNotes()
+                        .Where(n => n.Group == null)
+                        .Where(n => _selectedCategory == null
+                            ? n.Category != null
+                            : n.Category?.Id == _selectedCategory.Id)
+                );
+                break;
+            default:
+                Notes = new ObservableCollection<NoteModel>(_noteService.GetNotes());
+                break;
 
-            return;
         }
-        
-        Notes = new ObservableCollection<NoteModel>(_noteService.GetNotes().Where(n => n.Category?.Id == _selectedCategory.Id));
         
     }
     
-    private async Task OnNoteSelected(NoteModel note)
+    protected virtual async Task OnNoteSelected(NoteModel note)
     {
         var noteItemStruct = (NoteItemStruct)_factoryManager.Create(note)!;
         

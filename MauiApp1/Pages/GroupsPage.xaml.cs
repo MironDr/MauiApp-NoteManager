@@ -1,8 +1,9 @@
-﻿using MauiApp1.Views.Groups;
+﻿using MauiApp1.ViewModels.Groups;
+using MauiApp1.Views.Groups;
 
 namespace MauiApp1.Pages;
 
-public partial class GroupsPage : ContentPage
+public partial class GroupsPage : BasePage
 {
     private readonly IServiceProvider _serviceProvider;
 
@@ -12,6 +13,8 @@ public partial class GroupsPage : ContentPage
         _serviceProvider = serviceProvider;
         
         var verticalGroupsList = _serviceProvider.GetRequiredService<VerticalGroupsView>();
+        
+        CreateGroupButtonView.SetBindingContext(_serviceProvider.GetRequiredService<CreateGroupButtonViewModel>());
         
         Layout.Add(verticalGroupsList);
        

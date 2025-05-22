@@ -1,6 +1,7 @@
 ﻿using MauiApp1.Interfaces;
 using MauiApp1.ViewModels;
 using MauiApp1.ViewModels.Notes;
+using MauiApp1.ViewModels.Notes.Items;
 
 namespace MauiApp1.Structs;
 

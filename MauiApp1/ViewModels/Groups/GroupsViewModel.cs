@@ -4,6 +4,7 @@ using MauiApp1.Factories;
 using MauiApp1.Models;
 using MauiApp1.Services;
 using MauiApp1.Structs;
+using MauiApp1.ViewModels.Notes;
 using MauiApp1.Views.Groups;
 
 
@@ -14,6 +15,8 @@ public class GroupsViewModel : BaseViewModel
     private readonly IGroupService _groupService;
     
     private readonly NoteItemFactoryManager _factoryManager;
+    
+    private readonly NoteToGroupSelectorButtonViewModel _groupSelectorButtonViewModel;
     
     private readonly IModalService _modalService;
     
@@ -35,10 +38,11 @@ public class GroupsViewModel : BaseViewModel
     }
     
     
-    public GroupsViewModel(IGroupService groupService, IModalService modalService,  NoteItemFactoryManager factoryManager) : base()
+    public GroupsViewModel(IGroupService groupService, IModalService modalService,  NoteItemFactoryManager factoryManager, NoteToGroupSelectorButtonViewModel noteToGroupSelectorButtonViewModel) : base()
     {
         _groupService = groupService;
         _factoryManager = factoryManager;
+        _groupSelectorButtonViewModel = noteToGroupSelectorButtonViewModel;
         _modalService = modalService;
         
         _groupService.GroupsUpdated += OnGroupsUpdated!;
@@ -63,7 +67,8 @@ public class GroupsViewModel : BaseViewModel
         GroupItemStruct groupItemStruct = new GroupItemStruct
         {
             Group = group,
-            ItemFactory = _factoryManager
+            ItemFactory = _factoryManager,
+            NoteToGroupSelectorButtonViewModel = _groupSelectorButtonViewModel
         };
         
         

@@ -7,6 +7,14 @@
     <ScrollView Orientation="Horizontal">
     <StackLayout x:Name="MainLayout" Orientation="Horizontal">
         <CollectionView ItemsSource="{Binding Categories}" SelectionMode="None">
+            <CollectionView.EmptyView>
+                <Label Text="No categories" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center"
+                       TextColor="{StaticResource SecondaryDarkText}"
+                       TextTransform="Uppercase"
+                       FontSize="Title"/>
+            </CollectionView.EmptyView>
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Horizontal"/>
             </CollectionView.ItemsLayout>

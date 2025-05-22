@@ -153,6 +153,10 @@ public class NoteModel : BaseModel
         {
             Category = null;
             Group = noteDto.Group;
+        }else
+        {
+            Category = null;
+            Group = null;
         }
         
         return this;

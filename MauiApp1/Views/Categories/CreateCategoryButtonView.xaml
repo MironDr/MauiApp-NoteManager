@@ -5,5 +5,5 @@
              xmlns:view="clr-namespace:MauiApp1.View"
              x:Class="MauiApp1.Views.Categories.CreateCategoryButtonView">
     <Button Text="+"
-            Command="{Binding CreateCategoryCommand}" Style="{StaticResource ButtonCategoryNotSelected}"/>
+            Command="{Binding CreateCategoryCommand}" Style="{StaticResource CircleButton}"/>
 </view:BaseView>

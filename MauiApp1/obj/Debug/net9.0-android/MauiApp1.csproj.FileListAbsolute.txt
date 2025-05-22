@@ -1376,3 +1376,4 @@ D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-android\android\assets\x86_64\zh
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-android\android\assets\x86_64\zh-Hant\Microsoft.Maui.Controls.resources.dll
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-android\android\assets\x86_64\zh-HK\Microsoft.Maui.Controls.resources.dll
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-android\android\assets\x86_64\_Microsoft.Android.Resource.Designer.dll
+D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-android\res\values\styles.xml

@@ -14,7 +14,7 @@ public partial class NoteItemView : BaseView, IParameterizedView<NoteItemStruct>
 
     private NoteModel _model;
     
-    private IEditableNoteViewModel _editableNoteViewModel;
+    private IUpdatable _updatable;
     public NoteItemView()
     {
         InitializeComponent();
@@ -27,15 +27,21 @@ public partial class NoteItemView : BaseView, IParameterizedView<NoteItemStruct>
         
         BindingContext = data.NoteItemView;
         _model = data.NoteItemView.Note;
+        _updatable = data.NoteItemView;
 
         if (data.NoteItemEdit is IEventHandler eventHandler)
+        {
             eventHandler.OnEventInvoke += Switch;
-        
-        
+            eventHandler.OnEventInvoke += _updatable.Update;
+        }
+
+
         EditModeView.SetBindingContext(data.NoteItemEdit);
         EditModeView.SetDataToEdit(_model);
         
-        _editableNoteViewModel = data.NoteItemView;
+      
+        
+       
         
         
         if (data.NoteItemView is ICompositeViewModel compositeViewModel)
@@ -53,8 +59,6 @@ public partial class NoteItemView : BaseView, IParameterizedView<NoteItemStruct>
         
         if(!ReadModeView.IsVisible)
             EditModeView.SetDataToEdit(_model);
-        else
-            _editableNoteViewModel.GoToEditMode(_model);
         
         EditModeView.IsVisible = !ReadModeView.IsVisible;
     }

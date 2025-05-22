@@ -39,17 +39,23 @@ build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.AppShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
+[D:/RiderMAUI/MauiApp1/MauiApp1/Pages/CategoriesPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Pages.CategoriesPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\CategoriesPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\CategoriesPage.xaml
+
 [D:/RiderMAUI/MauiApp1/MauiApp1/Pages/GroupsPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Pages.GroupsPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages\GroupsPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Pages\GroupsPage.xaml
 
-[D:/RiderMAUI/MauiApp1/MauiApp1/Pages/MainPage.xaml]
+[D:/RiderMAUI/MauiApp1/MauiApp1/Pages/NotesPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Pages.MainPage.xaml
-build_metadata.AdditionalFiles.TargetPath = Pages\MainPage.xaml
-build_metadata.AdditionalFiles.RelativePath = Pages\MainPage.xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Pages.NotesPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\NotesPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\NotesPage.xaml
 
 [D:/RiderMAUI/MauiApp1/MauiApp1/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
@@ -152,6 +158,12 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Groups.GroupItemView.xaml
 build_metadata.AdditionalFiles.TargetPath = Views\Groups\GroupItemView.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\Groups\GroupItemView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Groups/NoteToGroupSelectorButtonView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Groups.NoteToGroupSelectorButtonView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Groups\NoteToGroupSelectorButtonView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Groups\NoteToGroupSelectorButtonView.xaml
 
 [D:/RiderMAUI/MauiApp1/MauiApp1/Views/Groups/VerticalGroupsView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

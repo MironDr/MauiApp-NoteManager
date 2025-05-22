@@ -13,6 +13,11 @@ public sealed partial class CreateNoteButtonView : BaseView
        
     }
     
+    public CreateNoteButtonView()
+    {
+        InitializeComponent();
+    }
+    
    
 }
 

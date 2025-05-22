@@ -72,7 +72,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <MauiXaml Update="Pages\MainPage.xaml">
+      <MauiXaml Update="Pages\CategoriesPage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
       <MauiXaml Update="View\Categories\CreateCategoryButtonView.xaml">
@@ -117,7 +117,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Pages\MainPage.xaml.cs">
+      <Compile Update="Pages\CategoriesPage.xaml.cs">
         <DependentUpon>MainPage.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>

@@ -9,10 +9,16 @@
     Shell.FlyoutBehavior="Flyout"
     Title="MauiApp1">
 
+    
+    <ShellContent
+        Title="Notes"
+        ContentTemplate="{DataTemplate pages:NotesPage}"
+        Route="NotesPage" />
+    
     <ShellContent
         Title="Categories"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        ContentTemplate="{DataTemplate local:CategoriesPage}"
+        Route="CategoriesPage" />
     
     <ShellContent
         Title="Groups"

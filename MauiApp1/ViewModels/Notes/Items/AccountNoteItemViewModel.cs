@@ -1,4 +1,5 @@
 ﻿using MauiApp1.Models;
+using MauiApp1.ViewModels.Notes.Items;
 
 namespace MauiApp1.ViewModels.Notes;
 

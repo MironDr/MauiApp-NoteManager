@@ -6,6 +6,14 @@
              x:Class="MauiApp1.Views.Notes.VerticalNotesView">
         <StackLayout x:Name="MainLayout" Orientation="Vertical">
             <CollectionView ItemsSource="{Binding Notes}" SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <Label Text="No matching notes" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"
+                           TextColor="{StaticResource SecondaryDarkText}"
+                           TextTransform="Uppercase"
+                           FontSize="Title"/>
+                </CollectionView.EmptyView>
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical"/>
                 </CollectionView.ItemsLayout>

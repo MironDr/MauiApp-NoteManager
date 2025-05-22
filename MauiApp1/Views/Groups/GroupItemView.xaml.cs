@@ -32,6 +32,9 @@ public partial class GroupItemView : BaseView, IParameterizedView<GroupItemStruc
         _groupModel = data.Group;
         _factoryManager = data.ItemFactory;
         BindingContext = _groupModel;
+        data.NoteToGroupSelectorButtonViewModel.SelectGroup(_groupModel);
+        data.NoteToGroupSelectorButtonViewModel.OnEventInvoke += Reload;
+        SelectorButtonView.BindingContext = data.NoteToGroupSelectorButtonViewModel;
         
         Reload();
     }
@@ -39,9 +42,8 @@ public partial class GroupItemView : BaseView, IParameterizedView<GroupItemStruc
     private void Reload()
     {
         MainStack.Children.Clear();
-
-        List<NoteItemStruct> _notes = new();
         
+        List<NoteItemStruct> _notes = new();
         
         foreach (var note in _groupModel.GetNotes().OrderBy(g => g.Id).ToList())
         {

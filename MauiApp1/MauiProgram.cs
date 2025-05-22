@@ -44,12 +44,15 @@ public static class MauiProgram
         builder.Services.AddTransient<BaseViewModel>();
              
         //Page
-        builder.Services.AddTransient<MainPageViewModel>();
+        builder.Services.AddTransient<CategoriesPageViewModel>();
         builder.Services.AddTransient<GroupsPageViewModel>();
         //Group
         builder.Services.AddTransient<GroupsViewModel>();
         builder.Services.AddTransient<CreateGroupViewModel>();
         builder.Services.AddTransient<CreateGroupButtonViewModel>();
+        builder.Services.AddTransient<NoteToGroupSelectorButtonViewModel>();
+        builder.Services.AddTransient<NoteToGroupSelectorViewModel>();
+        
         //Category
         builder.Services.AddTransient<CategoriesViewModel>();
         builder.Services.AddTransient<CreateCategoryViewModel>();
@@ -82,6 +85,7 @@ public static class MauiProgram
         builder.Services.AddTransient<VerticalGroupsView>();
         builder.Services.AddTransient<CreateGroupView>();
         builder.Services.AddTransient<CreateGroupButtonView>();
+        builder.Services.AddTransient<NoteToGroupSelectorButtonView>();
         //Category
         builder.Services.AddTransient<CreateCategoryButtonView>();
         builder.Services.AddTransient<CreateCategoryView>();

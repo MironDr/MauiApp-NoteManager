@@ -1,6 +1,7 @@
 ﻿using MauiApp1.Interfaces;
 using MauiApp1.Models;
 using MauiApp1.View;
+using MauiApp1.ViewModels.Notes.Items;
 using MauiApp1.Views.Notes;
 using MP01.Models;
 
