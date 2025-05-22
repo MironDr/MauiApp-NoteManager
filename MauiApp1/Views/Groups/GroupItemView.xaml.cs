@@ -33,7 +33,7 @@ public partial class GroupItemView : BaseView, IParameterizedView<GroupItemStruc
         _factoryManager = data.ItemFactory;
         BindingContext = _groupModel;
         data.NoteToGroupSelectorButtonViewModel.SelectGroup(_groupModel);
-        data.NoteToGroupSelectorButtonViewModel.OnEventInvoke += Reload;
+        data.NoteToGroupSelectorButtonViewModel.NoteToGroupSelectorViewModel.OnEventInvoke += Reload;
         SelectorButtonView.BindingContext = data.NoteToGroupSelectorButtonViewModel;
         
         Reload();
