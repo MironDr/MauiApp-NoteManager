@@ -8,29 +8,21 @@ using MauiApp1.Views.Notes;
 
 namespace MauiApp1.ViewModels.Groups;
 
-public class NoteToGroupSelectorButtonViewModel : BaseView
+public class NoteToGroupSelectorButtonViewModel : NoteSelectorButtonViewModel<NoteToGroupSelectorViewModel>
 {
-    private readonly IPopupService _popupService;
-    public NoteToGroupSelectorViewModel NoteToGroupSelectorViewModel  {get;}
-
-    public ICommand OpenSelectorCommand { get; }
-
-    public NoteToGroupSelectorButtonViewModel(IPopupService popupService, NoteToGroupSelectorViewModel noteToGroupSelectorViewModel)
+    public NoteToGroupSelectorButtonViewModel(IPopupService popupService, NoteToGroupSelectorViewModel viewModel) : base(popupService, viewModel)
     {
-        NoteToGroupSelectorViewModel = noteToGroupSelectorViewModel;
-        _popupService = popupService;
-        OpenSelectorCommand = new Command(OpenSelector);
     }
 
     public void SelectGroup(GroupModel group)
     {
-        NoteToGroupSelectorViewModel.Group = group;
+        ViewModel.Group = group;
     }
 
  
-    private void OpenSelector()
+    protected override void OpenSelector()
     {
-        _popupService.ShowPopupAsyncWithParameter<VerticalNotesView, NoteToGroupSelectorViewModel>(NoteToGroupSelectorViewModel);
+        _popupService.ShowPopupAsyncWithParameter<VerticalNotesView, NoteToGroupSelectorViewModel>(ViewModel);
     }
     
 }

@@ -12,11 +12,11 @@ public partial class GroupsPage : BasePage
         InitializeComponent();
         _serviceProvider = serviceProvider;
         
-        var verticalGroupsList = _serviceProvider.GetRequiredService<VerticalGroupsView>();
+        
+        VerticalGroupsView.SetBindingContext(_serviceProvider.GetRequiredService<GroupsViewModel>());
         
         CreateGroupButtonView.SetBindingContext(_serviceProvider.GetRequiredService<CreateGroupButtonViewModel>());
         
-        Layout.Add(verticalGroupsList);
        
     }
 }

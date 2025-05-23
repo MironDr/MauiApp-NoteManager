@@ -6,10 +6,9 @@ namespace MauiApp1.Views.Notes;
 
 public sealed partial class VerticalNotesView : BaseView, IParameterizedView<NotesViewModel>
 {
-    public VerticalNotesView(NotesViewModel viewModel)
+    public VerticalNotesView()
     {
         InitializeComponent();
-        SetBindingContext(viewModel);
     }
 
     public void SetData(NotesViewModel data)

@@ -1,4 +1,5 @@
-﻿using MauiApp1.DTOs;
+﻿using CommunityToolkit.Mvvm.Input;
+using MauiApp1.DTOs;
 using MauiApp1.Models;
 using MauiApp1.Services;
 
@@ -11,21 +12,21 @@ public class CreateCategoryViewModel : BaseViewModel
     private readonly IPopupService _popupService;
     public CategoryDto Category { get; } =  new ();
     
-    public Command SaveCategoryCommand { get; }
+    public AsyncRelayCommand SaveCategoryCommand { get; }
     
     public bool ClosePopup { get; set; } = true;
 
-    public event Action<CategoryModel> CategorySaved;
+    public event Action<CategoryModel>? CategorySaved;
     
     public CreateCategoryViewModel(ICategoryService categoryService, IPopupService popupService)
     {
-        SaveCategoryCommand = new Command(SaveCategory);
+        SaveCategoryCommand = new AsyncRelayCommand(SaveCategory);
         _categoryService = categoryService;
         _popupService = popupService;
 
     }
 
-    private void SaveCategory()
+    private async Task SaveCategory()
     {
         if (string.IsNullOrWhiteSpace(Category.CategoryName))
         {
@@ -37,6 +38,6 @@ public class CreateCategoryViewModel : BaseViewModel
         CategorySaved?.Invoke(category);
         
         if (ClosePopup)
-         _popupService.ClosePopupAsync();
+          await _popupService.ClosePopupAsync();
     }
 }

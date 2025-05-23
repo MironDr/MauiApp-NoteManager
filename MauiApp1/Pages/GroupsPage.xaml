@@ -7,12 +7,8 @@
              xmlns:groups="clr-namespace:MauiApp1.Views.Groups"
              x:Class="MauiApp1.Pages.GroupsPage">
     <Grid>
-        <ScrollView>
-            <VerticalStackLayout x:Name="Layout"
-                                 Spacing="25">
-            </VerticalStackLayout>
-        </ScrollView>
-        <AbsoluteLayout>
+        <groups:VerticalGroupsView x:Name="VerticalGroupsView" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+        <AbsoluteLayout>    
             <groups:CreateGroupButtonView x:Name="CreateGroupButtonView"
                                         AbsoluteLayout.LayoutBounds="1,1,AutoSize,AutoSize"
                                         AbsoluteLayout.LayoutFlags="PositionProportional"

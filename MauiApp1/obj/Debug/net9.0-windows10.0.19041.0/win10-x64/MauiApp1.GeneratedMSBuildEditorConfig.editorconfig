@@ -57,6 +57,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Pages.NotesPage.x
 build_metadata.AdditionalFiles.TargetPath = Pages\NotesPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Pages\NotesPage.xaml
 
+[D:/RiderMAUI/MauiApp1/MauiApp1/Pages/ProfilesPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Pages.ProfilesPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\ProfilesPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\ProfilesPage.xaml
+
 [D:/RiderMAUI/MauiApp1/MauiApp1/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Resources.Styles.Colors.xaml
@@ -159,11 +165,11 @@ build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Groups.Grou
 build_metadata.AdditionalFiles.TargetPath = Views\Groups\GroupItemView.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\Groups\GroupItemView.xaml
 
-[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Groups/NoteToGroupSelectorButtonView.xaml]
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Groups/NoteSelectorButtonView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Groups.NoteToGroupSelectorButtonView.xaml
-build_metadata.AdditionalFiles.TargetPath = Views\Groups\NoteToGroupSelectorButtonView.xaml
-build_metadata.AdditionalFiles.RelativePath = Views\Groups\NoteToGroupSelectorButtonView.xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Groups.NoteSelectorButtonView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Groups\NoteSelectorButtonView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Groups\NoteSelectorButtonView.xaml
 
 [D:/RiderMAUI/MauiApp1/MauiApp1/Views/Groups/VerticalGroupsView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
@@ -224,3 +230,27 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.VerticalNotesView.xaml
 build_metadata.AdditionalFiles.TargetPath = Views\Notes\VerticalNotesView.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\Notes\VerticalNotesView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/ProtectionProfiles/CreateProtectionProfileButtonView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.ProtectionProfiles.CreateProtectionProfileButtonView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ProtectionProfiles\CreateProtectionProfileButtonView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ProtectionProfiles\CreateProtectionProfileButtonView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/ProtectionProfiles/CreateProtectionProfileView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.ProtectionProfiles.CreateProtectionProfileView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ProtectionProfiles\CreateProtectionProfileView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ProtectionProfiles\CreateProtectionProfileView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/ProtectionProfiles/ProtectionProfileItemView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.ProtectionProfiles.ProtectionProfileItemView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ProtectionProfiles\ProtectionProfileItemView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ProtectionProfiles\ProtectionProfileItemView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/ProtectionProfiles/VerticalProtectionProfilesView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.ProtectionProfiles.VerticalProtectionProfilesView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ProtectionProfiles\VerticalProtectionProfilesView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ProtectionProfiles\VerticalProtectionProfilesView.xaml

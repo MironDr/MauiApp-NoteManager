@@ -5,10 +5,10 @@ namespace MauiApp1.Views.Categories;
 
 public sealed partial class HorizontalCategoriesView : BaseView
 {
-    public HorizontalCategoriesView(CategoriesViewModel viewModel)
+    public HorizontalCategoriesView()
     {
         InitializeComponent();
-        SetBindingContext(viewModel);
+       
     }
     
     

@@ -9,9 +9,11 @@ using MauiApp1.ViewModels.Groups;
 using MauiApp1.ViewModels.Notes;
 using MauiApp1.ViewModels.Notes.Items;
 using MauiApp1.ViewModels.Notes.Managers;
+using MauiApp1.ViewModels.ProtectionProfiles;
 using MauiApp1.Views.Categories;
 using MauiApp1.Views.Groups;
 using MauiApp1.Views.Notes;
+using MauiApp1.Views.ProtectionProfiles;
 using PopupService = MauiApp1.Services.PopupService;
 
 
@@ -38,7 +40,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<IPopupService, PopupService>();
         builder.Services.AddSingleton<IModalService, ModalService>();
         builder.Services.AddSingleton<IGroupService, GroupService>();
-        
+        builder.Services.AddSingleton<IProtectionProfileService, ProtectionProfileService>();
         
         //Register ViewModels
         builder.Services.AddTransient<BaseViewModel>();
@@ -52,7 +54,13 @@ public static class MauiProgram
         builder.Services.AddTransient<CreateGroupButtonViewModel>();
         builder.Services.AddTransient<NoteToGroupSelectorButtonViewModel>();
         builder.Services.AddTransient<NoteToGroupSelectorViewModel>();
-        
+        //Profile
+        builder.Services.AddTransient<CreateProtectionProfileButtonViewModel>();
+        builder.Services.AddTransient<CreateProtectionProfileViewModel>();
+        builder.Services.AddTransient<ProtectionProfilesViewModel>();
+        builder.Services.AddTransient<NoteToProfileSelectorButtonViewModel>();
+        builder.Services.AddTransient<NoteToProfileSelectorViewModel>();
+        builder.Services.AddTransient<ProtectionProfileItemViewModel>();
         //Category
         builder.Services.AddTransient<CategoriesViewModel>();
         builder.Services.AddTransient<CreateCategoryViewModel>();
@@ -85,7 +93,12 @@ public static class MauiProgram
         builder.Services.AddTransient<VerticalGroupsView>();
         builder.Services.AddTransient<CreateGroupView>();
         builder.Services.AddTransient<CreateGroupButtonView>();
-        builder.Services.AddTransient<NoteToGroupSelectorButtonView>();
+        builder.Services.AddTransient<NoteSelectorButtonView>();
+        //Profile
+        builder.Services.AddTransient<CreateProtectionProfileButtonView>();
+        builder.Services.AddTransient<CreateProtectionProfileView>();
+        builder.Services.AddTransient<VerticalProtectionProfilesView>();
+        builder.Services.AddTransient<ProtectionProfileItemView>();
         //Category
         builder.Services.AddTransient<CreateCategoryButtonView>();
         builder.Services.AddTransient<CreateCategoryView>();

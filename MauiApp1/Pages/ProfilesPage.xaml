@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<mauiApp1:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:protectionProfiles="clr-namespace:MauiApp1.Views.ProtectionProfiles"
+             xmlns:mauiApp1="clr-namespace:MauiApp1"
+             x:Class="MauiApp1.Pages.ProfilesPage">
+    <Grid>
+        <protectionProfiles:VerticalProtectionProfilesView x:Name="VerticalProtectionProfilesView" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+        <AbsoluteLayout>
+            <protectionProfiles:CreateProtectionProfileButtonView x:Name="CreateProfileButtonView"
+                                        AbsoluteLayout.LayoutBounds="1,1,AutoSize,AutoSize"
+                                        AbsoluteLayout.LayoutFlags="PositionProportional"
+                                        Margin="20" />
+        </AbsoluteLayout>
+    </Grid>
+</mauiApp1:BasePage>

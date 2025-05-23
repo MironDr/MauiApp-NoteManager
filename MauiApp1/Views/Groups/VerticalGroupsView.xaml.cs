@@ -10,9 +10,9 @@ namespace MauiApp1.Views.Groups;
 
 public sealed partial class VerticalGroupsView : BaseView
 {
-    public VerticalGroupsView(GroupsViewModel viewModel)
+    public VerticalGroupsView()
     {
         InitializeComponent();
-        SetBindingContext(viewModel);
+        
     }
 }

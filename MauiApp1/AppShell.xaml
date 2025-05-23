@@ -17,12 +17,17 @@
     
     <ShellContent
         Title="Categories"
-        ContentTemplate="{DataTemplate local:CategoriesPage}"
+        ContentTemplate="{DataTemplate pages:CategoriesPage}"
         Route="CategoriesPage" />
     
     <ShellContent
         Title="Groups"
         ContentTemplate="{DataTemplate pages:GroupsPage}"
         Route="GroupsPage" />
+    
+    <ShellContent
+        Title="Protection Profiles"
+        ContentTemplate="{DataTemplate pages:ProfilesPage}"
+        Route="ProfilesPage" />
 
 </Shell>

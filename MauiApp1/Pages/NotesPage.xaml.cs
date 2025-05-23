@@ -17,12 +17,10 @@ public partial class NotesPage : BasePage
         InitializeComponent();
         _serviceProvider = serviceProvider;
         
-  
-        var verticalNotesView = new VerticalNotesView(
-            _serviceProvider.GetRequiredService<NotesViewModel>());
+        
+        VerticalNotesView.SetBindingContext(_serviceProvider.GetRequiredService<NotesViewModel>());
         
         CreateNoteButtonView.SetBindingContext(_serviceProvider.GetRequiredService<CreateNoteButtonViewModel>());
         
-        Layout.Add(verticalNotesView);
     }
 }

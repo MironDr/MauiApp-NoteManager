@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<view:BaseView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:view="clr-namespace:MauiApp1.View"
+             x:Class="MauiApp1.Views.ProtectionProfiles.VerticalProtectionProfilesView">
+    <Grid x:Name="MainLayout">
+        <CollectionView ItemsSource="{Binding Profiles}" SelectionMode="None">
+            <CollectionView.EmptyView>
+                <Label Text="No profiles" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center"
+                       TextColor="{StaticResource SecondaryDarkText}"
+                       TextTransform="Uppercase"
+                       FontSize="Title"/>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Button
+                        Text="{Binding ProfileName}"
+                        Command="{Binding BindingContext.ProfileSelectedCommand, Source={x:Reference MainLayout}}"
+                        CommandParameter="{Binding .}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</view:BaseView>

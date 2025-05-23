@@ -49,15 +49,15 @@ public class GroupsViewModel : BaseViewModel
         
         GroupSelectedCommand = new AsyncRelayCommand<GroupModel>(OnGroupSelected!);
         
-        LoadNotes();
+        LoadGroups();
     }
     
     private void OnGroupsUpdated(object sender, EventArgs e)
     {
-        LoadNotes();
+        LoadGroups();
     }
     
-    private void LoadNotes()
+    private void LoadGroups()
     {
         Groups = new ObservableCollection<GroupModel>(_groupService.GetGroups());
     }

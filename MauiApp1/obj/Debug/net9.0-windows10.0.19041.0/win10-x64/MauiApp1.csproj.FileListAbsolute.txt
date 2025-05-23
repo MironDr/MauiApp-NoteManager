@@ -235,11 +235,6 @@ D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\sp
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\splashSplashScreen.scale-150.png
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\splashSplashScreen.scale-200.png
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\splashSplashScreen.scale-400.png
-D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\dotnet_bot.scale-400.png
-D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\dotnet_bot.scale-200.png
-D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\dotnet_bot.scale-150.png
-D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\dotnet_bot.scale-125.png
-D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\dotnet_bot.scale-100.png
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\appiconLargeTile.scale-400.png
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\appiconLargeTile.scale-200.png
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\appiconLargeTile.scale-150.png
@@ -286,6 +281,11 @@ D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\ap
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\appiconLogo.scale-125.png
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\appiconLogo.scale-100.png
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\appicon.ico
+D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\dotnet_bot.scale-400.png
+D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\dotnet_bot.scale-200.png
+D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\dotnet_bot.scale-150.png
+D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\dotnet_bot.scale-125.png
+D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\dotnet_bot.scale-100.png
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\MauiApp1.exe
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\MauiApp1.deps.json
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\MauiApp1.runtimeconfig.json
@@ -394,11 +394,6 @@ D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\ma
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\f\FluentUI.cs
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\f\OpenSans-Regular.ttf
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\f\OpenSans-Semibold.ttf
-D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-400.png
-D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-200.png
-D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-150.png
-D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-125.png
-D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-100.png
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-400.png
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-200.png
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-150.png
@@ -445,6 +440,11 @@ D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\re
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-125.png
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-100.png
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\appicon.ico
+D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-400.png
+D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-200.png
+D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-150.png
+D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-125.png
+D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-100.png
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\mauiimage.stamp
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\mauiimage.outputs
 D:\RiderMAUI\MauiApp1\MauiApp1\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\MauiApp1.AssemblyInfoInputs.cache

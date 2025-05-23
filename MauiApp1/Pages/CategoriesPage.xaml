@@ -5,15 +5,20 @@
              xmlns:mauiApp1="clr-namespace:MauiApp1"
              xmlns:notes="clr-namespace:MauiApp1.Views.Notes"
              xmlns:categories="clr-namespace:MauiApp1.Views.Categories"
-             x:Class="MauiApp1.CategoriesPage">
+             x:Class="MauiApp1.Pages.CategoriesPage">
 
-    <Grid>
-        <ScrollView>
-            <VerticalStackLayout x:Name="Layout"
-                                 Spacing="25">
-            </VerticalStackLayout>
-        </ScrollView>
-        <AbsoluteLayout>
+    <Grid RowDefinitions="Auto, *"> 
+    
+       
+      
+        <categories:HorizontalCategoriesView x:Name="HorizontalCategoriesView" Grid.Row="0" />
+     
+    
+        <notes:VerticalNotesView Grid.Row="1" x:Name="VerticalNotesView"
+                                 HorizontalOptions="Fill"
+                                 VerticalOptions="Fill"/>
+        
+        <AbsoluteLayout Grid.Row="1">
             <categories:CreateCategoryButtonView x:Name="CreateCategoryButtonView"
                                         AbsoluteLayout.LayoutBounds="1,1,AutoSize,AutoSize"
                                         AbsoluteLayout.LayoutFlags="PositionProportional"

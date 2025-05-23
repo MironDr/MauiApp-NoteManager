@@ -19,7 +19,7 @@
         </ScrollView>
         
         <AbsoluteLayout>
-            <groups:NoteToGroupSelectorButtonView x:Name="SelectorButtonView"
+            <groups:NoteSelectorButtonView x:Name="SelectorButtonView"
                                           AbsoluteLayout.LayoutBounds="1,1,AutoSize,AutoSize"
                                           AbsoluteLayout.LayoutFlags="PositionProportional"
                                           Margin="20" />

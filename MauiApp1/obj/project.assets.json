@@ -27763,7 +27763,7 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[9.0.4, 9.0.4]"
+            "version": "[9.0.5, 9.0.5]"
           }
         ],
         "frameworkReferences": {
@@ -27816,7 +27816,7 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[9.0.4, 9.0.4]"
+            "version": "[9.0.5, 9.0.5]"
           }
         ],
         "frameworkReferences": {
@@ -27870,7 +27870,7 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[9.0.4, 9.0.4]"
+            "version": "[9.0.5, 9.0.5]"
           }
         ],
         "frameworkReferences": {

@@ -21,19 +21,14 @@ public partial class GroupItemView : BaseView, IParameterizedView<GroupItemStruc
     {
         InitializeComponent();
     }
-
-    public void SetGroup(GroupModel group)
-    {
-        _groupModel = group;
-    }
-
+    
     public void SetData(GroupItemStruct data)
     {
         _groupModel = data.Group;
         _factoryManager = data.ItemFactory;
         BindingContext = _groupModel;
         data.NoteToGroupSelectorButtonViewModel.SelectGroup(_groupModel);
-        data.NoteToGroupSelectorButtonViewModel.NoteToGroupSelectorViewModel.OnEventInvoke += Reload;
+        data.NoteToGroupSelectorButtonViewModel.ViewModel.OnEventInvoke += Reload;
         SelectorButtonView.BindingContext = data.NoteToGroupSelectorButtonViewModel;
         
         Reload();

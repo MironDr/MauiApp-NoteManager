@@ -27,10 +27,33 @@ public class NoteModel : BaseModel
             _title = value;
         }
     }
-
+    
     public string? Description { get; protected set; }
     public DateTime CreatedAt { get; protected init; }
 
+    
+    // ---- Protection Profile ----
+    
+    private ProtectionProfileModel? _protectionProfile;
+    
+    public ProtectionProfileModel? ProtectionProfile
+    {
+        get => _protectionProfile;
+        set 
+        {
+            if (_protectionProfile != null && _protectionProfile.GetNotes().ContainsKey(Id))
+            {
+                _protectionProfile.RemoveNote(Id);
+            }
+            _protectionProfile = value;
+              
+            if (_protectionProfile != null)
+            {
+                _protectionProfile.AddNoteToGroup(this);
+            }
+        }
+    }
+    
     // ---- Group ----
 
     private GroupModel? _group;

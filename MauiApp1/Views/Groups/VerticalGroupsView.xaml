@@ -4,8 +4,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:view="clr-namespace:MauiApp1.View"
              x:Class="MauiApp1.Views.Groups.VerticalGroupsView">
-    <StackLayout x:Name="MainLayout" Orientation="Vertical">
+    <Grid x:Name="MainLayout">
         <CollectionView ItemsSource="{Binding Groups}" SelectionMode="None">
+            <CollectionView.EmptyView>
+                <Label Text="No groups" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center"
+                       TextColor="{StaticResource SecondaryDarkText}"
+                       TextTransform="Uppercase"
+                       FontSize="Title"/>
+            </CollectionView.EmptyView>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Button
@@ -15,5 +23,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </StackLayout>
+    </Grid>
 </view:BaseView>

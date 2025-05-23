@@ -26,8 +26,8 @@ public class GroupService : IGroupService
 
     private void LoadGroups()
     {
-        _groups.Add(GroupModel.CreateGroup(new GroupDto{GroupName = "Group1"}));
-        _groups.Add(GroupModel.CreateGroup(new GroupDto{GroupName = "Group2"}));
+        //_groups.Add(GroupModel.CreateGroup(new GroupDto{GroupName = "Group1"}));
+        //_groups.Add(GroupModel.CreateGroup(new GroupDto{GroupName = "Group2"}));
     }
 
     public void AddGroup(GroupModel group)
