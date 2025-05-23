@@ -21,7 +21,7 @@
             </VerticalStackLayout>
            
             
-            <notes:EditNoteView x:Name="EditModeView" IsVisible="False"/>
+            <notes:CreateNoteView x:Name="EditModeView" IsVisible="False"/>
            
         </VerticalStackLayout>
     </ScrollView>

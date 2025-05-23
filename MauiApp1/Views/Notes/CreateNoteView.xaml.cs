@@ -25,9 +25,6 @@ public sealed partial class CreateNoteView : BaseView, IParameterizedView<BaseVi
 
     public override void SetBindingContext(BaseViewModel baseViewModel)
     {
-        
-      
-        
         _viewModel = baseViewModel;
         BindingContext = _viewModel;
 
@@ -41,8 +38,6 @@ public sealed partial class CreateNoteView : BaseView, IParameterizedView<BaseVi
             foreach (var view in composite.GetEmbeddedViews())
                 AddView(view);
         }
-
-       
     }
 
     public void GoToEditMode(NoteModel noteModel)

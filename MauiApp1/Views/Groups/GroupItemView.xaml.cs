@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MauiApp1.Factories;
+﻿using MauiApp1.Factories;
 using MauiApp1.Interfaces;
 using MauiApp1.Models;
 using MauiApp1.Structs;
@@ -17,7 +12,7 @@ public partial class GroupItemView : BaseView, IParameterizedView<GroupItemStruc
     private GroupModel _groupModel;
     private NoteItemFactoryManager _factoryManager;
     
-    public GroupItemView()
+    public GroupItemView() 
     {
         InitializeComponent();
     }
@@ -37,33 +32,30 @@ public partial class GroupItemView : BaseView, IParameterizedView<GroupItemStruc
     private void Reload()
     {
         MainStack.Children.Clear();
-        
-        List<NoteItemStruct> _notes = new();
-        
-        foreach (var note in _groupModel.GetNotes().OrderBy(g => g.Id).ToList())
+
+        foreach (var note in _groupModel.GetNotes().OrderBy(n => n.Id))
         {
-            NoteItemStruct nis = (NoteItemStruct)_factoryManager.Create(note)!;
-            _notes.Add(nis);
-            if (nis.NoteItemView is IEventHandler eventHandlerView)
+            var nis = _factoryManager.Create(note);
+            if (nis == null)
+                continue;
+
+            var noteStruct = nis.Value;
+
+            if (noteStruct.NoteItemView is IEventHandler handlerView)
             {
-                eventHandlerView.OnEventInvoke += Reload;
+                handlerView.OnEventInvoke -= Reload;
+                handlerView.OnEventInvoke += Reload;
             }
-            if (nis.NoteItemEdit is IEventHandler eventHandlerEdit)
+
+            if (noteStruct.NoteItemEdit is IEventHandler handlerEdit)
             {
-                eventHandlerEdit.OnEventInvoke += Reload;
+                handlerEdit.OnEventInvoke -= Reload;
+                handlerEdit.OnEventInvoke += Reload;
             }
-        }
-        
-        foreach (var noteStruct in _notes)
-        {
-            if(noteStruct.NoteItemView.Note.Group == null)
-                return;
-            
+
             var noteView = new NoteItemView();
             noteView.SetData(noteStruct);
-            
-           
-            
+
             var border = new Border
             {
                 Padding = 10,
