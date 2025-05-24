@@ -48,7 +48,7 @@ public sealed class CreateNoteWithSourceViewModel : BaseViewModel
 
     public ObservableCollection<CustomFieldViewModel> Fields { get; set; } = new();
 
-    private NoteWithSourceDto Note { get; set; } = new();
+    private NoteWithSourceDto Note { get; set; }
 
     public IAsyncRelayCommand SaveNoteCommand { get; }
     
@@ -60,6 +60,10 @@ public sealed class CreateNoteWithSourceViewModel : BaseViewModel
         _noteService = noteService;
         _modalService = modalService;
         
+        
+        
+        SaveNoteCommand = new AsyncRelayCommand(SaveNoteAsync);
+        
         SourceNoteSelectorViewModel = new SpecificNoteSelectorViewModel(_noteService.GetNotes().OfType<SourceNoteModel>(), SourceNote)
         {
             SelectedNoteName = "Select a Source Note"
@@ -68,11 +72,15 @@ public sealed class CreateNoteWithSourceViewModel : BaseViewModel
         {
             SelectedNoteName = "Select a Text Note"
         };
+       
+        ClearViewModel();
+    }
+
+    private void ClearViewModel()
+    {
+        Note = new NoteWithSourceDto();
         
-        
-        SaveNoteCommand = new AsyncRelayCommand(SaveNoteAsync);
         ReloadFields();
-        
     }
 
   
@@ -100,7 +108,7 @@ public sealed class CreateNoteWithSourceViewModel : BaseViewModel
         _noteService.AddNote(ns.Note!);
         
         OnModelCreated?.Invoke();
-        
+        ClearViewModel();
         await _modalService.CloseModalAsync();
     }
 

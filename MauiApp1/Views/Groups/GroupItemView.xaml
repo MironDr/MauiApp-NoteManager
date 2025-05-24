@@ -6,19 +6,35 @@
              xmlns:view="clr-namespace:MauiApp1.View"
              xmlns:groups="clr-namespace:MauiApp1.Views.Groups"
              x:Class="MauiApp1.Views.Groups.GroupItemView">
-    <Grid>
-        <ScrollView>
-            <VerticalStackLayout>
-                <Label Text="{Binding GroupName}" 
-                       HorizontalOptions="Center"
-                       FontSize="Title"
-                       FontAttributes="Bold"
-                       Margin="0,10,0,20"/>
-                <VerticalStackLayout x:Name="MainStack" Padding="10" Spacing="10" />
-            </VerticalStackLayout>
-        </ScrollView>
+    <Grid RowDefinitions="Auto, *">
+        <Label Text="{Binding Group.GroupName}"  
+               HorizontalOptions="Center"
+               FontSize="Title"
+               FontAttributes="Bold"
+               Margin="0,10,0,20" Grid.Row="0"/>
+        <CollectionView x:Name="NotesCollectionView"
+                        ItemsSource="{Binding Notes}"
+                        Margin="10"
+                        SelectionMode="None"
+                        Grid.Row="1">
+            <CollectionView.EmptyView>
+                <Label Text="No notes" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center"
+                       TextColor="{StaticResource SecondaryDarkText}"
+                       TextTransform="Uppercase"
+                       FontSize="Title"/>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <ContentView>
+                      
+                    </ContentView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
         
-        <AbsoluteLayout>
+        <AbsoluteLayout Grid.Row="1">
             <groups:NoteSelectorButtonView x:Name="SelectorButtonView"
                                           AbsoluteLayout.LayoutBounds="1,1,AutoSize,AutoSize"
                                           AbsoluteLayout.LayoutFlags="PositionProportional"

@@ -22,7 +22,7 @@ public sealed class TextNoteItemViewModel : NoteItemViewModel, ICompositeViewMod
         CustomQuotesContainerViewModel = customQuotesContainerViewModel;
         _model = textModel;
         CustomQuotesContainerViewModel.CreateButtonViewModel.CreateNoteWithSourceViewModel.TextNote = _model;
-        CustomQuotesContainerViewModel.CreateButtonViewModel.CreateNoteWithSourceViewModel.OnModelCreated += ReloadFields;
+        CustomQuotesContainerViewModel.CreateButtonViewModel.CreateNoteWithSourceViewModel.OnModelCreated += OnQuotesChanged;
         ReloadFields();
     }
 
@@ -50,11 +50,17 @@ public sealed class TextNoteItemViewModel : NoteItemViewModel, ICompositeViewMod
         {
             CustomQuotesContainerViewModel.Fields.Add(new CustomInfoViewModel(new[]
             {
-                new CustomInfoStruct("Source Note => " , _ns[i].Note?.Title),
+                new CustomInfoStruct("Source Note => " , _ns[i].SourceNote?.Title),
                 new CustomInfoStruct("Quote: " , _ns[i].Quote),
                 new CustomInfoStruct("Comment: " , _ns[i].Comment)
             }));
         }
+       
+    }
+
+    private void OnQuotesChanged()
+    {
+        ReloadFields();
         OnEventInvoke?.Invoke();
     }
 

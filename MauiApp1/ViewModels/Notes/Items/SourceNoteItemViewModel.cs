@@ -22,7 +22,7 @@ public sealed class SourceNoteItemViewModel : NoteItemViewModel, ICompositeViewM
         CustomQuotesContainerViewModel = customQuotesContainerViewModel;
         _model = sourceModel;
         CustomQuotesContainerViewModel.CreateButtonViewModel.CreateNoteWithSourceViewModel.SourceNote = _model;
-        CustomQuotesContainerViewModel.CreateButtonViewModel.CreateNoteWithSourceViewModel.OnModelCreated += ReloadFields;
+        CustomQuotesContainerViewModel.CreateButtonViewModel.CreateNoteWithSourceViewModel.OnModelCreated += OnQuotesChanged;
         ReloadFields();
     }
 
@@ -48,11 +48,14 @@ public sealed class SourceNoteItemViewModel : NoteItemViewModel, ICompositeViewM
                 new CustomInfoStruct("Comment: " , _ns[i].Comment)
             }));
         }
-
-        OnEventInvoke?.Invoke();
         
     }
 
+    private void OnQuotesChanged()
+    {
+        ReloadFields();
+        OnEventInvoke?.Invoke();
+    }
 
     public IEnumerable<BaseView> GetEmbeddedViews()
     {

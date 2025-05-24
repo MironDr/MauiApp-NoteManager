@@ -64,6 +64,7 @@ public class SpecificNoteSelectorViewModel : BaseViewModel
             {
                 _selectedNote = value;
                 SelectedNoteName = _selectedNote.Title;
+                Notes = new ObservableCollection<NoteModel>(Notes.Where(n => n.Id != SelectedNote?.Id));
                 OnPropertyChanged(nameof(SelectedNote));
             }
         }
@@ -73,8 +74,8 @@ public class SpecificNoteSelectorViewModel : BaseViewModel
 
     public SpecificNoteSelectorViewModel(IEnumerable<NoteModel> notes, NoteModel? selectedNote = null)
     {
+        Notes = new ObservableCollection<NoteModel>(notes);
         SelectedNote = selectedNote;
-        Notes = new ObservableCollection<NoteModel>(notes.Where(n => n.Id != SelectedNote?.Id));
         NoteSelectedCommand = new Command<NoteModel>(OnNoteSelected);
          
         ToggleNoteListCommand = new Command(() =>
@@ -88,7 +89,6 @@ public class SpecificNoteSelectorViewModel : BaseViewModel
     public void OnNoteSelected(NoteModel note)
     {
         SelectedNote = note;
-        Notes = new ObservableCollection<NoteModel>(Notes.Where(n => n.Id != SelectedNote?.Id));
         IsListVisible = false; 
     }
 

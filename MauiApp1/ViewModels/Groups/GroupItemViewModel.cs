@@ -1,29 +1,20 @@
 ﻿using System.Collections.ObjectModel;
-using MauiApp1.Structs;
+using MauiApp1.Models;
+
 
 namespace MauiApp1.ViewModels.Groups;
 
 public class GroupItemViewModel : BaseViewModel
 {
-    public string GroupName => _struct.Group.GroupName;
-    public ObservableCollection<NoteItemStruct> Notes { get; } = new();
-    public NoteToGroupSelectorButtonViewModel SelectorButtonViewModel { get; private set; }
+    public ObservableCollection<NoteModel> Notes { get; } = new();
 
-    private GroupItemStruct _struct;
+    public GroupModel Group { get; }
 
-    public GroupItemViewModel(GroupItemStruct data)
+    public GroupItemViewModel(GroupModel group)
     {
-        _struct = data;
-        SelectorButtonViewModel = data.NoteToGroupSelectorButtonViewModel;
+        Group = group;
 
-       
-        Notes.Clear();
-        foreach (var note in data.Group.GetNotes().OrderBy(n => n.Id))
-        {
-            Notes.Add((NoteItemStruct)data.ItemFactory.Create(note)!);
-        }
-
-        OnPropertyChanged(nameof(GroupName));
-        OnPropertyChanged(nameof(SelectorButtonViewModel));
+        foreach (var note in group.GetNotes().OrderBy(n => n.Id))
+            Notes.Add(note);
     }
 }
