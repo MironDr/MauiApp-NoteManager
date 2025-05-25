@@ -5,6 +5,7 @@ using MauiApp1.Factories;
 using MauiApp1.Models;
 using MauiApp1.Services;
 using MauiApp1.Structs;
+using MauiApp1.Views;
 using MauiApp1.Views.Notes;
 
 
@@ -22,6 +23,8 @@ public class NotesViewModel : BaseViewModel
     
     
     protected readonly IModalService _modalService;
+    
+    protected readonly IPopupService _popupService;
 
     private ListType _listType = ListType.Note;
     public ListType ListType
@@ -60,13 +63,14 @@ public class NotesViewModel : BaseViewModel
     }
     
     
-    public NotesViewModel(INoteService noteService, IModalService modalService, NoteItemFactoryManager factoryManager) : base()
+    public NotesViewModel(INoteService noteService, IModalService modalService, NoteItemFactoryManager factoryManager, IPopupService popupService) : base()
     {
         _noteService = noteService;
         _modalService = modalService;
         _factoryManager = factoryManager;
+        _popupService = popupService;
 
-        
+
         _noteService.NotesUpdated += OnNotesUpdated!;
         
         NoteSelectedCommand = new AsyncRelayCommand<NoteModel>(OnNoteSelected!);
@@ -102,11 +106,36 @@ public class NotesViewModel : BaseViewModel
     
     protected virtual async Task OnNoteSelected(NoteModel note)
     {
+        if (note.ProtectionProfile is { IsUnlocked: false })
+        {
+           bool result = await PasswordPopup(note.ProtectionProfile);
+           
+           if(!result)
+               return;
+           
+        }
+
+
         var noteItemStruct = (NoteItemStruct)_factoryManager.Create(note)!;
         
         await _modalService.ShowModalAsyncWithParameter<NoteItemView, NoteItemStruct>(noteItemStruct);
         
         
+    }
+
+    protected async Task<bool> PasswordPopup(ProtectionProfileModel profile)
+    {
+        var password = await _popupService.ShowResultPopupAsyncWithParameter<PasswordPopupView,string, string?>(profile.ProfileName);
+
+        if (string.IsNullOrWhiteSpace(password))
+            return false;
+
+        if (!profile.TryUnlock(password))
+        {
+            await _popupService.AlertAsync("Error", "Incorrect password", "Ok");
+            return false;
+        }
+        return true;
     }
 
     public void FilterByCategory(CategoryModel? category)

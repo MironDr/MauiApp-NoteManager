@@ -11,6 +11,15 @@ public interface IPopupService
     Task ShowPopupAsyncWithParameter<TView, TParameter>(TParameter parameter,bool canBeClosed = true) where TView : BaseView;
     Task ClosePopupAsync();
     void AddViewToPopup(BaseView view);
+    
+    Task<T?> ShowResultPopupAsync<TView, T>()
+        where TView : BaseView, IResultView<T>;
+    
+    Task<T?> ShowResultPopupAsyncWithParameter<TView, TParameter, T>(TParameter parameter)
+        where TView : BaseView, IResultView<T>, IParameterizedView<TParameter>;
+
+    Task AlertAsync(string title, string message, string cancel = "OK");
+
 }
 
 
@@ -77,4 +86,52 @@ public class PopupService : IPopupService
         }
     }
     
+    public async Task<T?> ShowResultPopupAsync<TView, T>()
+        where TView : BaseView, IResultView<T>
+    {
+        if (_isBusy)
+            return default;
+
+        _isBusy = true;
+        var view = _serviceProvider.GetRequiredService<TView>();
+
+        var popup = new InstantPopup { Content = view, CanBeDismissedByTappingOutsideOfPopup = false };
+        _popup = popup;
+
+        Shell.Current.CurrentPage.ShowPopup(popup); 
+        var result = await view.WaitForResultAsync();
+
+        _isBusy = false;
+        await ClosePopupAsync();
+        return result;
+    }
+    
+    public async Task<T?> ShowResultPopupAsyncWithParameter<TView, TParameter, T>(
+        TParameter parameter)
+        where TView : BaseView, IResultView<T>, IParameterizedView<TParameter>
+    {
+        if (_isBusy)
+            return default;
+
+        _isBusy = true;
+        var view = _serviceProvider.GetRequiredService<TView>();
+
+        view.SetData(parameter);
+
+        var popup = new InstantPopup { Content = view, CanBeDismissedByTappingOutsideOfPopup = false};
+        _popup = popup;
+
+        Shell.Current.CurrentPage.ShowPopup(popup);
+        var result = await view.WaitForResultAsync();
+
+        _isBusy = false;
+        await ClosePopupAsync();
+        return result;
+    }
+    
+    
+    public async Task AlertAsync(string title, string message, string cancel = "OK")
+    {
+        await Shell.Current.CurrentPage.DisplayAlert(title, message, cancel);
+    }
 }

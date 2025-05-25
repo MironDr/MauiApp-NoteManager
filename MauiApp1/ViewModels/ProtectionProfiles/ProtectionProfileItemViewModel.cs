@@ -30,4 +30,9 @@ public class ProtectionProfileItemViewModel : BaseViewModel
     {
         OnPropertyChanged(nameof(NotesList));
     }
+
+    public void LockProfile()
+    {
+        _profile.Lock();
+    }
 }

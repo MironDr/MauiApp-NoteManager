@@ -30,19 +30,14 @@ public class CheckListNoteModel : NoteModel
         return this;
     }
 
-    public new static CheckListNoteModel CreateNote(NoteDto dto)
+    public static CheckListNoteModel CreateNote(NoteDto dto)
     {
         var checkListNoteDto = dto as CheckListNoteDto;
-        var checkListNoteModel = new CheckListNoteModel
-        {
-            Id = _idCounter++,
-            Title = checkListNoteDto.Title,
-            Description = checkListNoteDto.Description,
-            Category = checkListNoteDto.Category,
-            Group = checkListNoteDto.Group,
-            CreatedAt = DateTime.Now
-        };
-
+        
+        if(checkListNoteDto is null)
+            throw new ArgumentException("Invalid note type");
+        
+        var checkListNoteModel = (CheckListNoteModel)GetNoteBase(dto, new CheckListNoteModel());
         
         for(int i = 0; i < checkListNoteDto.BoxTitles.Count(); i++)
         {
@@ -61,7 +56,7 @@ public class CheckListNoteModel : NoteModel
     public IReadOnlyList<CheckBox> GetCheckBoxes() => _checkBoxes.AsReadOnly();
 
 
-    private void AddCheckBox(string title, bool status)
+    private void AddCheckBox(string? title, bool status)
     {
         _checkBoxes.Add(new CheckBox
         {
@@ -110,6 +105,6 @@ public class CheckListNoteModel : NoteModel
 
 public class CheckBox 
 {
-    public required string Title { get; set; }
+    public required string? Title { get; set; }
     public bool Status { get; set; } = false;
 }

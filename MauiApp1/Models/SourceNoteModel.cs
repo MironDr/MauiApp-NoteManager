@@ -84,28 +84,20 @@ public class SourceNoteModel : NoteModel
         return this;
     }
 
-    public new static SourceNoteModel CreateNote(NoteDto dto)
+    public static SourceNoteModel CreateNote(NoteDto dto)
     {
         var sourceDto = dto as SourceNoteDto;
         
-        if (sourceDto == null)
-            throw new ArgumentException();
+        if(sourceDto is null)
+            throw new ArgumentException("Invalid note type");
         
-        var sourceNoteModel = new SourceNoteModel
-        {
-            Id = _idCounter++,
-            Title = sourceDto.Title,
-            Description = sourceDto.Description,
-            CreatedAt = DateTime.Now,
-            Category = sourceDto.Category,
-            Group = sourceDto.Group,
-            Source = sourceDto.Source,
-            Author = sourceDto.Author,
-            PublishedDate = sourceDto.PublishedDate,
-            SourceType = sourceDto.SourceType
-        };
-
-      
+        var sourceNoteModel = (SourceNoteModel)GetNoteBase(dto, new SourceNoteModel());
+        
+        sourceNoteModel.Source = sourceDto.Source;
+        sourceDto.Author = sourceDto.Author;
+        sourceDto.PublishedDate = sourceDto.PublishedDate;
+        sourceDto.Source = sourceDto.Source;
+        
         
         return sourceNoteModel;
     }

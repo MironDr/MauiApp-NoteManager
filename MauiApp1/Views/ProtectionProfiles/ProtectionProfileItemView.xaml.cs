@@ -6,7 +6,7 @@ using MauiApp1.ViewModels.ProtectionProfiles;
 
 namespace MauiApp1.Views.ProtectionProfiles;
 
-public partial class ProtectionProfileItemView : BaseView, IParameterizedView<ProtectionProfileItemViewModel>
+public partial class ProtectionProfileItemView : BaseView, IParameterizedView<ProtectionProfileItemViewModel>, IClosedEvent
 {
     public ProtectionProfileItemView()
     {
@@ -17,5 +17,13 @@ public partial class ProtectionProfileItemView : BaseView, IParameterizedView<Pr
     {
         BindingContext = data;
         SelectorButtonView.SetBindingContext(data.NoteToProfileSelectorButtonViewModel);
+    }
+    
+    public void OnClosed()
+    {
+        if (BindingContext is ProtectionProfileItemViewModel vm)
+        {
+            vm.LockProfile();
+        }
     }
 }

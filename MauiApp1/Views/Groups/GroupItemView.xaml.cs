@@ -95,7 +95,7 @@ public partial class GroupItemView : BaseView, IParameterizedView<GroupItemStruc
     }
     private void FullReload()
     {
-        NotesCollectionView.ItemTemplate = null;
+        NotesCollectionView.ItemTemplate = null; 
         NotesCollectionView.ItemTemplate = new DataTemplate(CreateNoteViewTemplate);
         
        Reload();

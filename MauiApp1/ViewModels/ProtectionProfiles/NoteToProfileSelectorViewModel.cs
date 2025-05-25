@@ -23,11 +23,10 @@ public class NoteToProfileSelectorViewModel : NotesViewModel, IEventHandler
             LoadNotes();
         }
     }
-    private readonly IPopupService _popupService;
+  
 
-    public NoteToProfileSelectorViewModel(INoteService noteService, IModalService modalService, NoteItemFactoryManager factoryManager, IPopupService popupService) : base(noteService, modalService, factoryManager)
+    public NoteToProfileSelectorViewModel(INoteService noteService, IModalService modalService, NoteItemFactoryManager factoryManager, IPopupService popupService) : base(noteService, modalService, factoryManager, popupService)
     {
-        _popupService = popupService;
     }
 
     protected override void LoadNotes()
@@ -39,10 +38,19 @@ public class NoteToProfileSelectorViewModel : NotesViewModel, IEventHandler
 
     protected override async Task OnNoteSelected(NoteModel note)
     {
+        await _popupService.ClosePopupAsync();
+        
+        if (note.ProtectionProfile is { IsUnlocked: false })
+        {
+            bool result = await PasswordPopup(note.ProtectionProfile);
+               
+            if (!result)
+                return;
+        }
+        
         note.ProtectionProfile = Profile;
         LoadNotes();
         OnEventInvoke?.Invoke();
-        await _popupService.ClosePopupAsync();
     }
 
     public event Action? OnEventInvoke;

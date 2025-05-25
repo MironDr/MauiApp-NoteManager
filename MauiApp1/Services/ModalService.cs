@@ -1,4 +1,5 @@
 ﻿using MauiApp1.Interfaces;
+using MauiApp1.Pages;
 using MauiApp1.View;
 
 namespace MauiApp1.Services;
@@ -33,10 +34,8 @@ public class ModalService : IModalService
 
         var view = _serviceProvider.GetRequiredService<TView>();
 
-        _modalPages.Push(new ContentPage
-        {
-            Content = view
-        });
+        _modalPages.Push(new ModalContainerPage(view));
+        
 
         await Shell.Current.Navigation.PushModalAsync(_modalPages.Peek());
         _isBusy = false;
@@ -58,10 +57,7 @@ public class ModalService : IModalService
 
         }
 
-        _modalPages.Push(new ContentPage
-        {
-            Content = view
-        });
+        _modalPages.Push(new ModalContainerPage(view));
 
         await Shell.Current.Navigation.PushModalAsync(_modalPages.Peek());
         
@@ -74,7 +70,10 @@ public class ModalService : IModalService
             return;
 
         await Shell.Current.Navigation.PopModalAsync();
-        _modalPages.Pop();
+        
+        var modal = _modalPages.Pop() as ModalContainerPage;
+
+        modal?.Close();
     }
 
     public void AddViewToModal(BaseView view, bool switchMode = false)

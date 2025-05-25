@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using MauiApp1.Models;
 using MauiApp1.Services;
 using MauiApp1.Structs;
+using MauiApp1.Views;
 using MauiApp1.Views.Groups;
 using MauiApp1.Views.ProtectionProfiles;
 
@@ -16,6 +17,7 @@ public class ProtectionProfilesViewModel : BaseViewModel
     private readonly NoteToProfileSelectorViewModel _noteToProfileSelectorViewModel;
     
     private readonly IModalService _modalService;
+    private readonly IPopupService _popupService;
     
     private ObservableCollection<ProtectionProfileModel> _profiles = new();
     
@@ -36,12 +38,13 @@ public class ProtectionProfilesViewModel : BaseViewModel
     
     
     public ProtectionProfilesViewModel(IProtectionProfileService profileService, IModalService modalService, 
-        NoteToProfileSelectorButtonViewModel noteToProfileSelectorButtonViewModel, NoteToProfileSelectorViewModel noteToProfileSelectorViewModel) : base()
+        NoteToProfileSelectorButtonViewModel noteToProfileSelectorButtonViewModel, NoteToProfileSelectorViewModel noteToProfileSelectorViewModel, IPopupService popupService) : base()
     {
         _profileService = profileService;
         _modalService = modalService;
         _noteToProfileSelectorButtonViewModel = noteToProfileSelectorButtonViewModel;
         _noteToProfileSelectorViewModel = noteToProfileSelectorViewModel;
+        _popupService = popupService;
         _profileService.ProfilesUpdated += OnProfilesUpdated!;
         
         ProfileSelectedCommand = new AsyncRelayCommand<ProtectionProfileModel>(OnProfileSelected!);
@@ -61,6 +64,17 @@ public class ProtectionProfilesViewModel : BaseViewModel
     
     private async Task OnProfileSelected(ProtectionProfileModel profile)
     {
+        var password = await _popupService.ShowResultPopupAsyncWithParameter<PasswordPopupView,string, string?>(profile.ProfileName);
+
+        if (string.IsNullOrWhiteSpace(password))
+            return;
+
+        if (!profile.TryUnlock(password))
+        {
+            await _popupService.AlertAsync("Error", "Incorrect password", "Ok");
+            return;
+        }
+        
         var viewModel = new ProtectionProfileItemViewModel(profile, _noteToProfileSelectorButtonViewModel, _noteToProfileSelectorViewModel);
         
         await _modalService.ShowModalAsyncWithParameter<ProtectionProfileItemView, ProtectionProfileItemViewModel>(viewModel);

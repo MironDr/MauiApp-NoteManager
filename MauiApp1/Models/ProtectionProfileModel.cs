@@ -11,6 +11,8 @@ public class ProtectionProfileModel : BaseModel
 
     public byte[] Salt { get; set; }
     
+    private byte[]? _derivedKey;
+    
     private readonly Dictionary<int, NoteModel> _notes = new();
     
     public void RemoveNote(int id)
@@ -25,7 +27,7 @@ public class ProtectionProfileModel : BaseModel
         
     }
 
-    public void AddNoteToGroup(NoteModel note)
+    public void AddNoteToProfile(NoteModel note)
     {
         _notes.TryAdd(note.Id, note);
 
@@ -61,5 +63,27 @@ public class ProtectionProfileModel : BaseModel
         return protectionProfileModel;
         
     }
+    
 
+
+    public byte[]? DerivedKey => _derivedKey;
+
+    public bool IsUnlocked => _derivedKey != null;
+
+    public bool TryUnlock(string password)
+    {
+        var derived = ObjectUtils.DeriveKey(password, Salt);
+        if (derived.SequenceEqual(PasswordHash))
+        {
+            _derivedKey = derived;
+            return true;
+        }
+
+        return false;
+    }
+
+    public void Lock()
+    {
+        _derivedKey = null;
+    }
 }

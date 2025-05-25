@@ -5,6 +5,7 @@ using MauiApp1.Models;
 using MauiApp1.Services;
 using MauiApp1.Structs;
 using MauiApp1.ViewModels.Notes;
+using MauiApp1.Views;
 using MauiApp1.Views.Groups;
 
 
@@ -19,6 +20,8 @@ public class GroupsViewModel : BaseViewModel
     private readonly NoteToGroupSelectorButtonViewModel _groupSelectorButtonViewModel;
     
     private readonly IModalService _modalService;
+    private readonly IPopupService _popupService;
+    
     
     private ObservableCollection<GroupModel> _groups = new();
     
@@ -38,11 +41,12 @@ public class GroupsViewModel : BaseViewModel
     }
     
     
-    public GroupsViewModel(IGroupService groupService, IModalService modalService,  NoteItemFactoryManager factoryManager, NoteToGroupSelectorButtonViewModel noteToGroupSelectorButtonViewModel) : base()
+    public GroupsViewModel(IGroupService groupService, IModalService modalService,  NoteItemFactoryManager factoryManager, NoteToGroupSelectorButtonViewModel noteToGroupSelectorButtonViewModel, IPopupService popupService) : base()
     {
         _groupService = groupService;
         _factoryManager = factoryManager;
         _groupSelectorButtonViewModel = noteToGroupSelectorButtonViewModel;
+        _popupService = popupService;
         _modalService = modalService;
         
         _groupService.GroupsUpdated += OnGroupsUpdated!;
@@ -64,6 +68,19 @@ public class GroupsViewModel : BaseViewModel
     
     private async Task OnGroupSelected(GroupModel group)
     {
+        foreach (var note in group.GetNotes())
+        {
+            if (note.ProtectionProfile is { IsUnlocked: false })
+            {
+               bool result = await PasswordPopup(note.ProtectionProfile);
+               
+               if (!result)
+                   return;
+            }
+
+        }
+        
+        
         GroupItemStruct groupItemStruct = new GroupItemStruct
         {
             Group = group,
@@ -71,9 +88,23 @@ public class GroupsViewModel : BaseViewModel
             NoteToGroupSelectorButtonViewModel = _groupSelectorButtonViewModel
         };
         
-        
         await _modalService.ShowModalAsyncWithParameter<GroupItemView, GroupItemStruct>(groupItemStruct);
         
+    }
+    
+    protected async Task<bool> PasswordPopup(ProtectionProfileModel profile)
+    {
+        var password = await _popupService.ShowResultPopupAsyncWithParameter<PasswordPopupView,string, string?>(profile.ProfileName);
+
+        if (string.IsNullOrWhiteSpace(password))
+            return false;
+
+        if (!profile.TryUnlock(password))
+        {
+            await _popupService.AlertAsync("Error", "Incorrect password", "Ok");
+            return false;
+        }
+        return true;
     }
 
     

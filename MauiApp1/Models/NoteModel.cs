@@ -28,8 +28,40 @@ public class NoteModel : BaseModel
         }
     }
     
-    public string? Description { get; protected set; }
-    public DateTime CreatedAt { get; protected init; }
+    private string? _encryptedDescription;
+    public string? Description
+    {
+        get
+        {
+            if (_protectionProfile == null || string.IsNullOrEmpty(_encryptedDescription))
+                return _encryptedDescription;
+
+            if (!_protectionProfile.IsUnlocked)
+                throw new InvalidOperationException("Profile is locked.");
+
+            if (!ObjectUtils.IsBase64String(_encryptedDescription))
+            {
+                return _encryptedDescription;
+            }
+
+            return ObjectUtils.DecryptAes(_encryptedDescription, _protectionProfile.DerivedKey!);
+        }
+        private set
+        {
+            if (_protectionProfile == null)
+            {
+                _encryptedDescription = value;
+                return;
+            }
+
+            if (!_protectionProfile.IsUnlocked)
+                throw new InvalidOperationException("Profile is locked.");
+
+            if (value != null) _encryptedDescription = ObjectUtils.EncryptAes(value, _protectionProfile.DerivedKey!);
+        }
+    }
+    
+    public DateTime CreatedAt { get; private set; }
 
     
     // ---- Protection Profile ----
@@ -39,17 +71,30 @@ public class NoteModel : BaseModel
     public ProtectionProfileModel? ProtectionProfile
     {
         get => _protectionProfile;
-        set 
+        set
         {
-            if (_protectionProfile != null && _protectionProfile.GetNotes().ContainsKey(Id))
-            {
-                _protectionProfile.RemoveNote(Id);
-            }
-            _protectionProfile = value;
-              
+            if(value?.Id == _protectionProfile?.Id)
+                return;
+            
+            if (_protectionProfile is { IsUnlocked: false })
+                throw new InvalidOperationException("Current protection profile is not unlocked.");
+            
+            if(value is { IsUnlocked: false })
+                throw new InvalidOperationException("New protection profile is not unlocked.");
+
             if (_protectionProfile != null)
             {
-                _protectionProfile.AddNoteToGroup(this);
+                DecryptWithProfile();
+                _protectionProfile?.RemoveNote(Id);
+            }
+
+            _protectionProfile = value;
+
+            if (_protectionProfile != null)
+            {
+                _protectionProfile.AddNoteToProfile(this);
+                
+                EncryptWithProfile();
             }
         }
     }
@@ -75,10 +120,7 @@ public class NoteModel : BaseModel
 
             _group = value;
 
-            if (_group != null)
-            {
-                _group.AddNoteToGroup(this);
-            }
+            _group?.AddNoteToGroup(this);
         }
     }
 
@@ -90,7 +132,6 @@ public class NoteModel : BaseModel
         get => _category;
         set
         {
-            
             if (Group != null)
                 return;
 
@@ -135,33 +176,27 @@ public class NoteModel : BaseModel
     }
 
     // ---- Helpers ----
-
-    public static NoteModel CreateNote(NoteDto noteDto)
+    protected static NoteModel GetNoteBase(NoteDto dto, NoteModel noteModel)
     {
-        var note = new NoteModel
-        {
-            Id = _idCounter++,
-            Title = noteDto.Title,
-            CreatedAt = DateTime.Now,
-            Description = noteDto.Description
-        };
-
-        if (noteDto.Category != null)
-        {
-            note.Group = null;
-            note.Category = noteDto.Category;
-        }
-        else if (noteDto.Group != null)
-        {
-            note.Category = null;
-            note.Group = noteDto.Group;
-        }
-
+        noteModel.Id = _idCounter++;
+        noteModel.Title = dto.Title;
+        noteModel.Description = dto.Description;
+        noteModel.CreatedAt = DateTime.Now;
         
+        if (dto.Category != null)
+        {
+            noteModel.Group = null;
+            noteModel.Category = dto.Category;
+        }
+        else if (dto.Group != null)
+        {
+            noteModel.Category = null;
+            noteModel.Group = dto.Group;
+        }
 
-        return note;
+        return noteModel;
     }
-
+    
     public virtual NoteModel EditNote(NoteDto noteDto)
     {
         Title = noteDto.Title;
@@ -185,5 +220,28 @@ public class NoteModel : BaseModel
         return this;
     }
     
+    protected void EncryptWithProfile()
+    {
+        if(ProtectionProfile == null)
+            return;
+        
+        if (!ProtectionProfile.IsUnlocked)
+            throw new InvalidOperationException("Profile is locked.");
+
+        if (_encryptedDescription != null)
+            Description = _encryptedDescription;
+    }
+
+    protected void DecryptWithProfile()
+    {
+        if(ProtectionProfile == null)
+            return;
+        
+        if (!ProtectionProfile.IsUnlocked)
+            throw new InvalidOperationException("Profile is locked.");
+
+        if (Description != null)
+            _encryptedDescription = Description;
+    }
    
 }

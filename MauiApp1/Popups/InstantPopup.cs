@@ -5,8 +5,6 @@ public class InstantPopup : Popup
 {
     public InstantPopup()
     {
-        CanBeDismissedByTappingOutsideOfPopup = true;
-        Anchor = null;
         
     }
 }

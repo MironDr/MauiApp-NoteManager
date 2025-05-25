@@ -9,7 +9,7 @@ using MauiApp1.ViewModels.Notes;
 
 namespace MauiApp1.Views.Notes;
 
-public partial class NoteItemView : BaseView, IParameterizedView<NoteItemStruct>, IViewAddable
+public partial class NoteItemView : BaseView, IParameterizedView<NoteItemStruct>, IViewAddable, IClosedEvent
 {
     private NoteModel _model;
     private IUpdatable _updatable;
@@ -69,5 +69,9 @@ public partial class NoteItemView : BaseView, IParameterizedView<NoteItemStruct>
         DynamicContentArea.Add(view);
     }
 
-   
+
+    public void OnClosed()
+    {
+        _model.ProtectionProfile?.Lock();
+    }
 }

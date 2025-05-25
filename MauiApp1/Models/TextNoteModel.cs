@@ -30,24 +30,20 @@ public class TextNoteModel : NoteModel
         return this;
     }
 
-    public new static TextNoteModel CreateNote(NoteDto dto)
+    public static TextNoteModel CreateNote(NoteDto dto)
     {
         var textDto = dto as TextNoteDto;
-        var textNoteModel = new TextNoteModel
-        {
-            Id = _idCounter++,
-            Title = textDto.Title,
-            Description = textDto.Description,
-            Category = textDto.Category,
-            Group = textDto.Group,
-            CreatedAt = DateTime.Now
-        };
-
-        for(int i = 0; i < textDto.BlocksTitles.Count(); i++)
-        {
-            textNoteModel.AddTextBlock(textDto.BlocksTitles.ElementAt(i), textDto.BlocksContent.ElementAt(i));
-        }
         
+        if(textDto is null)
+            throw new ArgumentException("Invalid note type");
+        
+        var textNoteModel = (TextNoteModel)GetNoteBase(dto, new TextNoteModel());
+        
+     
+        for (int i = 0; i < textDto.BlocksTitles.Count(); i++)
+        {
+                textNoteModel.AddTextBlock(textDto.BlocksTitles.ElementAt(i), textDto.BlocksContent.ElementAt(i));
+        }
         
         return textNoteModel;
     }

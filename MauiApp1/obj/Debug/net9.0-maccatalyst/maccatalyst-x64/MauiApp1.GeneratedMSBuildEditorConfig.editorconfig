@@ -221,6 +221,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.Verti
 build_metadata.AdditionalFiles.TargetPath = Views\Notes\VerticalNotesView.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\Notes\VerticalNotesView.xaml
 
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/PasswordPopupView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.PasswordPopupView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\PasswordPopupView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\PasswordPopupView.xaml
+
 [D:/RiderMAUI/MauiApp1/MauiApp1/Views/ProtectionProfiles/CreateProtectionProfileButtonView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.ProtectionProfiles.CreateProtectionProfileButtonView.xaml

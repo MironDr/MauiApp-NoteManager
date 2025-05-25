@@ -22,20 +22,18 @@ public class AccountNoteModel : NoteModel
         return this;
     }
 
-    public new static AccountNoteModel CreateNote(NoteDto dto)
+    public static AccountNoteModel CreateNote(NoteDto dto)
     {
         var accountNoteDto = dto as AccountNoteDto;
-        return new AccountNoteModel
-        {
-            Id = _idCounter++,
-            Title = accountNoteDto.Title,
-            Description = accountNoteDto.Description,
-            Category = accountNoteDto.Category,
-            Group = accountNoteDto.Group,
-            CreatedAt = DateTime.Now,
-            Login = accountNoteDto.Login,
-            Password = accountNoteDto.Password
-        };
+        if(accountNoteDto is null)
+            throw new ArgumentException("Invalid note type");
+        
+        var accountNoteModel = (AccountNoteModel)GetNoteBase(dto, new AccountNoteModel());
+        
+        accountNoteModel.Login = accountNoteDto.Login;
+        accountNoteModel.Password = accountNoteDto.Password;
+        
+        return accountNoteModel;
     }
 
 }
