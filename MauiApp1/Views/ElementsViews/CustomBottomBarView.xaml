@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<view:BaseView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:categories="clr-namespace:MauiApp1.Views.Categories"
+             xmlns:notes="clr-namespace:MauiApp1.Views.Notes"
+             xmlns:groups="clr-namespace:MauiApp1.Views.Groups"
+             xmlns:protectionProfiles="clr-namespace:MauiApp1.Views.ProtectionProfiles"
+             xmlns:view="clr-namespace:MauiApp1.View"
+             x:Class="MauiApp1.Views.ElementsViews.CustomBottomBarView">
+    <Grid ColumnDefinitions="*,*,*,*"
+          RowDefinitions="*,*"
+          Padding="10"
+          VerticalOptions="Center"
+          BackgroundColor="DimGray">
+        <Label HorizontalOptions="Center" TextTransform="Uppercase" Text="Note" Grid.Row="0" Grid.Column="0"/>
+        <notes:CreateNoteButtonView Grid.Row="1" Grid.Column="0" x:Name="NoteButton"/>
+        <Label HorizontalOptions="Center" TextTransform="Uppercase" Text="Category" Grid.Row="0" Grid.Column="1"/>
+        <categories:CreateCategoryButtonView Grid.Row="1" Grid.Column="1" x:Name="CategoryButton"/>
+        <Label HorizontalOptions="Center" TextTransform="Uppercase" Text="Group" Grid.Row="0" Grid.Column="2"/>
+        <groups:CreateGroupButtonView Grid.Row="1" Grid.Column="2" x:Name="GroupButton"/>
+        <Label HorizontalOptions="Center" TextTransform="Uppercase" Text="Profile" Grid.Row="0" Grid.Column="3"/>
+        <protectionProfiles:CreateProtectionProfileButtonView Grid.Row="1" Grid.Column="3" x:Name="ProfileButton"/>
+    </Grid>
+</view:BaseView>

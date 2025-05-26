@@ -81,18 +81,16 @@
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}" />
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
-        <Setter Property="FontSize" Value="Title"/>
-    
-      
-        <Setter Property="WidthRequest" Value="60"/>
+        <Setter Property="FontSize" Value="Large"/>
+        
         <Setter Property="HeightRequest" Value="60"/>
+        <Setter Property="WidthRequest" Value="60"/>
         <Setter Property="CornerRadius" Value="30"/>
-    
-   
+        
         <Setter Property="HorizontalOptions" Value="Center"/>
         <Setter Property="VerticalOptions" Value="Center"/>
         
-        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Padding" Value="5"/>
     
    
         <Setter Property="TextTransform" Value="Uppercase"/>

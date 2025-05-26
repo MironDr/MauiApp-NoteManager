@@ -1,5 +1,6 @@
 ﻿using MauiApp1.ViewModels;
 using MauiApp1.ViewModels.Categories;
+using MauiApp1.Views.ElementsViews;
 
 namespace MauiApp1.Pages;
 
@@ -18,7 +19,7 @@ public partial class CategoriesPage : BasePage
         VerticalNotesView.SetBindingContext(mainVm.NotesViewModel);
         HorizontalCategoriesView.SetBindingContext(mainVm.CategoriesViewModel);
 
-        CreateCategoryButtonView.SetBindingContext(_serviceProvider.GetRequiredService<CreateCategoryButtonViewModel>());
+        BottomContainer.Content = _serviceProvider.GetRequiredService<CustomBottomBarView>();
         
        
     }

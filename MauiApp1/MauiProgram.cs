@@ -12,6 +12,7 @@ using MauiApp1.ViewModels.Notes.Managers;
 using MauiApp1.ViewModels.ProtectionProfiles;
 using MauiApp1.Views;
 using MauiApp1.Views.Categories;
+using MauiApp1.Views.ElementsViews;
 using MauiApp1.Views.Groups;
 using MauiApp1.Views.Notes;
 using MauiApp1.Views.ProtectionProfiles;
@@ -121,7 +122,7 @@ public static class MauiProgram
         builder.Services.AddTransient<CustomCheckBoxView>();
         //Other
         builder.Services.AddTransient<PasswordPopupView>();
-        
+        builder.Services.AddTransient<CustomBottomBarView>();
         //Factories
         builder.Services.AddSingleton<INoteItemFactory, TextNoteItemFactory>();
         builder.Services.AddSingleton<INoteItemFactory, AccountNoteItemFactory>();

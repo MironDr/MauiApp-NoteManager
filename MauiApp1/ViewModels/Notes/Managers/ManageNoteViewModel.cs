@@ -65,6 +65,8 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
        
         Note.Group = ClassifierSelectorViewModel.SelectedGroup;
         
+        if(Note.Group == null && Note.Category == null)
+            return;
         
         if (!_editMode)
         {

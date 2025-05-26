@@ -1,4 +1,5 @@
 ﻿using MauiApp1.ViewModels.Groups;
+using MauiApp1.Views.ElementsViews;
 using MauiApp1.Views.Groups;
 
 namespace MauiApp1.Pages;
@@ -15,7 +16,7 @@ public partial class GroupsPage : BasePage
         
         VerticalGroupsView.SetBindingContext(_serviceProvider.GetRequiredService<GroupsViewModel>());
         
-        CreateGroupButtonView.SetBindingContext(_serviceProvider.GetRequiredService<CreateGroupButtonViewModel>());
+        BottomContainer.Content = _serviceProvider.GetRequiredService<CustomBottomBarView>();
         
        
     }

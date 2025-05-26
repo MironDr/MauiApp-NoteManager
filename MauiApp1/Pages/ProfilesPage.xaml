@@ -5,13 +5,8 @@
              xmlns:protectionProfiles="clr-namespace:MauiApp1.Views.ProtectionProfiles"
              xmlns:mauiApp1="clr-namespace:MauiApp1"
              x:Class="MauiApp1.Pages.ProfilesPage">
-    <Grid>
-        <protectionProfiles:VerticalProtectionProfilesView x:Name="VerticalProtectionProfilesView" HorizontalOptions="Fill" VerticalOptions="Fill"/>
-        <AbsoluteLayout>
-            <protectionProfiles:CreateProtectionProfileButtonView x:Name="CreateProfileButtonView"
-                                        AbsoluteLayout.LayoutBounds="1,1,AutoSize,AutoSize"
-                                        AbsoluteLayout.LayoutFlags="PositionProportional"
-                                        Margin="20" />
-        </AbsoluteLayout>
+    <Grid RowDefinitions="*, Auto">
+        <protectionProfiles:VerticalProtectionProfilesView Grid.Row="0" x:Name="VerticalProtectionProfilesView" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+        <Border Grid.Row="1" x:Name="BottomContainer"/>
     </Grid>
 </mauiApp1:BasePage>

@@ -53,7 +53,5 @@
         <categories:CreateCategoryButtonView x:Name="CategoryButtonView" IsVisible="{Binding BindingContext.IsCategoryMode, Source={x:Reference MainLayout}}" />
         <groups:CreateGroupButtonView x:Name="GroupButtonView" IsVisible="{Binding BindingContext.IsGroupMode, Source={x:Reference MainLayout}}"/>
         
-        <Button Text="Reset Selection" Command="{Binding ResetSelectionCommand}" BackgroundColor="LightGray"/>
-
     </VerticalStackLayout>
 </view:BaseView>

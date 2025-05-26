@@ -8,15 +8,9 @@
     xmlns:pages="clr-namespace:MauiApp1.Pages"
     Shell.FlyoutBehavior="Flyout"
     Title="MauiApp1">
-
     
     <ShellContent
         Title="Notes"
-        ContentTemplate="{DataTemplate pages:NotesPage}"
-        Route="NotesPage" />
-    
-    <ShellContent
-        Title="Categories"
         ContentTemplate="{DataTemplate pages:CategoriesPage}"
         Route="CategoriesPage" />
     

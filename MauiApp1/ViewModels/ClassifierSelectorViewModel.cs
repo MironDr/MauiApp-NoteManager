@@ -1,13 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
-using MauiApp1.Interfaces;
 using MauiApp1.Models;
 using MauiApp1.Services;
+using MauiApp1.ViewModels.Categories;
 using MauiApp1.ViewModels.Groups;
 
-
-namespace MauiApp1.ViewModels.Categories;
+namespace MauiApp1.ViewModels;
 
 public class ClassifierSelectorViewModel : BaseViewModel
 {
@@ -19,7 +17,6 @@ public class ClassifierSelectorViewModel : BaseViewModel
     public ICommand CategorySelectedCommand { get; }
     public ICommand GroupSelectedCommand { get; }
     public ICommand ToggleListCommand { get; }
-    public ICommand ResetSelectionCommand { get; }
 
     public ObservableCollection<CategoryModel> Categories { get; private set; } = new();
     public ObservableCollection<GroupModel> Groups { get; private set; } = new();
@@ -99,15 +96,8 @@ public class ClassifierSelectorViewModel : BaseViewModel
             IsListVisible = !IsListVisible;
         });
 
-        ResetSelectionCommand = new Command(() =>
-        {
-            SelectedCategory = null;
-            SelectedGroup = null;
-            OnPropertyChanged(nameof(SelectedName));
-            UpdateList();
-        });
-
-
+       
+        
         
         UpdateList();
     }
@@ -136,6 +126,11 @@ public class ClassifierSelectorViewModel : BaseViewModel
     {
         if(category != null)
             OnCategorySelected(category);
+        else
+        {
+            var cat = Categories.FirstOrDefault();
+            if (cat != null) OnCategorySelected(cat);
+        }
     }
     
     public void SelectGroup(GroupModel? group)
@@ -150,7 +145,6 @@ public class ClassifierSelectorViewModel : BaseViewModel
         SelectedName = !IsGroupMode ? (SelectedCategory?.CategoryName ?? "Select Category") :
             (SelectedGroup?.GroupName ?? "Select Group");
         
-      
         
         if (!IsGroupMode)
         {

@@ -33,17 +33,12 @@ public class NoteModel : BaseModel
     {
         get
         {
-            if (_protectionProfile == null || string.IsNullOrEmpty(_encryptedDescription))
+            if (_protectionProfile == null || string.IsNullOrEmpty(_encryptedDescription) 
+                                           || !_protectionProfile.IsUnlocked 
+                                           || !ObjectUtils.IsBase64String(_encryptedDescription))
                 return _encryptedDescription;
-
-            if (!_protectionProfile.IsUnlocked)
-                throw new InvalidOperationException("Profile is locked.");
-
-            if (!ObjectUtils.IsBase64String(_encryptedDescription))
-            {
-                return _encryptedDescription;
-            }
-
+            
+        
             return ObjectUtils.DecryptAes(_encryptedDescription, _protectionProfile.DerivedKey!);
         }
         private set
@@ -178,6 +173,9 @@ public class NoteModel : BaseModel
     // ---- Helpers ----
     protected static NoteModel GetNoteBase(NoteDto dto, NoteModel noteModel)
     {
+        if(dto.Category == null && dto.Group == null)
+            throw new ArgumentNullException(nameof(dto) + " Group and Category cannot be null");
+        
         noteModel.Id = _idCounter++;
         noteModel.Title = dto.Title;
         noteModel.Description = dto.Description;
@@ -193,12 +191,16 @@ public class NoteModel : BaseModel
             noteModel.Category = null;
             noteModel.Group = dto.Group;
         }
+        
 
         return noteModel;
     }
     
     public virtual NoteModel EditNote(NoteDto noteDto)
     {
+        if(noteDto.Category == null && noteDto.Group == null)
+            throw new ArgumentNullException(nameof(noteDto) + " Group and Category cannot be null");
+        
         Title = noteDto.Title;
         Description = noteDto.Description;
         
@@ -211,10 +213,6 @@ public class NoteModel : BaseModel
         {
             Category = null;
             Group = noteDto.Group;
-        }else
-        {
-            Category = null;
-            Group = null;
         }
         
         return this;

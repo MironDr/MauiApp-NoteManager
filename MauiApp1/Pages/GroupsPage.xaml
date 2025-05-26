@@ -6,14 +6,10 @@
              xmlns:notes="clr-namespace:MauiApp1.Views.Notes"
              xmlns:groups="clr-namespace:MauiApp1.Views.Groups"
              x:Class="MauiApp1.Pages.GroupsPage">
-    <Grid>
-        <groups:VerticalGroupsView x:Name="VerticalGroupsView" HorizontalOptions="Fill" VerticalOptions="Fill"/>
-        <AbsoluteLayout>    
-            <groups:CreateGroupButtonView x:Name="CreateGroupButtonView"
-                                        AbsoluteLayout.LayoutBounds="1,1,AutoSize,AutoSize"
-                                        AbsoluteLayout.LayoutFlags="PositionProportional"
-                                        Margin="20" />
-        </AbsoluteLayout>
+    <Grid RowDefinitions="*, Auto">
+        <groups:VerticalGroupsView Grid.Row="0" x:Name="VerticalGroupsView" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+        
+        <Border Grid.Row="1" x:Name="BottomContainer"/>
     </Grid>
 
 </mauiApp1:BasePage>

@@ -47,12 +47,6 @@ build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Pages.GroupsPage.
 build_metadata.AdditionalFiles.TargetPath = Pages\GroupsPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Pages\GroupsPage.xaml
 
-[D:/RiderMAUI/MauiApp1/MauiApp1/Pages/NotesPage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Pages.NotesPage.xaml
-build_metadata.AdditionalFiles.TargetPath = Pages\NotesPage.xaml
-build_metadata.AdditionalFiles.RelativePath = Pages\NotesPage.xaml
-
 [D:/RiderMAUI/MauiApp1/MauiApp1/Pages/ProfilesPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Pages.ProfilesPage.xaml
@@ -94,6 +88,12 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Categories.HorizontalCategoriesView.xaml
 build_metadata.AdditionalFiles.TargetPath = Views\Categories\HorizontalCategoriesView.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\Categories\HorizontalCategoriesView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/ElementsViews/CustomBottomBarView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.ElementsViews.CustomBottomBarView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ElementsViews\CustomBottomBarView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ElementsViews\CustomBottomBarView.xaml
 
 [D:/RiderMAUI/MauiApp1/MauiApp1/Views/ElementsViews/CustomCheckBoxView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

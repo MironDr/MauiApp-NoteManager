@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MauiApp1.ViewModels.ProtectionProfiles;
+using MauiApp1.Views.ElementsViews;
 using MauiApp1.Views.ProtectionProfiles;
 
 namespace MauiApp1.Pages;
@@ -20,7 +21,7 @@ public partial class ProfilesPage : BasePage
         
         VerticalProtectionProfilesView.SetBindingContext(_serviceProvider.GetRequiredService<ProtectionProfilesViewModel>());
         
-        CreateProfileButtonView.SetBindingContext(_serviceProvider.GetRequiredService<CreateProtectionProfileButtonViewModel>());
+        BottomContainer.Content = _serviceProvider.GetRequiredService<CustomBottomBarView>();
        
     }
 }

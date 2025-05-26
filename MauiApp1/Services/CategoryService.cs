@@ -25,6 +25,7 @@ public class CategoryService : ICategoryService
 
     private void LoadCategories()
     {
+        /*
         _categories.Add(CategoryModel.CreateCategory(new CategoryDto()
         {
             CategoryName = "Category 1"
@@ -33,7 +34,7 @@ public class CategoryService : ICategoryService
         {
             CategoryName = "Category 2"
         }));
- 
+        */
     }
 
     public void AddCategory(CategoryModel category)

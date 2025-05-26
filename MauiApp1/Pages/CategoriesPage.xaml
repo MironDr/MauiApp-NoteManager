@@ -7,7 +7,7 @@
              xmlns:categories="clr-namespace:MauiApp1.Views.Categories"
              x:Class="MauiApp1.Pages.CategoriesPage">
 
-    <Grid RowDefinitions="Auto, *"> 
+    <Grid RowDefinitions="Auto, *, Auto">
     
        
       
@@ -18,12 +18,7 @@
                                  HorizontalOptions="Fill"
                                  VerticalOptions="Fill"/>
         
-        <AbsoluteLayout Grid.Row="1">
-            <categories:CreateCategoryButtonView x:Name="CreateCategoryButtonView"
-                                        AbsoluteLayout.LayoutBounds="1,1,AutoSize,AutoSize"
-                                        AbsoluteLayout.LayoutFlags="PositionProportional"
-                                        Margin="20" />
-        </AbsoluteLayout>
+        <Border Grid.Row="2" x:Name="BottomContainer"/>
     </Grid>
 
 </mauiApp1:BasePage>
