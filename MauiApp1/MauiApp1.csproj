@@ -114,6 +114,9 @@
       <MauiXaml Update="Views\ElementsViews\CustomCheckBoxView.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
+      <MauiXaml Update="Views\ElementsViews\ClassifierSelectorView.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
@@ -171,6 +174,10 @@
       </Compile>
       <Compile Update="Views\ElementsViews\CustomCheckBoxView.xaml.cs">
         <DependentUpon>CustomCheckBoxView.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\ElementsViews\ClassifierSelectorView.xaml.cs">
+        <DependentUpon>ClassifierSelectorView.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>

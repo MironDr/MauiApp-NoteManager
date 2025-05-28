@@ -5,5 +5,5 @@
              xmlns:view="clr-namespace:MauiApp1.View"
              x:Class="MauiApp1.Views.Groups.CreateGroupButtonView">
     <Button Text="+"
-            Command="{Binding CreateGroupCommand}" Style="{StaticResource CircleButton}"/>
+            Command="{Binding CreateGroupCommand}" TextTransform="Uppercase" FontSize="Title"/>
 </view:BaseView>

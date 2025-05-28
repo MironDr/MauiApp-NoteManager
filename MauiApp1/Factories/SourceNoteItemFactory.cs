@@ -15,19 +15,21 @@ public class SourceNoteItemFactory : INoteItemFactory
 
     private readonly INoteService _noteService;
     private readonly IModalService _modalService;
-    private readonly ICategoryService _categoryService;
+    private readonly IPopupService _popupService;
     private readonly IServiceProvider _serviceProvider;
+
 
     public SourceNoteItemFactory(
         INoteService noteService,
         IModalService modalService,
-        ICategoryService categoryService,
+        IPopupService popupService,
         IServiceProvider serviceProvider)
     {
         _noteService = noteService;
         _modalService = modalService;
-        _categoryService = categoryService;
+        _popupService  = popupService;
         _serviceProvider = serviceProvider;
+
     }
 
     public NoteItemStruct Create(NoteModel note)
@@ -49,6 +51,7 @@ public class SourceNoteItemFactory : INoteItemFactory
     public BaseViewModel GetEditorViewModel()
     {
         ClassifierSelectorViewModel classifierSelectorViewModel = _serviceProvider.GetRequiredService<ClassifierSelectorViewModel>();
-        return new ManageSourceNoteViewModel(_noteService, _modalService, classifierSelectorViewModel);
+        ProfileToNoteSelectorButtonViewModel profileToNoteSelectorButtonViewModel = _serviceProvider.GetRequiredService<ProfileToNoteSelectorButtonViewModel>();
+        return new ManageSourceNoteViewModel(_noteService, _modalService, _popupService, classifierSelectorViewModel, profileToNoteSelectorButtonViewModel);
     }
 }

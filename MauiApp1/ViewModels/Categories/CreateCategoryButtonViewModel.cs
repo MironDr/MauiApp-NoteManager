@@ -19,6 +19,6 @@ public class CreateCategoryButtonViewModel : BaseViewModel
     
     private void CreateCategory()
     {
-        _popupService.ShowPopupAsync<CreateCategoryView>();
+        _popupService.ShowPopupAsync<CreateCategoryView>(true);
     }
 }

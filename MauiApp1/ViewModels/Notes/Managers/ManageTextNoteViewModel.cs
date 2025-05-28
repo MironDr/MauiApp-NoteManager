@@ -12,9 +12,10 @@ public sealed class ManageTextNoteViewModel : ManageNoteViewModel<TextNoteDto, T
 {
     private readonly TextBlocksViewModel _textBlocksViewModel;
 
-    public ManageTextNoteViewModel(INoteService noteService, IModalService modalService,
-        ClassifierSelectorViewModel selectorViewModel, TextBlocksViewModel textBlocksViewModel)
-        : base(noteService, modalService, selectorViewModel)
+    public ManageTextNoteViewModel(INoteService noteService, IModalService modalService, IPopupService popupService,
+        ClassifierSelectorViewModel selectorViewModel, TextBlocksViewModel textBlocksViewModel
+        ,ProfileToNoteSelectorButtonViewModel profileToNoteSelectorButtonViewModel)
+        : base(noteService, modalService, popupService, selectorViewModel, profileToNoteSelectorButtonViewModel)
     {
         _textBlocksViewModel = textBlocksViewModel;
         ReloadFields();

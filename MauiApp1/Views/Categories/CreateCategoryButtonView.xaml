@@ -4,6 +4,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:view="clr-namespace:MauiApp1.View"
              x:Class="MauiApp1.Views.Categories.CreateCategoryButtonView">
-    <Button Text="+"
-            Command="{Binding CreateCategoryCommand}" Style="{StaticResource CircleButton}"/>
+        <Button Text="+"
+                Command="{Binding CreateCategoryCommand}" TextTransform="Uppercase" FontSize="Title"/>
 </view:BaseView>

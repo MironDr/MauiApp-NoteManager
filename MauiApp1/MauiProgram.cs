@@ -87,7 +87,8 @@ public static class MauiProgram
         builder.Services.AddTransient<CustomQuotesContainerViewModel>();
         builder.Services.AddTransient<CustomCheckBoxViewModel>();
         builder.Services.AddTransient<CheckListViewModel>();
-        
+        builder.Services.AddTransient<ProfileToNoteSelectorButtonViewModel>();
+        builder.Services.AddTransient<ProfileToNoteSelectorViewModel>();
         
         //Register Views
         //Group

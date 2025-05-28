@@ -7,7 +7,7 @@
                xmlns:groups="clr-namespace:MauiApp1.Views.Groups"
                x:Class="MauiApp1.Views.Categories.ClassifierSelectorView">
 
-    <VerticalStackLayout x:Name="MainLayout" Padding="20" Spacing="15">
+    <VerticalStackLayout x:Name="MainLayout" Padding="10" Spacing="15">
         
         <HorizontalStackLayout HorizontalOptions="Center">
             <Label Text="Categories" VerticalOptions="Center"/>
@@ -15,18 +15,20 @@
             <Label Text="Groups" VerticalOptions="Center"/>
         </HorizontalStackLayout>
 
-      
-        <Button Text="{Binding SelectedName}" Command="{Binding ToggleListCommand}" />
+        <VerticalStackLayout BackgroundColor="Gray" Spacing="15">
+           <Button Text="{Binding SelectedName}" Command="{Binding ToggleListCommand}"/>
 
       
         
             <CollectionView ItemsSource="{Binding Categories}" 
                             SelectionMode="None" 
-                            IsVisible="{Binding IsCategoryListVisible}"
-                            HeightRequest="100">
+                            IsVisible="{Binding IsCategoryListVisible}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Button Text="{Binding CategoryName}"
+                        <Button Margin="10,0" Text="{Binding CategoryName}"
                                 Command="{Binding BindingContext.CategorySelectedCommand, Source={x:Reference MainLayout}}"
                                 CommandParameter="{Binding .}" />
                     </DataTemplate>
@@ -37,11 +39,13 @@
        
             <CollectionView ItemsSource="{Binding Groups}" 
                             SelectionMode="None" 
-                            IsVisible="{Binding IsGroupListVisible}"
-                            HeightRequest="100">
+                            IsVisible="{Binding IsGroupListVisible}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Button Text="{Binding GroupName}"
+                        <Button Margin="10,0" Text="{Binding GroupName}"
                                 Command="{Binding BindingContext.GroupSelectedCommand, Source={x:Reference MainLayout}}"
                                 CommandParameter="{Binding .}" />
                     </DataTemplate>
@@ -50,8 +54,8 @@
   
 
       
-        <categories:CreateCategoryButtonView x:Name="CategoryButtonView" IsVisible="{Binding BindingContext.IsCategoryMode, Source={x:Reference MainLayout}}" />
-        <groups:CreateGroupButtonView x:Name="GroupButtonView" IsVisible="{Binding BindingContext.IsGroupMode, Source={x:Reference MainLayout}}"/>
-        
+        <categories:CreateCategoryButtonView Margin="10,0" x:Name="CategoryButtonView" IsVisible="{Binding BindingContext.IsCategoryListVisible, Source={x:Reference MainLayout}}" />
+        <groups:CreateGroupButtonView Margin="10,0" x:Name="GroupButtonView" IsVisible="{Binding BindingContext.IsGroupListVisible, Source={x:Reference MainLayout}}"/>
+        </VerticalStackLayout>
     </VerticalStackLayout>
 </view:BaseView>

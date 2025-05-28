@@ -13,13 +13,15 @@ public class NoteDto : BaseCommon
     
     public GroupModel? Group { get; set; }
 
+    
+    public ProtectionProfileModel? ProtectionProfile { get; set; }
     public virtual void CompleteNoteDtoByNoteModel(NoteModel noteModel)
     {
         Title = noteModel.Title;
         Description = noteModel.Description;
         Category = noteModel.Category;
         Group = noteModel.Group;
-       
+        ProtectionProfile = noteModel.ProtectionProfile;
     }
 }
 

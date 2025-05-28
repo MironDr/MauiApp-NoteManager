@@ -22,7 +22,7 @@ public class NoteToGroupSelectorButtonViewModel : NoteSelectorButtonViewModel<No
  
     protected override void OpenSelector()
     {
-        _popupService.ShowPopupAsyncWithParameter<VerticalNotesView, NoteToGroupSelectorViewModel>(ViewModel);
+        _popupService.ShowPopupAsyncWithParameter<VerticalNotesView, NoteToGroupSelectorViewModel>(ViewModel, true);
     }
     
 }

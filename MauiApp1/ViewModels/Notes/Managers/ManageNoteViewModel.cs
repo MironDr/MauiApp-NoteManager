@@ -15,7 +15,8 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
 {
     protected readonly INoteService _noteService;
     protected readonly IModalService _modalService;
-
+    protected readonly IPopupService _popupService;
+    private readonly ProfileToNoteSelectorButtonViewModel _profileToNoteSelectorButtonViewModel;
     public ClassifierSelectorViewModel ClassifierSelectorViewModel { get; }
 
     public ObservableCollection<CustomFieldViewModel> Fields { get; set; } = new();
@@ -29,14 +30,17 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
 
     
     
-    protected ManageNoteViewModel(INoteService noteService, IModalService modalService, ClassifierSelectorViewModel selectorViewModel)
+    protected ManageNoteViewModel(INoteService noteService, IModalService modalService, IPopupService popupService, ClassifierSelectorViewModel selectorViewModel, ProfileToNoteSelectorButtonViewModel profileToNoteSelectorButtonViewModel)
     {
         _noteService = noteService;
         _modalService = modalService;
+        _popupService = popupService;
+        _profileToNoteSelectorButtonViewModel = profileToNoteSelectorButtonViewModel;
         ClassifierSelectorViewModel = selectorViewModel;
 
         SaveNoteCommand = new AsyncRelayCommand(SaveNoteAsync);
         
+
     }
 
     public void GoToEditMode(NoteModel noteModel)
@@ -56,20 +60,39 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
         ClassifierSelectorViewModel.SelectGroup(Note.Group);
     }
 
+   
     private async Task SaveNoteAsync()
     {
         if (string.IsNullOrWhiteSpace(Note.Title))
+        {
+            await _popupService.AlertAsync("Error", "Title is required", "Ok");
             return;
+        }
 
         Note.Category = ClassifierSelectorViewModel.SelectedCategory;
        
         Note.Group = ClassifierSelectorViewModel.SelectedGroup;
-        
-        if(Note.Group == null && Note.Category == null)
+
+        if (Note.Group == null && Note.Category == null)
+        {
+            await _popupService.AlertAsync("Error", "You should select Group or Category", "Ok");
             return;
-        
+        }
+
         if (!_editMode)
         {
+            bool answer = await _popupService.AlertConfirmAsync(
+                "Secure",          
+                "Want to set up a security profile for this note?"
+            );
+
+            if (answer)
+            {
+                Note.ProtectionProfile = await _profileToNoteSelectorButtonViewModel.Open();
+                if(Note.ProtectionProfile == null)
+                    return;
+            }
+
             _noteService.AddNote(CreateNoteFromDto());
             await _modalService.CloseModalAsync();
         }

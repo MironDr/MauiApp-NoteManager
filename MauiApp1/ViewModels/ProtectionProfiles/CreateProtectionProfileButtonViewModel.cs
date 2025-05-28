@@ -18,6 +18,6 @@ public class CreateProtectionProfileButtonViewModel : BaseViewModel
     
     private async Task CreateProfile()
     {
-       await _popupService.ShowPopupAsync<CreateProtectionProfileView>();
+       await _popupService.ShowPopupAsync<CreateProtectionProfileView>(true);
     }
 }

@@ -18,6 +18,6 @@ public class CreateGroupButtonViewModel : BaseViewModel
     
     private void CreateGroup()
     {
-        _popupService.ShowPopupAsync<CreateGroupView>();
+        _popupService.ShowPopupAsync<CreateGroupView>(true);
     }
 }

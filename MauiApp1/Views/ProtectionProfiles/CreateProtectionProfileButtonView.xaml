@@ -5,5 +5,5 @@
              xmlns:view="clr-namespace:MauiApp1.View"
              x:Class="MauiApp1.Views.ProtectionProfiles.CreateProtectionProfileButtonView">
     <Button Text="+"
-            Command="{Binding CreateProfileCommand}" Style="{StaticResource CircleButton}"/>
+            Command="{Binding CreateProfileCommand}" TextTransform="Uppercase" FontSize="Title"/>
 </view:BaseView>

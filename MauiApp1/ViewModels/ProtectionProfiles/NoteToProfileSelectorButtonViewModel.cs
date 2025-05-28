@@ -22,7 +22,7 @@ public class NoteToProfileSelectorButtonViewModel : NoteSelectorButtonViewModel<
  
     protected override void OpenSelector()
     {
-        _popupService.ShowPopupAsyncWithParameter<VerticalNotesView, NoteToProfileSelectorViewModel>(ViewModel);
+        _popupService.ShowPopupAsyncWithParameter<VerticalNotesView, NoteToProfileSelectorViewModel>(ViewModel, true);
     }
 
 }

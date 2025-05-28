@@ -180,6 +180,7 @@ public class NoteModel : BaseModel
         noteModel.Title = dto.Title;
         noteModel.Description = dto.Description;
         noteModel.CreatedAt = DateTime.Now;
+        noteModel.ProtectionProfile = dto.ProtectionProfile;
         
         if (dto.Category != null)
         {
@@ -214,6 +215,8 @@ public class NoteModel : BaseModel
             Category = null;
             Group = noteDto.Group;
         }
+        
+        ProtectionProfile = noteDto.ProtectionProfile;
         
         return this;
     }

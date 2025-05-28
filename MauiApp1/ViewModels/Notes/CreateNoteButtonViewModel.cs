@@ -24,6 +24,6 @@ public class CreateNoteButtonViewModel : BaseViewModel
 
     private void ShowTypeSelectorPopup()
     {
-        _popupService.ShowPopupAsyncWithParameter<CustomTypeSelectorView, NoteTypeSelectorViewModel>(_noteTypeSelectorViewModel);
+        _popupService.ShowPopupAsyncWithParameter<CustomTypeSelectorView, NoteTypeSelectorViewModel>(_noteTypeSelectorViewModel, true);
     }
 }

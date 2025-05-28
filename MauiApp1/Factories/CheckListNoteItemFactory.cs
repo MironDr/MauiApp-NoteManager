@@ -16,20 +16,20 @@ public class CheckListNoteItemFactory : INoteItemFactory
 
     private readonly INoteService _noteService;
     private readonly IModalService _modalService;
-    private readonly ICategoryService _categoryService;
+    private readonly IPopupService _popupService;
     private readonly IServiceProvider _serviceProvider;
+
 
     public CheckListNoteItemFactory(
         INoteService noteService,
         IModalService modalService,
-        ICategoryService categoryService,
-        IServiceProvider serviceProvider)
+        IServiceProvider serviceProvider, IPopupService popupService)
     {
         _noteService = noteService;
         _modalService = modalService;
-        _categoryService = categoryService;
         _serviceProvider = serviceProvider;
-        
+        _popupService = popupService;
+
     }
 
     public NoteItemStruct Create(NoteModel note)
@@ -55,7 +55,7 @@ public class CheckListNoteItemFactory : INoteItemFactory
     {
         CheckListViewModel checkListViewModel = _serviceProvider.GetRequiredService<CheckListViewModel>();
         ClassifierSelectorViewModel classifierSelectorViewModel = _serviceProvider.GetRequiredService<ClassifierSelectorViewModel>();
-        
-        return new ManageCheckListNoteViewModel(_noteService, _modalService, classifierSelectorViewModel, checkListViewModel);
+        ProfileToNoteSelectorButtonViewModel profileToNoteSelectorButtonViewModel = _serviceProvider.GetRequiredService<ProfileToNoteSelectorButtonViewModel>();
+        return new ManageCheckListNoteViewModel(_noteService, _modalService, _popupService, classifierSelectorViewModel, checkListViewModel, profileToNoteSelectorButtonViewModel);
     }
 }

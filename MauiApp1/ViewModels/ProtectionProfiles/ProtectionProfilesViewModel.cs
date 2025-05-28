@@ -62,22 +62,32 @@ public class ProtectionProfilesViewModel : BaseViewModel
         Profiles = new ObservableCollection<ProtectionProfileModel>(_profileService.GetProfiles());
     }
     
-    private async Task OnProfileSelected(ProtectionProfileModel profile)
+    protected virtual async Task OnProfileSelected(ProtectionProfileModel profile)
     {
-        var password = await _popupService.ShowResultPopupAsyncWithParameter<PasswordPopupView,string, string?>(profile.ProfileName);
+        bool result =  await Validate(profile);
 
-        if (string.IsNullOrWhiteSpace(password))
+        if(!result)
             return;
-
-        if (!profile.TryUnlock(password))
-        {
-            await _popupService.AlertAsync("Error", "Incorrect password", "Ok");
-            return;
-        }
         
         var viewModel = new ProtectionProfileItemViewModel(profile, _noteToProfileSelectorButtonViewModel, _noteToProfileSelectorViewModel);
         
         await _modalService.ShowModalAsyncWithParameter<ProtectionProfileItemView, ProtectionProfileItemViewModel>(viewModel);
+    }
+
+    protected async Task<bool> Validate(ProtectionProfileModel profile)
+    {
+        var password = await _popupService.ShowResultPopupAsyncWithParameter<PasswordPopupView,string, string?>(profile.ProfileName);
+
+        if (string.IsNullOrWhiteSpace(password))
+            return false;
+
+        if (!profile.TryUnlock(password))
+        {
+            await _popupService.AlertAsync("Error", "Incorrect password", "Ok");
+            return false;
+        }
+        
+        return true;
     }
 
 }

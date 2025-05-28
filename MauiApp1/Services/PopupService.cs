@@ -7,8 +7,8 @@ namespace MauiApp1.Services;
 
 public interface IPopupService
 {
-    Task ShowPopupAsync<TView>(bool canBeClosed = true) where TView : BaseView;
-    Task ShowPopupAsyncWithParameter<TView, TParameter>(TParameter parameter,bool canBeClosed = true) where TView : BaseView;
+    Task ShowPopupAsync<TView>(bool canBeClosed) where TView : BaseView;
+    Task ShowPopupAsyncWithParameter<TView, TParameter>(TParameter parameter,bool canBeClosed) where TView : BaseView;
     Task ClosePopupAsync();
     void AddViewToPopup(BaseView view);
     
@@ -19,6 +19,9 @@ public interface IPopupService
         where TView : BaseView, IResultView<T>, IParameterizedView<TParameter>;
 
     Task AlertAsync(string title, string message, string cancel = "OK");
+
+
+    Task<bool> AlertConfirmAsync(string title, string message);
 
 }
 
@@ -133,5 +136,10 @@ public class PopupService : IPopupService
     public async Task AlertAsync(string title, string message, string cancel = "OK")
     {
         await Shell.Current.CurrentPage.DisplayAlert(title, message, cancel);
+    }
+    
+    public async Task<bool> AlertConfirmAsync(string title, string message)
+    {
+       return await Shell.Current.CurrentPage.DisplayAlert(title, message, "Yes","No");
     }
 }

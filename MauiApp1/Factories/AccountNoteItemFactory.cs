@@ -15,19 +15,19 @@ public class AccountNoteItemFactory: INoteItemFactory
 
     private readonly INoteService _noteService;
     private readonly IModalService _modalService;
-    private readonly ICategoryService _categoryService;
+    private readonly IPopupService _popupService;
     private readonly IServiceProvider _serviceProvider;
-
+ 
     public AccountNoteItemFactory(
         INoteService noteService,
         IModalService modalService,
-        ICategoryService categoryService,
-        IServiceProvider serviceProvider)
+        IServiceProvider serviceProvider,
+        IPopupService popupService)
     {
         _noteService = noteService;
         _modalService = modalService;
-        _categoryService = categoryService;
         _serviceProvider = serviceProvider;
+        _popupService = popupService;
     }
 
     public NoteItemStruct Create(NoteModel note)
@@ -48,6 +48,7 @@ public class AccountNoteItemFactory: INoteItemFactory
     public BaseViewModel GetEditorViewModel()
     {
         ClassifierSelectorViewModel classifierSelectorViewModel = _serviceProvider.GetRequiredService<ClassifierSelectorViewModel>();
-        return new ManageAccountNoteViewModel(_noteService, _modalService, classifierSelectorViewModel);
+        ProfileToNoteSelectorButtonViewModel profileToNoteSelectorButtonViewModel = _serviceProvider.GetRequiredService<ProfileToNoteSelectorButtonViewModel>();
+        return new ManageAccountNoteViewModel(_noteService, _modalService, _popupService, classifierSelectorViewModel, profileToNoteSelectorButtonViewModel);
     }
 }

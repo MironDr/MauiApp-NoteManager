@@ -12,14 +12,14 @@
           RowDefinitions="*,*"
           Padding="10"
           VerticalOptions="Center"
-          BackgroundColor="DimGray">
+          BackgroundColor="Black">
         <Label HorizontalOptions="Center" TextTransform="Uppercase" Text="Note" Grid.Row="0" Grid.Column="0"/>
-        <notes:CreateNoteButtonView Grid.Row="1" Grid.Column="0" x:Name="NoteButton"/>
+        <notes:CreateNoteButtonView Grid.Row="1" Grid.Column="0" x:Name="NoteButton" Padding="5"/>
         <Label HorizontalOptions="Center" TextTransform="Uppercase" Text="Category" Grid.Row="0" Grid.Column="1"/>
-        <categories:CreateCategoryButtonView Grid.Row="1" Grid.Column="1" x:Name="CategoryButton"/>
+        <categories:CreateCategoryButtonView Grid.Row="1" Grid.Column="1" x:Name="CategoryButton" Padding="5"/>
         <Label HorizontalOptions="Center" TextTransform="Uppercase" Text="Group" Grid.Row="0" Grid.Column="2"/>
-        <groups:CreateGroupButtonView Grid.Row="1" Grid.Column="2" x:Name="GroupButton"/>
+        <groups:CreateGroupButtonView Grid.Row="1" Grid.Column="2" x:Name="GroupButton" Padding="5"/>
         <Label HorizontalOptions="Center" TextTransform="Uppercase" Text="Profile" Grid.Row="0" Grid.Column="3"/>
-        <protectionProfiles:CreateProtectionProfileButtonView Grid.Row="1" Grid.Column="3" x:Name="ProfileButton"/>
+        <protectionProfiles:CreateProtectionProfileButtonView Grid.Row="1" Grid.Column="3" x:Name="ProfileButton" Padding="5"/>
     </Grid>
 </view:BaseView>

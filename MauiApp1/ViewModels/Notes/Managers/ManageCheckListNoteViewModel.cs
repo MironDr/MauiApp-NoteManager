@@ -13,8 +13,11 @@ public sealed class ManageCheckListNoteViewModel : ManageNoteViewModel<CheckList
     private readonly CheckListViewModel _checkListViewModel;
     
     
-    public ManageCheckListNoteViewModel(INoteService noteService, IModalService modalService, ClassifierSelectorViewModel selectorViewModel, CheckListViewModel checkListViewModel)
-        : base(noteService, modalService, selectorViewModel)
+    public ManageCheckListNoteViewModel(INoteService noteService, IModalService modalService, 
+        IPopupService popupService, ClassifierSelectorViewModel selectorViewModel, 
+        CheckListViewModel checkListViewModel, 
+        ProfileToNoteSelectorButtonViewModel profileToNoteSelectorButtonViewModel)
+        : base(noteService, modalService, popupService, selectorViewModel, profileToNoteSelectorButtonViewModel)
     {
         _checkListViewModel = checkListViewModel;
         ReloadFields();
