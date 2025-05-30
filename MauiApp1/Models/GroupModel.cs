@@ -8,12 +8,6 @@ public class GroupModel : BaseModel
 
     private NoteModel? _mainNote;
     public string GroupName { get; set; }
-
-
-    public GroupModel()
-    {
-        GroupName = string.Empty;
-    }
     
     private GroupModel(string groupName)
     {
@@ -28,6 +22,8 @@ public class GroupModel : BaseModel
     {
         if (Notes.Contains(note))
         {
+            if(note.Id == _mainNote?.Id)
+                RemoveMainNote();
             Notes.Remove(note);
         }
         
@@ -62,7 +58,8 @@ public class GroupModel : BaseModel
         
         _mainNote = note;
         
-        note.IsMainInGroup = true;
+        if(!note.IsMainInGroup)
+         note.IsMainInGroup = true;
     }
 
     public void RemoveMainNote()
@@ -70,7 +67,8 @@ public class GroupModel : BaseModel
         if(_mainNote == null)
             return;
 
-        _mainNote.IsMainInGroup = false;
+        if(_mainNote.IsMainInGroup)
+            _mainNote.IsMainInGroup = false;
         
         _mainNote = null;
         

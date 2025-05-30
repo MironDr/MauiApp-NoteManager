@@ -57,7 +57,7 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
         Fields.Add(new CustomFieldViewModel("Title", Note.Title, s => Note.Title = s!));
         Fields.Add(new CustomFieldViewModel("Description", Note.Description, s => Note.Description = s));
         ClassifierSelectorViewModel.SelectCategory(Note.Category);
-        ClassifierSelectorViewModel.SelectGroup(Note.Group);
+        ClassifierSelectorViewModel.SelectGroup(Note.Group, Note.IsMainInGroup);
     }
 
    
@@ -72,6 +72,9 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
         Note.Category = ClassifierSelectorViewModel.SelectedCategory;
        
         Note.Group = ClassifierSelectorViewModel.SelectedGroup;
+        
+        if(Note.Group != null)
+            Note.IsMainInGroup = ClassifierSelectorViewModel.IsNoteMainInGroup;
 
         if (Note.Group == null && Note.Category == null)
         {

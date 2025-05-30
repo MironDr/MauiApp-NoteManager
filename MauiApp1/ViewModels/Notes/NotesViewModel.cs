@@ -90,10 +90,7 @@ public class NotesViewModel : BaseViewModel
             case ListType.Category:
                 Notes = new ObservableCollection<NoteModel>(
                     _noteService.GetNotes()
-                        .Where(n => n.Group == null)
-                        .Where(n => _selectedCategory == null
-                            ? n.Category != null
-                            : n.Category?.Id == _selectedCategory.Id)
+                        .Where(n => _selectedCategory == null || n.Category?.Id == _selectedCategory.Id)
                 );
                 break;
             default:

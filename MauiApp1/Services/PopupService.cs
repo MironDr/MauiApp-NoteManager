@@ -2,6 +2,7 @@
 using MauiApp1.Interfaces;
 using MauiApp1.Popups;
 using MauiApp1.View;
+using Microsoft.Maui.Controls.Shapes;
 
 namespace MauiApp1.Services;
 
@@ -46,6 +47,8 @@ public class PopupService : IPopupService
         
         _isBusy = true;
         var view = _serviceProvider.GetRequiredService<TView>();
+        
+        view.Padding = new Thickness(20);
         
         
         _popup = new InstantPopup { Content = view, CanBeDismissedByTappingOutsideOfPopup = canBeClosed };

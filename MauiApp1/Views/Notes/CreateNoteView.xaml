@@ -10,16 +10,20 @@
         <VerticalStackLayout Padding="10" x:Name="MainLayout" Spacing="10">
 
          
-            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Fields}">
+            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Fields}" Spacing="10">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <notes:CustomEntryView />
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </VerticalStackLayout>
-
-            <categories:ClassifierSelectorView x:Name="CategorySelectorView" />
-            
+ 
+            <Border>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="6" />
+                </Border.StrokeShape>
+                <categories:ClassifierSelectorView x:Name="CategorySelectorView" />
+            </Border>
             <VerticalStackLayout x:Name="DynamicContentArea" />
             
          

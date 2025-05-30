@@ -6,6 +6,6 @@ public class InstantPopup : Popup
 {
     public InstantPopup()
     {
-        
+        Color = Colors.Black;
     }
 }

@@ -1,6 +1,7 @@
-﻿using System.Reflection;
+﻿
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.Maui.Controls.Shapes;
 
 namespace MauiApp1.Utilities;
 
@@ -9,15 +10,15 @@ public static class ObjectUtils
     public static byte[] DeriveKey(string password, byte[] salt)
     {
         using var rfc = new Rfc2898DeriveBytes(password, salt, 100_000, HashAlgorithmName.SHA256);
-        return rfc.GetBytes(32); 
+        return rfc.GetBytes(32);
     }
 
     public static void CreatePasswordHash(string password, out byte[] hash, out byte[] salt)
     {
         salt = RandomNumberGenerator.GetBytes(16);
-        hash = DeriveKey(password, salt); 
+        hash = DeriveKey(password, salt);
     }
-    
+
     public static string EncryptAes(string plainText, byte[] key)
     {
         using var aes = Aes.Create();
@@ -54,10 +55,11 @@ public static class ObjectUtils
 
         return Encoding.UTF8.GetString(decryptedBytes);
     }
-    
+
     public static bool IsBase64String(string base64)
     {
         Span<byte> buffer = new Span<byte>(new byte[base64.Length]);
         return Convert.TryFromBase64String(base64, buffer, out _);
     }
+    
 }

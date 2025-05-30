@@ -18,7 +18,7 @@
                                  HorizontalOptions="Fill"
                                  VerticalOptions="Fill"/>
         
-        <Border Grid.Row="2" x:Name="BottomContainer"/>
+        <Border Grid.Row="2" x:Name="BottomContainer" StrokeThickness="0" />
     </Grid>
 
 </mauiApp1:BasePage>

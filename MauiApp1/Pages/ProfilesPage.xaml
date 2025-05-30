@@ -7,6 +7,6 @@
              x:Class="MauiApp1.Pages.ProfilesPage">
     <Grid RowDefinitions="*, Auto">
         <protectionProfiles:VerticalProtectionProfilesView Grid.Row="0" x:Name="VerticalProtectionProfilesView" HorizontalOptions="Fill" VerticalOptions="Fill"/>
-        <Border Grid.Row="1" x:Name="BottomContainer"/>
+        <Border Grid.Row="1" x:Name="BottomContainer" StrokeThickness="0" />
     </Grid>
 </mauiApp1:BasePage>

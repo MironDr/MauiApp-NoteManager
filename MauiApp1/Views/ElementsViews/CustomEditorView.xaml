@@ -5,10 +5,13 @@
              x:Class="MauiApp1.Views.Notes.CustomEditorView">
     <VerticalStackLayout x:Name="MainLayout" IsVisible="{Binding IsNonEmptyField}">
         <Entry Text="{Binding Label}"  Completed="OnEditorCompleted" IsReadOnly="{Binding IsReadOnly}"/>
-        <Border Padding="0">
+        <Border Padding="5">
             <Border.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnEditorTapped" />
             </Border.GestureRecognizers>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="6" />
+            </Border.StrokeShape>
         <Editor AutoSize="TextChanges" x:Name="EditorField" Text="{Binding Value}" Completed="OnEditorCompleted" IsReadOnly="{Binding IsReadOnly}"/>
         </Border>
     </VerticalStackLayout>

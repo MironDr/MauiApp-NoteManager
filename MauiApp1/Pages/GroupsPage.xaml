@@ -9,7 +9,7 @@
     <Grid RowDefinitions="*, Auto">
         <groups:VerticalGroupsView Grid.Row="0" x:Name="VerticalGroupsView" HorizontalOptions="Fill" VerticalOptions="Fill"/>
         
-        <Border Grid.Row="1" x:Name="BottomContainer"/>
+        <Border Grid.Row="1" x:Name="BottomContainer" StrokeThickness="0" />
     </Grid>
 
 </mauiApp1:BasePage>

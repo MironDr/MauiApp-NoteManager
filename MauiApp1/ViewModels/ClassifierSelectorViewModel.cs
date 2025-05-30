@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using MauiApp1.DTOs;
 using MauiApp1.Models;
 using MauiApp1.Services;
 using MauiApp1.ViewModels.Categories;
@@ -14,6 +15,7 @@ public class ClassifierSelectorViewModel : BaseViewModel
 
     public CreateCategoryButtonViewModel CreateCategoryButtonViewModel { get; }
     public CreateGroupButtonViewModel CreateGroupButtonViewModel { get; }
+
     public ICommand CategorySelectedCommand { get; }
     public ICommand GroupSelectedCommand { get; }
     public ICommand ToggleListCommand { get; }
@@ -21,17 +23,15 @@ public class ClassifierSelectorViewModel : BaseViewModel
     public ObservableCollection<CategoryModel> Categories { get; private set; } = new();
     public ObservableCollection<GroupModel> Groups { get; private set; } = new();
 
-    public CategoryModel? SelectedCategory {get; private set; }
-    public GroupModel? SelectedGroup {get; private set; }
+    public CategoryModel? SelectedCategory { get; private set; }
+    public GroupModel? SelectedGroup { get; private set; }
 
     private bool _isListVisible;
-    private bool _isGroupMode = false;
-
     public bool IsListVisible
     {
         get => _isListVisible;
         set
-        { 
+        {
             if (value != _isListVisible)
             {
                 _isListVisible = value;
@@ -39,32 +39,38 @@ public class ClassifierSelectorViewModel : BaseViewModel
                 OnPropertyChanged(nameof(IsCategoryListVisible));
                 OnPropertyChanged(nameof(IsGroupListVisible));
             }
-        } 
+        }
     }
 
+    private bool _isGroupMode;
     public bool IsGroupMode
     {
         get => _isGroupMode;
         set
         {
-           
             if (value != _isGroupMode)
             {
                 _isGroupMode = value;
                 IsListVisible = false;
-                OnPropertyChanged(nameof(IsCategoryMode));
                 OnPropertyChanged(nameof(IsGroupMode));
+                OnPropertyChanged(nameof(IsCategoryMode));
+                OnPropertyChanged(nameof(MainNoteNotSelected));
                 UpdateList();
             }
         }
     }
 
     public bool IsCategoryMode => !IsGroupMode;
-    
     public bool IsCategoryListVisible => IsCategoryMode && IsListVisible;
     public bool IsGroupListVisible => IsGroupMode && IsListVisible;
 
-    private string _selectedName;
+    private int? _noteMainGroupId;
+    public bool IsNoteMainInGroup { get; set; }
+
+    public bool MainNoteNotSelected =>
+        (SelectedGroup?.GetMainNote() == null || SelectedGroup.Id == _noteMainGroupId) && IsGroupMode && SelectedGroup != null;
+
+    private string _selectedName = string.Empty;
     public string SelectedName
     {
         get => _selectedName;
@@ -76,11 +82,13 @@ public class ClassifierSelectorViewModel : BaseViewModel
                 OnPropertyChanged(nameof(SelectedName));
             }
         }
-    } 
-  
-        
+    }
 
-    public ClassifierSelectorViewModel(ICategoryService categoryService, IGroupService groupService, CreateCategoryButtonViewModel createCategoryButtonViewModel, CreateGroupButtonViewModel createGroupButtonViewModel)
+    public ClassifierSelectorViewModel(
+        ICategoryService categoryService,
+        IGroupService groupService,
+        CreateCategoryButtonViewModel createCategoryButtonViewModel,
+        CreateGroupButtonViewModel createGroupButtonViewModel)
     {
         _categoryService = categoryService;
         _groupService = groupService;
@@ -96,67 +104,79 @@ public class ClassifierSelectorViewModel : BaseViewModel
             IsListVisible = !IsListVisible;
         });
 
-       
-        
-        
         UpdateList();
     }
 
     private void OnCategorySelected(CategoryModel category)
     {
         SelectedCategory = category;
-        IsGroupMode = false;
         SelectedGroup = null;
+        IsGroupMode = false;
         IsListVisible = false;
-        OnPropertyChanged(nameof(SelectedName));
+
+        UpdateSelectedName();
         UpdateList();
     }
 
     private void OnGroupSelected(GroupModel group)
     {
         SelectedGroup = group;
-        IsGroupMode = true;
         SelectedCategory = null;
+        IsGroupMode = true;
         IsListVisible = false;
-        OnPropertyChanged(nameof(SelectedName));
+        IsNoteMainInGroup = _noteMainGroupId != null && _noteMainGroupId == group.Id;
+        UpdateSelectedName();
+        OnPropertyChanged(nameof(MainNoteNotSelected));
+        OnPropertyChanged(nameof(IsNoteMainInGroup));
+
         UpdateList();
     }
 
     public void SelectCategory(CategoryModel? category)
     {
-        if(category != null)
+        if (category != null)
             OnCategorySelected(category);
-        else
-        {
-            var cat = Categories.FirstOrDefault();
-            if (cat != null) OnCategorySelected(cat);
-        }
-    }
-    
-    public void SelectGroup(GroupModel? group)
-    {
-        if(group != null)
-            OnGroupSelected(group);
+        else if(Categories.Count > 0)
+            OnCategorySelected(Categories.FirstOrDefault());
     }
 
-    
+    public void SelectGroup(GroupModel? group, bool isMainNote)
+    {
+        if (group != null)
+        {
+            if(isMainNote)
+                _noteMainGroupId = group.Id;
+            else
+                _noteMainGroupId = null;
+            
+            IsNoteMainInGroup = isMainNote;
+            
+            OnGroupSelected(group);
+        }
+    }
+
     private void UpdateList()
     {
-        SelectedName = !IsGroupMode ? (SelectedCategory?.CategoryName ?? "Select Category") :
-            (SelectedGroup?.GroupName ?? "Select Group");
-        
-        
-        if (!IsGroupMode)
-        {
-            Categories = new ObservableCollection<CategoryModel>(
-                _categoryService.GetCategories().Where(c => c.Id != SelectedCategory?.Id));
-            OnPropertyChanged(nameof(Categories));
-        }
-        else
+        UpdateSelectedName();
+
+        if (IsGroupMode)
         {
             Groups = new ObservableCollection<GroupModel>(
                 _groupService.GetGroups().Where(g => g.Id != SelectedGroup?.Id));
             OnPropertyChanged(nameof(Groups));
         }
+        else
+        {
+            Categories = new ObservableCollection<CategoryModel>(
+                _categoryService.GetCategories().Where(c => c.Id != SelectedCategory?.Id));
+            OnPropertyChanged(nameof(Categories));
+        }
+    }
+
+    private void UpdateSelectedName()
+    {
+        SelectedName = IsGroupMode
+            ? SelectedGroup?.GroupName ?? "Select Group"
+            : SelectedCategory?.CategoryName ?? "Select Category";
     }
 }

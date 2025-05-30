@@ -8,6 +8,9 @@
     <VerticalStackLayout>
         <Label Text = "Sources"/>
         <Border>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="6" />
+            </Border.StrokeShape>
             <VerticalStackLayout>
                 <VerticalStackLayout BindableLayout.ItemsSource="{Binding Fields}">
                     <BindableLayout.ItemTemplate>

@@ -10,7 +10,7 @@
 
             <Switch IsToggled="False" Toggled="Switch_OnToggled" x:Name="SwitchView"/>
             <VerticalStackLayout  x:Name="ReadModeView" IsVisible="True">
-                <VerticalStackLayout BindableLayout.ItemsSource="{Binding Fields}">
+                <VerticalStackLayout BindableLayout.ItemsSource="{Binding Fields}" Spacing="10">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <notes:CustomEntryView />

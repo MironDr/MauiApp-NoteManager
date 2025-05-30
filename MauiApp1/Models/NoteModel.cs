@@ -10,7 +10,7 @@ public enum NoteType
     CheckList,
   
 }
-public class NoteModel : BaseModel
+public abstract class NoteModel : BaseModel
 {
     public virtual NoteType Type { get; }
 
@@ -111,6 +111,7 @@ public class NoteModel : BaseModel
             if (_group != null && _group.GetNotes().Contains(this))
             {
                 _group.RemoveNote(this);
+                IsMainInGroup = false;
             }
 
             _group = value;
@@ -154,7 +155,9 @@ public class NoteModel : BaseModel
         {
             if (_group == null || value == _isMainInGroup)
                 return;
-
+            
+            _isMainInGroup = value;
+            
             if (value)
             {
                 if (_group.GetMainNote() == null)
@@ -166,7 +169,7 @@ public class NoteModel : BaseModel
                     _group.RemoveMainNote();
             }
 
-            _isMainInGroup = value;
+           
         }
     }
 
@@ -186,11 +189,13 @@ public class NoteModel : BaseModel
         {
             noteModel.Group = null;
             noteModel.Category = dto.Category;
+            noteModel.IsMainInGroup = false;
         }
         else if (dto.Group != null)
         {
             noteModel.Category = null;
             noteModel.Group = dto.Group;
+            noteModel.IsMainInGroup = dto.IsMainInGroup;
         }
         
 
@@ -209,11 +214,13 @@ public class NoteModel : BaseModel
         {
             Group = null;
             Category = noteDto.Category;
+            IsMainInGroup = false;
         }
         else if (noteDto.Group != null)
         {
             Category = null;
             Group = noteDto.Group;
+            IsMainInGroup = noteDto.IsMainInGroup;
         }
         
         ProtectionProfile = noteDto.ProtectionProfile;

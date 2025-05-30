@@ -5,6 +5,7 @@ namespace MauiApp1.DTOs;
 
 public class NoteDto : BaseCommon
 {
+
     public string Title {get; set; } = string.Empty;
 
     public string? Description { get; set; }
@@ -13,6 +14,7 @@ public class NoteDto : BaseCommon
     
     public GroupModel? Group { get; set; }
 
+    public bool IsMainInGroup { get; set; }
     
     public ProtectionProfileModel? ProtectionProfile { get; set; }
     public virtual void CompleteNoteDtoByNoteModel(NoteModel noteModel)
@@ -22,6 +24,7 @@ public class NoteDto : BaseCommon
         Category = noteModel.Category;
         Group = noteModel.Group;
         ProtectionProfile = noteModel.ProtectionProfile;
+        IsMainInGroup = noteModel.IsMainInGroup;
     }
 }
 
