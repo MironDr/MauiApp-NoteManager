@@ -10,6 +10,8 @@ public interface IGroupService
     List<GroupModel> GetGroups();
     void AddGroup(GroupModel group);
     GroupModel? GetById(int id);
+    
+    void DeleteGroup(GroupModel group);
 }
 
 public class GroupService : IGroupService
@@ -45,5 +47,11 @@ public class GroupService : IGroupService
     {
         return _groups.FirstOrDefault(c => c.Id == id);
     }
-    
+
+    public void DeleteGroup(GroupModel group)
+    {
+        group.UnlinkAssociations();
+        _groups.Remove(group);
+        GroupsUpdated?.Invoke(this, EventArgs.Empty);
+    }
 }

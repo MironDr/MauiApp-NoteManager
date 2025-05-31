@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.Input;
 using MauiApp1.Models;
 using MauiApp1.Services;
 using MauiApp1.View;
@@ -10,10 +11,11 @@ namespace MauiApp1.ViewModels.Categories;
 public class CategoriesViewModel : BaseViewModel
 {
     private readonly ICategoryService _categoryService;
-
-
+    private readonly IPopupService _popupService;
     public event EventHandler<CategoryModel?>? CategorySelected;
 
+    
+    public AsyncRelayCommand DeleteCategoryCommand { get; }
   
     private ObservableCollection<CategoryButtonModel> _categories = new();
 
@@ -34,11 +36,12 @@ public class CategoriesViewModel : BaseViewModel
     
     
 
-    public CategoriesViewModel(ICategoryService categoryService) : base()
+    public CategoriesViewModel(ICategoryService categoryService, IPopupService popupService) : base()
     {
         _categoryService = categoryService;
+        _popupService = popupService;
         _categoryService.CategoriesUpdated += OnCategoriesUpdated!;
-        
+        DeleteCategoryCommand = new AsyncRelayCommand(OnCategoryDeleted);
         LoadCategories();
     }
     
@@ -74,6 +77,33 @@ public class CategoriesViewModel : BaseViewModel
         _selectedCategory = selectedCategoryModel;
         SelectCategory(_selectedCategory.Category);
         
+    }
+    
+    private async Task OnCategoryDeleted()
+    {
+        if (_selectedCategory == null)
+        {
+            await _popupService.AlertAsync("Warning", "Select category to delete", "Ok");
+            return;
+        }
+
+        bool answer = await _popupService.AlertConfirmAsync(
+            "Warning",          
+            "Are you sure you want to delete this category?"
+        );
+        
+        if(!answer)
+            return;
+
+        if (_selectedCategory.Category.GetNotes().Count > 0)
+        {
+            await _popupService.AlertAsync("Error", "You cannot delete non empty categories", "Ok");
+            return;
+        }
+        
+        _categoryService.DeleteCategory(_selectedCategory.Category);
+        _selectedCategory = null;
+        SelectCategory(_selectedCategory?.Category);
     }
     private void SelectCategory(CategoryModel? category)
     {

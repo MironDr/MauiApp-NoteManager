@@ -6,7 +6,15 @@
              x:Class="MauiApp1.Views.Notes.SpecificNoteSelectorView">
     <VerticalStackLayout x:Name="MainLayout" Padding="20">
             <Button Text="{Binding SelectedNoteName}" Command="{Binding ToggleNoteListCommand}"/>
-            <CollectionView ItemsSource="{Binding Notes}" SelectionMode="None"  IsVisible="{Binding IsListVisible}" HeightRequest="100">
+            <CollectionView ItemsSource="{Binding Notes}" SelectionMode="None"  IsVisible="{Binding IsListVisible}">
+                <CollectionView.EmptyView>
+                    <Label Text="No matching notes" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"
+                           TextColor="{StaticResource SecondaryDarkText}"
+                           TextTransform="Uppercase"
+                           FontSize="Title"/>
+                </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Button Text="{Binding Title}" 

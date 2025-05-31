@@ -11,6 +11,8 @@ public interface ICategoryService
     void AddCategory(CategoryModel category);
     
     CategoryModel? GetById(int id);
+    
+    void DeleteCategory(CategoryModel category);
 }
 public class CategoryService : ICategoryService
 {
@@ -52,5 +54,11 @@ public class CategoryService : ICategoryService
     {
         return _categories.FirstOrDefault(c => c.Id == id);
     }
-    
+
+    public void DeleteCategory(CategoryModel category)
+    {
+        category.UnlinkAssociations();
+        _categories.Remove(category);
+        CategoriesUpdated?.Invoke(this, EventArgs.Empty);
+    }
 }

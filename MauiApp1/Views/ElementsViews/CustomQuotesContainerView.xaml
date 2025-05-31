@@ -7,7 +7,7 @@
              x:Class="MauiApp1.Views.Notes.CustomQuotesContainerView">
     <VerticalStackLayout>
         <Label Text = "Sources"/>
-        <Border>
+        <Border Padding="5">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="6" />
             </Border.StrokeShape>
@@ -20,6 +20,7 @@
                     </BindableLayout.ItemTemplate>
                 </VerticalStackLayout>
                 <notes:CreateNoteWithSourceButtonView x:Name="CreateButton"/>
+                <notes:DeleteNoteWithSourceButtonView x:Name="DeleteButton"/>
             </VerticalStackLayout>
         </Border>
     </VerticalStackLayout>

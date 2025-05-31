@@ -49,6 +49,8 @@ public class NotesViewModel : BaseViewModel
     
     public AsyncRelayCommand<NoteModel> NoteSelectedCommand { get; }
 
+    
+    public AsyncRelayCommand<NoteModel> DeleteNoteCommand { get; }
     public ObservableCollection<NoteModel> Notes
     {
         get => _notes;
@@ -74,7 +76,8 @@ public class NotesViewModel : BaseViewModel
         _noteService.NotesUpdated += OnNotesUpdated!;
         
         NoteSelectedCommand = new AsyncRelayCommand<NoteModel>(OnNoteSelected!);
-        
+
+        DeleteNoteCommand = new AsyncRelayCommand<NoteModel>(OnNoteDeleted!);
         LoadNotes();
     }
     
@@ -120,6 +123,28 @@ public class NotesViewModel : BaseViewModel
         
     }
 
+    private async Task OnNoteDeleted(NoteModel note)
+    {
+        bool answer = await _popupService.AlertConfirmAsync(
+            "Warning",          
+            "Are you sure you want to delete the note?"
+        );
+        
+        if(!answer)
+            return;
+
+        if (note.ProtectionProfile is { IsUnlocked: false })
+        {
+            bool result = await PasswordPopup(note.ProtectionProfile);
+           
+            if(!result)
+                return;
+           
+        }
+        
+        _noteService.DeleteNote(note);
+    }
+    
     protected async Task<bool> PasswordPopup(ProtectionProfileModel profile)
     {
         var password = await _popupService.ShowResultPopupAsyncWithParameter<PasswordPopupView,string, string?>(profile.ProfileName);

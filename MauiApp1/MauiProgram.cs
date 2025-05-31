@@ -89,7 +89,7 @@ public static class MauiProgram
         builder.Services.AddTransient<CheckListViewModel>();
         builder.Services.AddTransient<ProfileToNoteSelectorButtonViewModel>();
         builder.Services.AddTransient<ProfileToNoteSelectorViewModel>();
-        
+        builder.Services.AddTransient<DeleteNoteWithSourceButtonViewModel>();
         //Register Views
         //Group
         builder.Services.AddTransient<GroupItemView>();
@@ -121,6 +121,7 @@ public static class MauiProgram
         builder.Services.AddTransient<CustomInfoView>();
         builder.Services.AddTransient<CheckListView>();
         builder.Services.AddTransient<CustomCheckBoxView>();
+        builder.Services.AddTransient<DeleteNoteWithSourceView>();
         //Other
         builder.Services.AddTransient<PasswordPopupView>();
         builder.Services.AddTransient<CustomBottomBarView>();

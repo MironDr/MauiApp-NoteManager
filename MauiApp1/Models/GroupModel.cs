@@ -73,7 +73,14 @@ public class GroupModel : BaseModel
         _mainNote = null;
         
     }
-    
+
+    private void ClearNotes()
+    {
+        foreach (var note in Notes)
+        {
+            RemoveNote(note);
+        }
+    }
 
     public NoteModel? GetMainNote()
     {
@@ -83,6 +90,12 @@ public class GroupModel : BaseModel
     public static GroupModel CreateGroup(GroupDto groupDto)
     {
         return new GroupModel(groupDto.GroupName);
+    }
+
+    public void UnlinkAssociations()
+    {
+        RemoveMainNote();
+        ClearNotes();
     }
 
 }

@@ -18,5 +18,6 @@ public sealed partial class CustomQuotesContainerView : BaseView
         InitializeComponent();
         SetBindingContext(mainVm);
         CreateButton.SetBindingContext(mainVm.CreateButtonViewModel);
+        DeleteButton.SetBindingContext(mainVm.DeleteButtonViewModel);
     }
 }

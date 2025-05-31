@@ -35,6 +35,14 @@ public class ProtectionProfileModel : BaseModel
             note.ProtectionProfile = this;
     }
 
+    private void RemoveNotes()
+    {
+        foreach (var note in _notes.Keys)
+        {
+            RemoveNote(note);
+        }
+    }
+
     public Dictionary<int, NoteModel> GetNotes()
     {
         return _notes.ToDictionary(note => note.Key, note => note.Value);
@@ -85,5 +93,14 @@ public class ProtectionProfileModel : BaseModel
     public void Lock()
     {
         _derivedKey = null;
+    }
+    
+    public void UnlinkAssociations()
+    {
+        if(!IsUnlocked)
+            throw new InvalidOperationException("Cannot unlink locked protection profile");
+        
+        RemoveNotes();
+        
     }
 }

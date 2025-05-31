@@ -7,16 +7,26 @@
              x:Class="MauiApp1.Views.Categories.HorizontalCategoriesView">
     <ScrollView Orientation="Horizontal">
     <StackLayout x:Name="MainLayout" Orientation="Horizontal">
-        <CollectionView ItemsSource="{Binding Categories}" SelectionMode="None">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Horizontal"/>
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Button Text="{Binding Category.CategoryName}" Command="{Binding Command}" CommandParameter="{Binding .}" Style="{Binding Style}"/>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <SwipeView>
+            <SwipeView.LeftItems>
+                <SwipeItems>
+                    <SwipeItem
+                        Text="Delete"
+                        BackgroundColor="DarkRed"
+                        Command="{Binding DeleteCategoryCommand}"/>
+                </SwipeItems>
+            </SwipeView.LeftItems>
+            <CollectionView ItemsSource="{Binding Categories}" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Button Text="{Binding Category.CategoryName}" Command="{Binding Command}" CommandParameter="{Binding .}" Style="{Binding Style}"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </SwipeView>
     </StackLayout>
     </ScrollView>
 </view:BaseView>

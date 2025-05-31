@@ -7,8 +7,11 @@ public class CustomQuotesContainerViewModel : BaseViewModel
     public ObservableCollection<CustomInfoViewModel> Fields { get; } = new();
     public CreateNoteWithSourceButtonViewModel CreateButtonViewModel { get; set; }
 
-    public CustomQuotesContainerViewModel(CreateNoteWithSourceButtonViewModel createButtonViewModel)
+    public DeleteNoteWithSourceButtonViewModel DeleteButtonViewModel { get; set; }
+    
+    public CustomQuotesContainerViewModel(CreateNoteWithSourceButtonViewModel createButtonViewModel, DeleteNoteWithSourceButtonViewModel deleteButtonViewModel)
     {
         CreateButtonViewModel = createButtonViewModel;
+        DeleteButtonViewModel = deleteButtonViewModel;
     }
 }

@@ -23,6 +23,8 @@ public sealed class SourceNoteItemViewModel : NoteItemViewModel, ICompositeViewM
         _model = sourceModel;
         CustomQuotesContainerViewModel.CreateButtonViewModel.CreateNoteWithSourceViewModel.SourceNote = _model;
         CustomQuotesContainerViewModel.CreateButtonViewModel.CreateNoteWithSourceViewModel.OnModelCreated += OnQuotesChanged;
+        CustomQuotesContainerViewModel.DeleteButtonViewModel.DeleteNoteWithSourceViewModel.OnEventInvoke += OnQuotesChanged;
+        CustomQuotesContainerViewModel.DeleteButtonViewModel.DeleteNoteWithSourceViewModel.SetModel(_model!);
         ReloadFields();
     }
 
@@ -53,6 +55,7 @@ public sealed class SourceNoteItemViewModel : NoteItemViewModel, ICompositeViewM
 
     private void OnQuotesChanged()
     {
+        CustomQuotesContainerViewModel.DeleteButtonViewModel.DeleteNoteWithSourceViewModel.SetModel(_model!);
         ReloadFields();
         OnEventInvoke?.Invoke();
     }

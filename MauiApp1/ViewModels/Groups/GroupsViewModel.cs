@@ -26,6 +26,7 @@ public class GroupsViewModel : BaseViewModel
     private ObservableCollection<GroupModel> _groups = new();
     
     public AsyncRelayCommand<GroupModel> GroupSelectedCommand { get; }
+    public AsyncRelayCommand<GroupModel> DeleteGroupCommand { get; }
 
     public ObservableCollection<GroupModel> Groups
     {
@@ -52,7 +53,7 @@ public class GroupsViewModel : BaseViewModel
         _groupService.GroupsUpdated += OnGroupsUpdated!;
         
         GroupSelectedCommand = new AsyncRelayCommand<GroupModel>(OnGroupSelected!);
-        
+        DeleteGroupCommand = new AsyncRelayCommand<GroupModel>(OnGroupDeleted!);
         LoadGroups();
     }
     
@@ -90,6 +91,25 @@ public class GroupsViewModel : BaseViewModel
         
         await _modalService.ShowModalAsyncWithParameter<GroupItemView, GroupItemStruct>(groupItemStruct);
         
+    }
+    
+    private async Task OnGroupDeleted(GroupModel group)
+    {
+        bool answer = await _popupService.AlertConfirmAsync(
+            "Warning",          
+            "Are you sure you want to delete the group?"
+        );
+        
+        if(!answer)
+            return;
+
+        if (group.GetNotes().Count > 0)
+        {
+            await _popupService.AlertAsync("Error", "There are notes inside this group, to remove them, assign them to another group or category", "Ok");
+            return;
+        }
+        
+        _groupService.DeleteGroup(group);
     }
     
     protected async Task<bool> PasswordPopup(ProtectionProfileModel profile)

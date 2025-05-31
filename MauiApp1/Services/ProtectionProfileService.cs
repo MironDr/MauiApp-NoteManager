@@ -10,6 +10,8 @@ public interface IProtectionProfileService
     void AddProfile(ProtectionProfileModel profile);
     
     ProtectionProfileModel? GetById(int id);
+    
+    void DeleteProfile(ProtectionProfileModel profile);
 }
 
 public class ProtectionProfileService : IProtectionProfileService
@@ -44,4 +46,10 @@ public class ProtectionProfileService : IProtectionProfileService
         return _profiles.FirstOrDefault(c => c.Id == id);
     }
 
+    public void DeleteProfile(ProtectionProfileModel profile)
+    {
+        profile.UnlinkAssociations();
+        _profiles.Remove(profile);
+        ProfilesUpdated?.Invoke(this, EventArgs.Empty);
+    }
 }

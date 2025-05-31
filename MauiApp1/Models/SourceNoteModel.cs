@@ -21,7 +21,7 @@ public class SourceNoteModel : NoteModel
     
     
     //Asocjacje z atrybutem
-    private List<NoteWithSourceModel> Sources = new();
+    private readonly List<NoteWithSourceModel> _sources = new();
     
     public void AddNote(NoteWithSourceModel ns)
     {
@@ -31,21 +31,21 @@ public class SourceNoteModel : NoteModel
             return;
         }
         
-        if(Sources.Contains(ns))
+        if(_sources.Contains(ns))
             return;
         
         if (ns.SourceNote == this)
         {
-            Sources.Add(ns);
+            _sources.Add(ns);
         }
     }
 
     public void RemoveNote(NoteWithSourceModel ns)
     {
-        if(!Sources.Contains(ns))   
+        if(!_sources.Contains(ns))   
             return;
         
-        Sources.Remove(ns);
+        _sources.Remove(ns);
         
         if (ns.SourceNote == this)
         {
@@ -56,12 +56,20 @@ public class SourceNoteModel : NoteModel
     
     public List<TextNoteModel> GetTextNoteModelsLinks()
     {
-        return Sources.Select(t => t.Note).ToList();
+        return _sources.Select(t => t.Note).ToList();
     }
 
     public List<NoteWithSourceModel> GetNotesLinks()
     {
-        return Sources.ToList();
+        return _sources.ToList();
+    }
+    
+    private void RemoveAllSources()
+    {
+        foreach (var ns in _sources.ToList())
+        {
+            ns.Remove();
+        }
     }
     //
 
@@ -100,6 +108,12 @@ public class SourceNoteModel : NoteModel
         
         
         return sourceNoteModel;
+    }
+    
+    public override void UnlinkAssociations()
+    {
+        base.UnlinkAssociations();
+        RemoveAllSources();
     }
     
    

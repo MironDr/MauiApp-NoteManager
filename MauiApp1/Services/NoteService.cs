@@ -10,6 +10,8 @@ public interface INoteService
     List<NoteModel> GetNotes();
     void AddNote(NoteModel note);
     NoteModel? GetById(int id);
+
+    void DeleteNote(NoteModel note);
 }
 public class NoteService : INoteService
 {
@@ -36,6 +38,13 @@ public class NoteService : INoteService
                 _notes.Add(note);
         
         
+        NotesUpdated?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void DeleteNote(NoteModel note)
+    {
+        note.UnlinkAssociations();
+        _notes.Remove(note);
         NotesUpdated?.Invoke(this, EventArgs.Empty);
     }
     

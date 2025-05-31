@@ -203,6 +203,18 @@ build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.Creat
 build_metadata.AdditionalFiles.TargetPath = Views\Notes\CreateNoteWithSourceView.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\Notes\CreateNoteWithSourceView.xaml
 
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/DeleteNoteWithSourceButtonView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.DeleteNoteWithSourceButtonView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Notes\DeleteNoteWithSourceButtonView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Notes\DeleteNoteWithSourceButtonView.xaml
+
+[D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/DeleteNoteWithSourceView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.DeleteNoteWithSourceView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Notes\DeleteNoteWithSourceView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Notes\DeleteNoteWithSourceView.xaml
+
 [D:/RiderMAUI/MauiApp1/MauiApp1/Views/Notes/NoteItemView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MauiApp1.Views.Notes.NoteItemView.xaml

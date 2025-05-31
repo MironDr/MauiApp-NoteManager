@@ -11,6 +11,8 @@ public class TextBlocksViewModel : BaseViewModel
 
     public IAsyncRelayCommand AddNewBlockCommand { get; }
 
+    public IAsyncRelayCommand<CustomFieldViewModel> DeleteBlockCommand { get; }
+    
     private readonly List<string?> _blocksContent = new();
     
     
@@ -37,6 +39,7 @@ public class TextBlocksViewModel : BaseViewModel
     public TextBlocksViewModel()
     {
         AddNewBlockCommand = new AsyncRelayCommand(AddNewBlock);
+        DeleteBlockCommand = new AsyncRelayCommand<CustomFieldViewModel>(DeleteBlock!);
     }
 
     private Task AddNewBlock()
@@ -51,6 +54,12 @@ public class TextBlocksViewModel : BaseViewModel
         return Task.CompletedTask;
     }
 
+
+    private Task DeleteBlock(CustomFieldViewModel customFieldViewModel)
+    {
+        Blocks.Remove(customFieldViewModel);
+        return Task.CompletedTask;
+    }
 
     public void SetReadOnly()
     {

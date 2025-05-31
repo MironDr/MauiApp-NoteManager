@@ -74,7 +74,7 @@ public class CheckListNoteModel : NoteModel
         }
     }
     
-    public void ClearCheckBoxes()
+    private void ClearCheckBoxes()
     {
         _checkBoxes.Clear();
     }
@@ -97,6 +97,11 @@ public class CheckListNoteModel : NoteModel
     //
     
     
+    public override void UnlinkAssociations()
+    {
+        base.UnlinkAssociations();
+        ClearCheckBoxes();
+    }
    
 
 

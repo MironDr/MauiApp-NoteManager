@@ -24,6 +24,8 @@ public sealed class TextNoteItemViewModel : NoteItemViewModel, ICompositeViewMod
         _model = textModel;
         CustomQuotesContainerViewModel.CreateButtonViewModel.CreateNoteWithSourceViewModel.TextNote = _model;
         CustomQuotesContainerViewModel.CreateButtonViewModel.CreateNoteWithSourceViewModel.OnModelCreated += OnQuotesChanged;
+        CustomQuotesContainerViewModel.DeleteButtonViewModel.DeleteNoteWithSourceViewModel.OnEventInvoke += OnQuotesChanged;
+        CustomQuotesContainerViewModel.DeleteButtonViewModel.DeleteNoteWithSourceViewModel.SetModel(_model!);
         ReloadFields();
     }
 
@@ -61,6 +63,7 @@ public sealed class TextNoteItemViewModel : NoteItemViewModel, ICompositeViewMod
 
     private void OnQuotesChanged()
     {
+        CustomQuotesContainerViewModel.DeleteButtonViewModel.DeleteNoteWithSourceViewModel.SetModel(_model!);
         ReloadFields();
         OnEventInvoke?.Invoke();
     }

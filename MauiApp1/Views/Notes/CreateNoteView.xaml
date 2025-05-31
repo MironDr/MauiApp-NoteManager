@@ -8,8 +8,7 @@
              x:Class="MauiApp1.Views.Notes.CreateNoteView">
     <ScrollView>
         <VerticalStackLayout Padding="10" x:Name="MainLayout" Spacing="10">
-
-         
+            
             <VerticalStackLayout BindableLayout.ItemsSource="{Binding Fields}" Spacing="10">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>

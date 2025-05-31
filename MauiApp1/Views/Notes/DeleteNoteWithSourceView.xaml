@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<view:BaseView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:view="clr-namespace:MauiApp1.View"
+             x:Class="MauiApp1.Views.Notes.DeleteNoteWithSourceView">
+    <VerticalStackLayout x:Name="MainLayout" Padding="20">
+        <CollectionView ItemsSource="{Binding Quotes}" SelectionMode="None">
+            <CollectionView.EmptyView>
+                <Label Text="No matching quotes" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center"
+                       TextColor="{StaticResource SecondaryDarkText}"
+                       TextTransform="Uppercase"
+                       FontSize="Title"/>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Button Text="{Binding Quote}" 
+                            Command="{Binding BindingContext.DeleteQuoteCommand, Source={x:Reference MainLayout}}"
+                            CommandParameter="{Binding .}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</view:BaseView>

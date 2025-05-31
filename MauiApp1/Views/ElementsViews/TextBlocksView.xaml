@@ -6,7 +6,7 @@
              xmlns:notes="clr-namespace:MauiApp1.Views.Notes"
              x:Class="MauiApp1.Views.ElementsViews.TextBlocksView">
   
-        <VerticalStackLayout>
+        <VerticalStackLayout x:Name="MainLayout">
             <Border Padding="5" IsVisible="{Binding IsEdit}">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="6" />
@@ -19,7 +19,19 @@
             <CollectionView ItemsSource="{Binding Blocks}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <notes:CustomEditorView />
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItem
+                                        Text="Delete"
+                                        BackgroundColor="DarkRed"
+                                        Command="{Binding BindingContext.DeleteBlockCommand,  Source={x:Reference MainLayout}}"
+                                        CommandParameter="{Binding .}" 
+                                        IsVisible="{Binding BindingContext.IsEdit, Source={x:Reference MainLayout}}"/>
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+                            <notes:CustomEditorView />
+                        </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

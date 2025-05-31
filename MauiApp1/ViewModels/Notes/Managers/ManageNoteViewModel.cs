@@ -13,21 +13,21 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
     where TDto : NoteDto, new()
     where TModel : NoteModel
 {
-    protected readonly INoteService _noteService;
-    protected readonly IModalService _modalService;
-    protected readonly IPopupService _popupService;
+    private readonly INoteService _noteService;
+    private readonly IModalService _modalService;
+    private readonly IPopupService _popupService;
     private readonly ProfileToNoteSelectorButtonViewModel _profileToNoteSelectorButtonViewModel;
     public ClassifierSelectorViewModel ClassifierSelectorViewModel { get; }
 
     public ObservableCollection<CustomFieldViewModel> Fields { get; set; } = new();
 
     public TDto Note { get; } = new();
-
+    
     public IAsyncRelayCommand SaveNoteCommand { get; }
+    
+    public bool IsEditMode { get; private set; } 
 
-    protected bool _editMode = false;
     protected TModel _noteToEdit;
-
     
     
     protected ManageNoteViewModel(INoteService noteService, IModalService modalService, IPopupService popupService, ClassifierSelectorViewModel selectorViewModel, ProfileToNoteSelectorButtonViewModel profileToNoteSelectorButtonViewModel)
@@ -39,13 +39,14 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
         ClassifierSelectorViewModel = selectorViewModel;
 
         SaveNoteCommand = new AsyncRelayCommand(SaveNoteAsync);
+
         
 
     }
 
     public void GoToEditMode(NoteModel noteModel)
     {
-        _editMode = true;
+        IsEditMode = true;
         _noteToEdit = (TModel)noteModel;
         Note.CompleteNoteDtoByNoteModel(_noteToEdit);
         ReloadFields();
@@ -82,7 +83,7 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
             return;
         }
 
-        if (!_editMode)
+        if (!IsEditMode)
         {
             bool answer = await _popupService.AlertConfirmAsync(
                 "Secure",          
@@ -105,6 +106,9 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
         OnEventInvoke?.Invoke();
        
     }
+
+   
+    
 
     protected abstract TModel CreateNoteFromDto();
     protected abstract TModel EditNoteFromDto();

@@ -46,15 +46,12 @@ public class NoteWithSourceModel
         {
             SourceNote?.RemoveNote(this);
             Note?.RemoveSourceLink(this);
-            
             Note = null;
             SourceNote = null;
-            
-            
         }
-
         
     }
+    
     
     
     //

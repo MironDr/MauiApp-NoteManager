@@ -19,10 +19,21 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Button
-                        Text="{Binding GroupName}"
-                        Command="{Binding BindingContext.GroupSelectedCommand, Source={x:Reference MainLayout}}"
-                        CommandParameter="{Binding .}" />
+                    <SwipeView>
+                        <SwipeView.LeftItems>
+                            <SwipeItems>
+                                <SwipeItem
+                                    Text="Delete"
+                                    BackgroundColor="DarkRed"
+                                    Command="{Binding BindingContext.DeleteGroupCommand, Source={x:Reference MainLayout}}"
+                                    CommandParameter="{Binding .}" />
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+                        <Button
+                            Text="{Binding GroupName}"
+                            Command="{Binding BindingContext.GroupSelectedCommand, Source={x:Reference MainLayout}}"
+                            CommandParameter="{Binding .}" />
+                    </SwipeView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

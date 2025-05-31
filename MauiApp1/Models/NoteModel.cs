@@ -131,14 +131,14 @@ public abstract class NoteModel : BaseModel
             if (Group != null)
                 return;
 
-            if (_category != null && _category.GetNotes().Contains(Id))
+            if (_category != null && _category.GetNotes().Contains(this))
             {
                 _category.RemoveNote(this);
             }
 
             _category = value;
 
-            if (_category != null && !_category.GetNotes().Contains(Id))
+            if (_category != null && !_category.GetNotes().Contains(this))
             {
                 _category.AddNote(this);
             }
@@ -250,6 +250,13 @@ public abstract class NoteModel : BaseModel
 
         if (Description != null)
             _encryptedDescription = Description;
+    }
+    
+    public virtual void UnlinkAssociations()
+    {
+        ProtectionProfile = null;
+        Group = null;
+        Category = null;
     }
    
 }

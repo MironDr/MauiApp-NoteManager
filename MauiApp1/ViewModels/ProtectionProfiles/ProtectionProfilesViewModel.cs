@@ -23,6 +23,7 @@ public class ProtectionProfilesViewModel : BaseViewModel
     
     public IAsyncRelayCommand<ProtectionProfileModel> ProfileSelectedCommand { get; }
 
+    public IAsyncRelayCommand<ProtectionProfileModel> DeleteProfileCommand { get; }
     public ObservableCollection<ProtectionProfileModel> Profiles
     {
         get => _profiles;
@@ -48,6 +49,8 @@ public class ProtectionProfilesViewModel : BaseViewModel
         _profileService.ProfilesUpdated += OnProfilesUpdated!;
         
         ProfileSelectedCommand = new AsyncRelayCommand<ProtectionProfileModel>(OnProfileSelected!);
+        
+        DeleteProfileCommand = new AsyncRelayCommand<ProtectionProfileModel>(OnProfileDeleted!);
         
         LoadProfiles();
     }
@@ -88,6 +91,28 @@ public class ProtectionProfilesViewModel : BaseViewModel
         }
         
         return true;
+    }
+    
+    private async Task OnProfileDeleted(ProtectionProfileModel profile)
+    {
+        bool answer = await _popupService.AlertConfirmAsync(
+            "Warning",          
+            "Are you sure you want to delete the protection profile?"
+        );
+        
+        if(!answer)
+            return;
+
+        if (profile is { IsUnlocked: false })
+        {
+            bool result =  await Validate(profile);
+
+            if(!result)
+                return;
+           
+        }
+        
+        _profileService.DeleteProfile(profile);
     }
 
 }

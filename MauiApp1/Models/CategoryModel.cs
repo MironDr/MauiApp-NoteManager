@@ -21,13 +21,13 @@ public class CategoryModel : BaseModel
               }
        }
 
-       private readonly List<int> _notes = new(); 
+       private readonly List<NoteModel> _notes = new(); 
     
        public void AddNote(NoteModel note)
        {
-              if (!_notes.Contains(note.Id))
+              if (!_notes.Contains(note))
               {
-                     _notes.Add(note.Id);
+                     _notes.Add(note);
               }
         
               if(note.Category?.Id != Id)
@@ -36,9 +36,9 @@ public class CategoryModel : BaseModel
 
        public void RemoveNote(NoteModel note)
        {
-              if (_notes.Contains(note.Id))
+              if (_notes.Contains(note))
               {
-                     _notes.Remove(note.Id);
+                     _notes.Remove(note);
               }
         
               if (note.Category?.Id == Id)
@@ -46,7 +46,13 @@ public class CategoryModel : BaseModel
               
        }
 
-       public List<int> GetNotes()
+       private void RemoveNotes()
+       { 
+              foreach (var note in _notes)
+                     RemoveNote(note);
+       }
+       
+       public List<NoteModel> GetNotes()
        {
               return _notes.ToList();
        }
@@ -55,6 +61,11 @@ public class CategoryModel : BaseModel
        public static CategoryModel CreateCategory(CategoryDto categoryDto)
        {
               return new CategoryModel{Id = _idCounter++, CategoryName = categoryDto.CategoryName};
+       }
+
+       public void UnlinkAssociations()
+       {
+              RemoveNotes();
        }
 
 }
