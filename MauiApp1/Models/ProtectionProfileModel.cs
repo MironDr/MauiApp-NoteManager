@@ -48,25 +48,19 @@ public class ProtectionProfileModel : BaseModel
         return _notes.ToDictionary(note => note.Key, note => note.Value);
     }
     
-    private ProtectionProfileModel(string profileName, byte[] passwordHash, byte[] salt)
-    {
-        ProfileName = profileName;
-        PasswordHash = passwordHash;
-        Salt = salt;
-    }
-    
+  
     
     public static ProtectionProfileModel CreateProfile(ProtectionProfileDto profileDto)
     {
         ObjectUtils.CreatePasswordHash(profileDto.Password, out var hash, out var salt);
-        
+
         ProtectionProfileModel protectionProfileModel = new ProtectionProfileModel
-            (profileDto.ProfileName,
-                hash,
-                salt)
         {
-            Id = _idCounter++
+            ProfileName = profileDto.ProfileName,
+            PasswordHash = hash,
+            Salt = salt
         };
+        
 
         return protectionProfileModel;
         

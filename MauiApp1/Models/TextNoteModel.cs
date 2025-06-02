@@ -1,17 +1,15 @@
 ﻿using MauiApp1.DTOs;
 using MauiApp1.Utilities;
 using MP01.Models;
+using SQLite;
 
 namespace MauiApp1.Models;
 
 public class TextNoteModel : NoteModel
 {
-    
+    [Ignore]
     public override NoteType Type => NoteType.Text;
-
-    protected TextNoteModel() : base()
-    {
-    }
+    
     public override NoteModel EditNote(NoteDto dto)
     { 
         base.EditNote(dto);
@@ -37,7 +35,7 @@ public class TextNoteModel : NoteModel
         if(textDto is null)
             throw new ArgumentException("Invalid note type");
         
-        var textNoteModel = (TextNoteModel)GetNoteBase(dto, new TextNoteModel());
+        var textNoteModel = GetNoteBase<TextNoteModel>(dto);
         
      
         for (int i = 0; i < textDto.BlocksTitles.Count(); i++)

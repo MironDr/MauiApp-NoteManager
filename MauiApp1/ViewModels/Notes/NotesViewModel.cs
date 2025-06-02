@@ -20,37 +20,41 @@ public enum ListType
 public class NotesViewModel : BaseViewModel
 {
     protected readonly INoteService _noteService;
-    
-    
-    protected readonly IModalService _modalService;
-    
+    private readonly IModalService _modalService;
     protected readonly IPopupService _popupService;
+    private readonly NoteItemFactoryManager _factoryManager;
 
+    private CategoryModel? _selectedCategory;
     private ListType _listType = ListType.Note;
+
+    private bool _isBusy;
+    public bool IsBusy
+    {
+        get => _isBusy;
+        set
+        {
+            if (_isBusy != value)
+            {
+                _isBusy = value;
+                OnPropertyChanged(nameof(IsBusy));
+            }
+        }
+    }
+    
     public ListType ListType
     {
         get => _listType;
         set
         {
-            if (value != _listType)
+            if (_listType != value)
             {
                 _listType = value;
-                LoadNotes();
+                _ = LoadNotes(); 
             }
         }
     }
 
-    private readonly NoteItemFactoryManager _factoryManager;
-
-
-    private CategoryModel? _selectedCategory;
-    
     private ObservableCollection<NoteModel> _notes = new();
-    
-    public AsyncRelayCommand<NoteModel> NoteSelectedCommand { get; }
-
-    
-    public AsyncRelayCommand<NoteModel> DeleteNoteCommand { get; }
     public ObservableCollection<NoteModel> Notes
     {
         get => _notes;
@@ -63,91 +67,125 @@ public class NotesViewModel : BaseViewModel
             }
         }
     }
+
+    public IAsyncRelayCommand<NoteModel> NoteSelectedCommand { get; }
+    public IAsyncRelayCommand<NoteModel> DeleteNoteCommand { get; }
+    public IAsyncRelayCommand ReloadNotesCommand { get; }
     
-    
-    public NotesViewModel(INoteService noteService, IModalService modalService, NoteItemFactoryManager factoryManager, IPopupService popupService) : base()
+
+    public NotesViewModel(
+        INoteService noteService,
+        IModalService modalService,
+        NoteItemFactoryManager factoryManager,
+        IPopupService popupService) : base()
     {
         _noteService = noteService;
         _modalService = modalService;
         _factoryManager = factoryManager;
         _popupService = popupService;
 
-
-        _noteService.NotesUpdated += OnNotesUpdated!;
-        
         NoteSelectedCommand = new AsyncRelayCommand<NoteModel>(OnNoteSelected!);
-
         DeleteNoteCommand = new AsyncRelayCommand<NoteModel>(OnNoteDeleted!);
-        LoadNotes();
-    }
-    
-    private void OnNotesUpdated(object sender, EventArgs e)
-    {
-        LoadNotes();
-    }
-    
-    protected virtual void LoadNotes()
-    {
-        switch (ListType)
-        {
-            case ListType.Category:
-                Notes = new ObservableCollection<NoteModel>(
-                    _noteService.GetNotes()
-                        .Where(n => _selectedCategory == null || n.Category?.Id == _selectedCategory.Id)
-                );
-                break;
-            default:
-                Notes = new ObservableCollection<NoteModel>(_noteService.GetNotes());
-                break;
+        ReloadNotesCommand = new AsyncRelayCommand(LoadNotes);
 
+        _noteService.NotesUpdated += OnNotesUpdated;
+      
+        _ = LoadNotes();
+    }
+
+    private async void OnNotesUpdated(object? sender, EventArgs e)
+    {
+        try
+        {
+            await LoadNotes();
         }
+        catch (Exception e1)
+        {
+            Console.WriteLine(e1);
+        }
+    }
+
+    public async void FilterByCategory(CategoryModel? category)
+    {
+        try
+        {
+            _selectedCategory = category;
+            await LoadNotes();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+    }
+
+    protected async Task LoadNotes()
+    {
         
+        if (IsBusy)
+            return;
+
+        try
+        {
+            IsBusy = true;
+            Console.WriteLine("Loading notes...");
+
+            var allNotes = await _noteService.GetNotes();
+
+            var filtered = FilterNotes(allNotes);
+            Notes = new ObservableCollection<NoteModel>(filtered);
+
+            Console.WriteLine($"Loaded notes: {Notes.Count}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading notes: {ex.Message}");
+            await _popupService.AlertAsync("Error", "Failed to load notes", "Ok");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+
+    protected virtual IEnumerable<NoteModel> FilterNotes(IEnumerable<NoteModel> notes)
+    {
+        return ListType switch
+        {
+            ListType.Category => notes.Where(n => _selectedCategory == null || n.Category?.Id == _selectedCategory.Id),
+            _ => notes
+        };
     }
     
     protected virtual async Task OnNoteSelected(NoteModel note)
     {
         if (note.ProtectionProfile is { IsUnlocked: false })
         {
-           bool result = await PasswordPopup(note.ProtectionProfile);
-           
-           if(!result)
-               return;
-           
+            if (!await PasswordPopup(note.ProtectionProfile))
+                return;
         }
 
-
         var noteItemStruct = (NoteItemStruct)_factoryManager.Create(note)!;
-        
         await _modalService.ShowModalAsyncWithParameter<NoteItemView, NoteItemStruct>(noteItemStruct);
-        
-        
     }
 
     private async Task OnNoteDeleted(NoteModel note)
     {
-        bool answer = await _popupService.AlertConfirmAsync(
-            "Warning",          
-            "Are you sure you want to delete the note?"
-        );
-        
-        if(!answer)
+        bool confirm = await _popupService.AlertConfirmAsync("Warning", "Are you sure you want to delete the note?");
+        if (!confirm)
             return;
 
         if (note.ProtectionProfile is { IsUnlocked: false })
         {
-            bool result = await PasswordPopup(note.ProtectionProfile);
-           
-            if(!result)
+            if (!await PasswordPopup(note.ProtectionProfile))
                 return;
-           
         }
-        
-        _noteService.DeleteNote(note);
+
+        await _noteService.DeleteNote(note);
     }
-    
+
     protected async Task<bool> PasswordPopup(ProtectionProfileModel profile)
     {
-        var password = await _popupService.ShowResultPopupAsyncWithParameter<PasswordPopupView,string, string?>(profile.ProfileName);
+        var password = await _popupService.ShowResultPopupAsyncWithParameter<PasswordPopupView, string, string?>(profile.ProfileName);
 
         if (string.IsNullOrWhiteSpace(password))
             return false;
@@ -157,16 +195,9 @@ public class NotesViewModel : BaseViewModel
             await _popupService.AlertAsync("Error", "Incorrect password", "Ok");
             return false;
         }
+
         return true;
     }
-
-    public void FilterByCategory(CategoryModel? category)
-    {
-       
-        _selectedCategory = category;
-        
-        LoadNotes();
-            
-    }
+    
     
 }

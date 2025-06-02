@@ -5,7 +5,7 @@
              xmlns:view="clr-namespace:MauiApp1.View"
              xmlns:groups="clr-namespace:MauiApp1.Views.Groups"
              x:Class="MauiApp1.Views.ProtectionProfiles.ProtectionProfileItemView">
-    <Grid RowDefinitions="Auto, *">
+    <Grid RowDefinitions="Auto, *" x:Name="MainLayout">
         <Label Text="{Binding Name}"  
                HorizontalOptions="Center"
                FontSize="Title"
@@ -21,12 +21,14 @@
                        FontSize="Title"/>
             </CollectionView.EmptyView>
             <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical"/>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Button
-                        Text="{Binding Title}"/>
+                        Text="{Binding Title}"
+                        Command="{Binding BindingContext.DeleteNoteCommand, Source={x:Reference MainLayout}}"
+                        CommandParameter="{Binding .}"/>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

@@ -63,19 +63,27 @@ public sealed class CreateNoteWithSourceViewModel : BaseViewModel
         
         
         SaveNoteCommand = new AsyncRelayCommand(SaveNoteAsync);
+
+        _ = Load();
+    }
+
+
+    private async Task Load()
+    {
+        var newNotes = await _noteService.GetNotes();
         
-        SourceNoteSelectorViewModel = new SpecificNoteSelectorViewModel(_noteService.GetNotes().OfType<SourceNoteModel>(), SourceNote)
+        SourceNoteSelectorViewModel = new SpecificNoteSelectorViewModel(newNotes.OfType<SourceNoteModel>(), SourceNote)
         {
             SelectedNoteName = "Select a Source Note"
         };
-        TextNoteSelectorViewModel = new SpecificNoteSelectorViewModel(_noteService.GetNotes().OfType<TextNoteModel>(), TextNote)
+        TextNoteSelectorViewModel = new SpecificNoteSelectorViewModel(newNotes.OfType<TextNoteModel>(), TextNote)
         {
             SelectedNoteName = "Select a Text Note"
         };
        
         ClearViewModel();
     }
-
+    
     private void ClearViewModel()
     {
         Note = new NoteWithSourceDto();
@@ -104,8 +112,8 @@ public sealed class CreateNoteWithSourceViewModel : BaseViewModel
         
         var ns = NoteWithSourceModel.Create(Note);
         
-        _noteService.AddNote(ns.SourceNote!);
-        _noteService.AddNote(ns.Note!);
+        await _noteService.AddNote(ns.SourceNote!);
+        await _noteService.AddNote(ns.Note!);
         
         OnModelCreated?.Invoke();
         ClearViewModel();

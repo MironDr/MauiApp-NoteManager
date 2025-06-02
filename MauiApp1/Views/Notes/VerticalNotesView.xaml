@@ -4,39 +4,56 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:view="clr-namespace:MauiApp1.View"
              x:Class="MauiApp1.Views.Notes.VerticalNotesView">
-        <Grid x:Name="MainLayout">
-            <CollectionView ItemsSource="{Binding Notes}" SelectionMode="None">
-                <CollectionView.EmptyView>
-                    <Label Text="No matching notes" 
-                           HorizontalOptions="Center" 
-                           VerticalOptions="Center"
-                           TextColor="{StaticResource SecondaryDarkText}"
-                           TextTransform="Uppercase"
-                           FontSize="Title"/>
-                </CollectionView.EmptyView>
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <SwipeView>
-                            <SwipeView.LeftItems>
-                                <SwipeItems>
-                                    <SwipeItem
-                                        Text="Delete"
-                                        BackgroundColor="DarkRed"
-                                        Command="{Binding BindingContext.DeleteNoteCommand, Source={x:Reference MainLayout}}"
-                                        CommandParameter="{Binding .}" />
-                                </SwipeItems>
-                            </SwipeView.LeftItems>
+    <Grid x:Name="MainLayout">
 
-                            <Button
-                                Text="{Binding Title}"
-                                Command="{Binding BindingContext.NoteSelectedCommand, Source={x:Reference MainLayout}}"
-                                CommandParameter="{Binding .}" />
-                        </SwipeView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </Grid>
+      
+        <ActivityIndicator 
+            IsRunning="{Binding IsBusy}" 
+            IsVisible="{Binding IsBusy}" 
+            HorizontalOptions="Center" 
+            VerticalOptions="Center"
+            Color="{StaticResource Primary}" />
+
+   
+        <CollectionView 
+            ItemsSource="{Binding Notes}" 
+            SelectionMode="None"
+            Margin="0,10,0,0">
+        
+            <CollectionView.EmptyView>
+                <Label Text="No matching notes" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center"
+                       TextColor="{StaticResource SecondaryDarkText}"
+                       TextTransform="Uppercase"
+                       FontSize="Title"/>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.LeftItems>
+                            <SwipeItems>
+                                <SwipeItem
+                                    Text="Delete"
+                                    BackgroundColor="DarkRed"
+                                    Command="{Binding BindingContext.DeleteNoteCommand, Source={x:Reference MainLayout}}"
+                                    CommandParameter="{Binding .}" />
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+
+                        <Button
+                            Text="{Binding Title}"
+                            Command="{Binding BindingContext.NoteSelectedCommand, Source={x:Reference MainLayout}}"
+                            CommandParameter="{Binding .}" />
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
 </view:BaseView>

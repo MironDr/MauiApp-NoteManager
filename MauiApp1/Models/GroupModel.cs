@@ -9,10 +9,9 @@ public class GroupModel : BaseModel
     private NoteModel? _mainNote;
     public string GroupName { get; set; }
     
-    private GroupModel(string groupName)
+    public GroupModel()
     {
-        Id = _idCounter++;
-        GroupName = groupName;
+      
     }
 
     //Asocjacje Kwalifikowana
@@ -89,7 +88,10 @@ public class GroupModel : BaseModel
     
     public static GroupModel CreateGroup(GroupDto groupDto)
     {
-        return new GroupModel(groupDto.GroupName);
+        return new GroupModel
+        {
+            GroupName = groupDto.GroupName,
+        };
     }
 
     public void UnlinkAssociations()

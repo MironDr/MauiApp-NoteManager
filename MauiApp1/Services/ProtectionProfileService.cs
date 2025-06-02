@@ -1,4 +1,5 @@
 ﻿using MauiApp1.Models;
+using MauiApp1.Repositories;
 
 namespace MauiApp1.Services;
 
@@ -7,33 +8,43 @@ public interface IProtectionProfileService
 {
     event EventHandler ProfilesUpdated;
     List<ProtectionProfileModel> GetProfiles();
-    void AddProfile(ProtectionProfileModel profile);
+    Task AddProfile(ProtectionProfileModel profile);
     
     ProtectionProfileModel? GetById(int id);
     
-    void DeleteProfile(ProtectionProfileModel profile);
+    Task DeleteProfile(ProtectionProfileModel profile);
 }
 
 public class ProtectionProfileService : IProtectionProfileService
 {
-    private readonly List<ProtectionProfileModel> _profiles = new();
+    private readonly IDatabaseRepository _repository;
+    private List<ProtectionProfileModel> _profiles = new();
     
     public event EventHandler ProfilesUpdated = null!;
     
-    public ProtectionProfileService()
+    public ProtectionProfileService(IDatabaseRepository repository)
     {
-        LoadProfiles();
+        _repository = repository;
+        _ = LoadProfiles();
     }
 
-    private void LoadProfiles()
+    private async Task LoadProfiles()
     {
-        
+        try
+        {
+            _profiles = await _repository.GetEntitiesAsync<ProtectionProfileModel>();
+            ProfilesUpdated?.Invoke(this, EventArgs.Empty);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
 
-    public void AddProfile(ProtectionProfileModel profile)
+    public async Task AddProfile(ProtectionProfileModel profile)
     {
-        _profiles.Add(profile);
-        ProfilesUpdated?.Invoke(this, EventArgs.Empty);
+       await _repository.SaveNewEntityAsync(profile);
+       await LoadProfiles();
     }
     
     public List<ProtectionProfileModel> GetProfiles()
@@ -46,10 +57,10 @@ public class ProtectionProfileService : IProtectionProfileService
         return _profiles.FirstOrDefault(c => c.Id == id);
     }
 
-    public void DeleteProfile(ProtectionProfileModel profile)
+    public async Task DeleteProfile(ProtectionProfileModel profile)
     {
         profile.UnlinkAssociations();
-        _profiles.Remove(profile);
-        ProfilesUpdated?.Invoke(this, EventArgs.Empty);
+        await _repository.DeleteEntityAsync(profile);
+        await LoadProfiles();
     }
 }

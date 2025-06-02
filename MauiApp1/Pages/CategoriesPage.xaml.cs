@@ -1,4 +1,5 @@
-﻿using MauiApp1.ViewModels;
+﻿using MauiApp1.Services;
+using MauiApp1.ViewModels;
 using MauiApp1.ViewModels.Categories;
 using MauiApp1.Views.ElementsViews;
 
@@ -23,6 +24,8 @@ public partial class CategoriesPage : BasePage
         
        
     }
+
+ 
 
     
  

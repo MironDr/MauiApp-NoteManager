@@ -12,7 +12,7 @@ namespace MauiApp1.ViewModels.ProtectionProfiles;
 public class ProtectionProfilesViewModel : BaseViewModel
 {
     private readonly IProtectionProfileService _profileService;
-
+    private readonly INoteService _noteService;
     private readonly NoteToProfileSelectorButtonViewModel _noteToProfileSelectorButtonViewModel;
     private readonly NoteToProfileSelectorViewModel _noteToProfileSelectorViewModel;
     
@@ -39,13 +39,14 @@ public class ProtectionProfilesViewModel : BaseViewModel
     
     
     public ProtectionProfilesViewModel(IProtectionProfileService profileService, IModalService modalService, 
-        NoteToProfileSelectorButtonViewModel noteToProfileSelectorButtonViewModel, NoteToProfileSelectorViewModel noteToProfileSelectorViewModel, IPopupService popupService) : base()
+        NoteToProfileSelectorButtonViewModel noteToProfileSelectorButtonViewModel, NoteToProfileSelectorViewModel noteToProfileSelectorViewModel, IPopupService popupService, INoteService noteService) : base()
     {
         _profileService = profileService;
         _modalService = modalService;
         _noteToProfileSelectorButtonViewModel = noteToProfileSelectorButtonViewModel;
         _noteToProfileSelectorViewModel = noteToProfileSelectorViewModel;
         _popupService = popupService;
+        _noteService = noteService;
         _profileService.ProfilesUpdated += OnProfilesUpdated!;
         
         ProfileSelectedCommand = new AsyncRelayCommand<ProtectionProfileModel>(OnProfileSelected!);
@@ -72,7 +73,7 @@ public class ProtectionProfilesViewModel : BaseViewModel
         if(!result)
             return;
         
-        var viewModel = new ProtectionProfileItemViewModel(profile, _noteToProfileSelectorButtonViewModel, _noteToProfileSelectorViewModel);
+        var viewModel = new ProtectionProfileItemViewModel(profile, _noteToProfileSelectorButtonViewModel, _noteToProfileSelectorViewModel, _popupService, _noteService);
         
         await _modalService.ShowModalAsyncWithParameter<ProtectionProfileItemView, ProtectionProfileItemViewModel>(viewModel);
     }
@@ -97,12 +98,19 @@ public class ProtectionProfilesViewModel : BaseViewModel
     {
         bool answer = await _popupService.AlertConfirmAsync(
             "Warning",          
-            "Are you sure you want to delete the protection profile?"
+            "Are you sure you want to delete this protection profile?"
         );
         
         if(!answer)
             return;
 
+        if (profile.GetNotes().Count != 0)
+        {
+            await _popupService.AlertAsync("Error", "You cannot delete non empty profile", "Ok");
+            return;
+        }
+        
+        
         if (profile is { IsUnlocked: false })
         {
             bool result =  await Validate(profile);
@@ -112,7 +120,7 @@ public class ProtectionProfilesViewModel : BaseViewModel
            
         }
         
-        _profileService.DeleteProfile(profile);
+        await _profileService.DeleteProfile(profile);
     }
 
 }

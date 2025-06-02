@@ -38,7 +38,7 @@ public class CreateProtectionProfileViewModel : BaseViewModel
         }
 
         ProtectionProfileModel profile = ProtectionProfileModel.CreateProfile(Profile);
-        _profileService.AddProfile(profile);
+        await _profileService.AddProfile(profile);
         ProfileSaved?.Invoke(profile);
         
         if (ClosePopup)

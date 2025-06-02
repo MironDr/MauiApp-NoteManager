@@ -95,14 +95,16 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
                 Note.ProtectionProfile = await _profileToNoteSelectorButtonViewModel.Open();
                 if(Note.ProtectionProfile == null)
                     return;
+                
+         
             }
 
-            _noteService.AddNote(CreateNoteFromDto());
+            await _noteService.AddNote(CreateNoteFromDto());
             await _modalService.CloseModalAsync();
         }
         else
-            _noteService.AddNote(EditNoteFromDto());
-
+            await _noteService.AddNote(EditNoteFromDto());
+        
         OnEventInvoke?.Invoke();
        
     }

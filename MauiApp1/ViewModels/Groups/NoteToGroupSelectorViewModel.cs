@@ -3,8 +3,9 @@ using MauiApp1.Factories;
 using MauiApp1.Interfaces;
 using MauiApp1.Models;
 using MauiApp1.Services;
+using MauiApp1.ViewModels.Notes;
 
-namespace MauiApp1.ViewModels.Notes;
+namespace MauiApp1.ViewModels.Groups;
 
 public class NoteToGroupSelectorViewModel : NotesViewModel, IEventHandler
 {
@@ -19,21 +20,21 @@ public class NoteToGroupSelectorViewModel : NotesViewModel, IEventHandler
                 return;
             
             _group = value;
-            LoadNotes();
+            _ = LoadNotes();
         }
     }
     
 
     public NoteToGroupSelectorViewModel(INoteService noteService, IModalService modalService, NoteItemFactoryManager factoryManager, IPopupService popupService) : base(noteService, modalService, factoryManager, popupService)
     {
+        Console.WriteLine("HUI");
     }
-
-    protected override void LoadNotes()
+    
+    protected override IEnumerable<NoteModel> FilterNotes(IEnumerable<NoteModel> notes)
     {
-        Notes = new ObservableCollection<NoteModel>(
-            _noteService.GetNotes().Where(n => n.Group?.Id != Group?.Id || n.Group == null)
-        );
+        return notes.Where(n => n.Group?.Id != Group?.Id || n.Group == null);
     }
+    
 
     protected override async Task OnNoteSelected(NoteModel note)
     {
@@ -49,7 +50,8 @@ public class NoteToGroupSelectorViewModel : NotesViewModel, IEventHandler
         
         note.Category = null;
         note.Group = Group;
-        LoadNotes();
+        await _noteService.AddNote(note);
+        await LoadNotes();
         OnEventInvoke?.Invoke();
         
     }

@@ -1,5 +1,6 @@
 ﻿using MauiApp1.DTOs;
 using MauiApp1.Models;
+using MauiApp1.Repositories;
 
 namespace MauiApp1.Services;
 
@@ -8,41 +9,42 @@ public interface ICategoryService
 {
     event EventHandler CategoriesUpdated;
     List<CategoryModel> GetCategories();
-    void AddCategory(CategoryModel category);
+    Task AddCategory(CategoryModel category);
     
     CategoryModel? GetById(int id);
     
-    void DeleteCategory(CategoryModel category);
+    Task DeleteCategory(CategoryModel category);
 }
 public class CategoryService : ICategoryService
 {
-    private readonly List<CategoryModel> _categories = new();
+    private readonly IDatabaseRepository _repository;
+    private List<CategoryModel> _categories = new();
     
     public event EventHandler CategoriesUpdated = null!;
     
-    public CategoryService()
+    public CategoryService(IDatabaseRepository repository)
     {
-        LoadCategories();
+        _repository = repository;
+        _ = LoadCategories();
     }
 
-    private void LoadCategories()
+    private async Task LoadCategories()
     {
-        /*
-        _categories.Add(CategoryModel.CreateCategory(new CategoryDto()
+        try
         {
-            CategoryName = "Category 1"
-        }));
-        _categories.Add(CategoryModel.CreateCategory(new CategoryDto()
+            _categories = await _repository.GetEntitiesAsync<CategoryModel>();
+            CategoriesUpdated?.Invoke(this, EventArgs.Empty);
+        }
+        catch (Exception e)
         {
-            CategoryName = "Category 2"
-        }));
-        */
+            Console.WriteLine(e);
+        }
     }
 
-    public void AddCategory(CategoryModel category)
+    public async Task AddCategory(CategoryModel category)
     {
-        _categories.Add(category);
-        CategoriesUpdated?.Invoke(this, EventArgs.Empty);
+        await _repository.SaveNewEntityAsync(category);
+        await LoadCategories();
     }
     
     public List<CategoryModel> GetCategories()
@@ -55,10 +57,10 @@ public class CategoryService : ICategoryService
         return _categories.FirstOrDefault(c => c.Id == id);
     }
 
-    public void DeleteCategory(CategoryModel category)
+    public async Task DeleteCategory(CategoryModel category)
     {
         category.UnlinkAssociations();
-        _categories.Remove(category);
-        CategoriesUpdated?.Invoke(this, EventArgs.Empty);
+        await _repository.DeleteEntityAsync(category);
+        await LoadCategories();
     }
 }

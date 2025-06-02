@@ -15,4 +15,5 @@ public sealed partial class VerticalNotesView : BaseView, IParameterizedView<Not
     {
         SetBindingContext(data);
     }
+    
 }

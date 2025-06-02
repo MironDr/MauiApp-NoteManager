@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using MauiApp1.DTOs;
 using MauiApp1.Models;
 using MauiApp1.Services;
@@ -12,7 +13,7 @@ public class CreateGroupViewModel : BaseViewModel
     
     public GroupDto Group { get; } =  new ();
     
-    public ICommand SaveGroupCommand { get; }
+    public AsyncRelayCommand SaveGroupCommand { get; }
     
     public bool ClosePopup { get; set; } = true;
 
@@ -20,13 +21,13 @@ public class CreateGroupViewModel : BaseViewModel
     
     public CreateGroupViewModel(IGroupService groupService, IPopupService popupService)
     {
-        SaveGroupCommand = new Command(SaveGroup);
+        SaveGroupCommand = new AsyncRelayCommand(SaveGroup);
         _groupService = groupService;
         _popupService = popupService;
 
     }
 
-    private void SaveGroup()
+    private async Task SaveGroup()
     {
         if (string.IsNullOrWhiteSpace(Group.GroupName))
         {
@@ -34,10 +35,10 @@ public class CreateGroupViewModel : BaseViewModel
         }
 
         GroupModel group = GroupModel.CreateGroup(Group);
-        _groupService.AddGroup(group);
+        await _groupService.AddGroup(group);
         GroupSaved?.Invoke(group);
         
         if (ClosePopup)
-            _popupService.ClosePopupAsync();
+          await _popupService.ClosePopupAsync();
     }
 }

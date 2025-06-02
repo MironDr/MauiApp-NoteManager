@@ -18,6 +18,10 @@ D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-ios\iossimulator-x64\Microsoft.M
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-ios\iossimulator-x64\Microsoft.Maui.dll
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-ios\iossimulator-x64\Microsoft.Maui.Essentials.dll
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-ios\iossimulator-x64\Microsoft.Maui.Graphics.dll
+D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-ios\iossimulator-x64\SQLite-net.dll
+D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-ios\iossimulator-x64\SQLitePCLRaw.batteries_v2.dll
+D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-ios\iossimulator-x64\SQLitePCLRaw.core.dll
+D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-ios\iossimulator-x64\SQLitePCLRaw.provider.sqlite3.dll
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-ios\iossimulator-x64\ar\Microsoft.Maui.Controls.resources.dll
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-ios\iossimulator-x64\ca\Microsoft.Maui.Controls.resources.dll
 D:\RiderMAUI\MauiApp1\MauiApp1\bin\Debug\net9.0-ios\iossimulator-x64\cs\Microsoft.Maui.Controls.resources.dll

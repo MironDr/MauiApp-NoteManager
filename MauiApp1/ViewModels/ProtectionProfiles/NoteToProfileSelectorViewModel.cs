@@ -20,20 +20,19 @@ public class NoteToProfileSelectorViewModel : NotesViewModel, IEventHandler
                 return;
             
             _profile = value;
-            LoadNotes();
+            _ = LoadNotes();
         }
     }
   
 
     public NoteToProfileSelectorViewModel(INoteService noteService, IModalService modalService, NoteItemFactoryManager factoryManager, IPopupService popupService) : base(noteService, modalService, factoryManager, popupService)
     {
+        Console.WriteLine("ZALUPA");
     }
-
-    protected override void LoadNotes()
+    
+    protected override IEnumerable<NoteModel> FilterNotes(IEnumerable<NoteModel> notes)
     {
-        Notes = new ObservableCollection<NoteModel>(
-            _noteService.GetNotes().Where(n => n.ProtectionProfile?.Id != Profile?.Id || n.ProtectionProfile == null)
-        );
+        return notes.Where(n => n.ProtectionProfile?.Id != Profile?.Id || n.ProtectionProfile == null);
     }
 
     protected override async Task OnNoteSelected(NoteModel note)
@@ -49,7 +48,8 @@ public class NoteToProfileSelectorViewModel : NotesViewModel, IEventHandler
         }
         
         note.ProtectionProfile = Profile;
-        LoadNotes();
+        await _noteService.AddNote(note);
+        await LoadNotes();
         OnEventInvoke?.Invoke();
     }
 

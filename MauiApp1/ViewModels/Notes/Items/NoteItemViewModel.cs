@@ -24,7 +24,7 @@ public class NoteItemViewModel : BaseViewModel, IUpdatable
         Fields.Clear();
         InitializeNames();
         Fields.Add(new CustomFieldViewModel("Title", Note.Title, null, true));
-        Fields.Add(new CustomFieldViewModel("Description", Note.Description, null, true));
+        Fields.Add(new CustomFieldViewModel("Description", Note.EncryptedDescription, null, true));
         Fields.Add(new CustomFieldViewModel("CreatedAt", Note.CreatedAt.ToShortDateString(), null, true));
         Fields.Add(new CustomFieldViewModel("Category", _categoryName,  null, true));
         Fields.Add(new CustomFieldViewModel("Group", _groupName,  null, true));

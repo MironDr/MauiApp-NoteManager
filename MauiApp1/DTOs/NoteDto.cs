@@ -20,7 +20,7 @@ public class NoteDto : BaseCommon
     public virtual void CompleteNoteDtoByNoteModel(NoteModel noteModel)
     {
         Title = noteModel.Title;
-        Description = noteModel.Description;
+        Description = noteModel.EncryptedDescription;
         Category = noteModel.Category;
         Group = noteModel.Group;
         ProtectionProfile = noteModel.ProtectionProfile;

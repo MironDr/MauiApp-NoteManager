@@ -56,6 +56,7 @@ public class ModalService : IModalService
             parameterizedView.SetData(parameter);
 
         }
+       
 
         _modalPages.Push(new ModalContainerPage(view));
 

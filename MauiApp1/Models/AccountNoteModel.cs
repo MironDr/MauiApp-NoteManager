@@ -10,10 +10,6 @@ public class AccountNoteModel : NoteModel
     
     public override NoteType Type => NoteType.Account;
     
-    protected AccountNoteModel() : base()
-    {
-    }
-
     public override NoteModel EditNote(NoteDto dto)
     { 
         base.EditNote(dto);
@@ -28,7 +24,7 @@ public class AccountNoteModel : NoteModel
         if(accountNoteDto is null)
             throw new ArgumentException("Invalid note type");
         
-        var accountNoteModel = (AccountNoteModel)GetNoteBase(dto, new AccountNoteModel());
+        var accountNoteModel = GetNoteBase<AccountNoteModel>(dto);
         
         accountNoteModel.Login = accountNoteDto.Login;
         accountNoteModel.Password = accountNoteDto.Password;

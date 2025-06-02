@@ -15,8 +15,7 @@ public class CreateCategoryViewModel : BaseViewModel
     public AsyncRelayCommand SaveCategoryCommand { get; }
     
     public bool ClosePopup { get; set; } = true;
-
-    public event Action<CategoryModel>? CategorySaved;
+    
     
     public CreateCategoryViewModel(ICategoryService categoryService, IPopupService popupService)
     {
@@ -34,8 +33,7 @@ public class CreateCategoryViewModel : BaseViewModel
         }
 
         CategoryModel category = CategoryModel.CreateCategory(Category);
-        _categoryService.AddCategory(category);
-        CategorySaved?.Invoke(category);
+        await _categoryService.AddCategory(category);
         
         if (ClosePopup)
           await _popupService.ClosePopupAsync();

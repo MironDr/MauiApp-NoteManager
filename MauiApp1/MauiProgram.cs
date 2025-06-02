@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
 using MauiApp1.Factories;
 using MauiApp1.Interfaces;
+using MauiApp1.Repositories;
 using MauiApp1.ViewModels;
 using MauiApp1.ViewModels.Categories;
 using MauiApp1.ViewModels.Groups;
@@ -34,8 +35,8 @@ public static class MauiProgram
             })
             .UseMauiCommunityToolkit();
        
-        
-        
+        //Database
+        builder.Services.AddSingleton<IDatabaseRepository, DatabaseRepository>();
         //Register Services
         builder.Services.AddSingleton<ICategoryService, CategoryService>();
         builder.Services.AddSingleton<INoteService, NoteService>();

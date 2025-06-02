@@ -1,17 +1,15 @@
 ﻿using MauiApp1.DTOs;
 using MauiApp1.Utilities;
 using MP01.Models;
+using SQLite;
 
 namespace MauiApp1.Models;
 
 public class CheckListNoteModel : NoteModel
 {
-    
+    [Ignore]
     public override NoteType Type => NoteType.CheckList;
-
-    protected CheckListNoteModel() : base()
-    {
-    }
+    
     public override NoteModel EditNote(NoteDto dto)
     { 
         base.EditNote(dto);
@@ -37,7 +35,7 @@ public class CheckListNoteModel : NoteModel
         if(checkListNoteDto is null)
             throw new ArgumentException("Invalid note type");
         
-        var checkListNoteModel = (CheckListNoteModel)GetNoteBase(dto, new CheckListNoteModel());
+        var checkListNoteModel = GetNoteBase<CheckListNoteModel>(dto);
         
         for(int i = 0; i < checkListNoteDto.BoxTitles.Count(); i++)
         {

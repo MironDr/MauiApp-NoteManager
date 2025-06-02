@@ -1,6 +1,7 @@
 ﻿using MauiApp1.DTOs;
 using MauiApp1.Utilities;
 using MP01.Models;
+using SQLite;
 
 namespace MauiApp1.Models;
 
@@ -17,6 +18,7 @@ public class SourceNoteModel : NoteModel
     public string? Author { get; private set; }
     public DateTime PublishedDate { get; private set; }
 
+    [Ignore]
     public override NoteType Type => NoteType.Source;
     
     
@@ -99,7 +101,7 @@ public class SourceNoteModel : NoteModel
         if(sourceDto is null)
             throw new ArgumentException("Invalid note type");
         
-        var sourceNoteModel = (SourceNoteModel)GetNoteBase(dto, new SourceNoteModel());
+        var sourceNoteModel = GetNoteBase<SourceNoteModel>(dto);
         
         sourceNoteModel.Source = sourceDto.Source;
         sourceDto.Author = sourceDto.Author;

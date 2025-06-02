@@ -95,9 +95,12 @@ public partial class GroupItemView : BaseView, IParameterizedView<GroupItemStruc
     {
         foreach (var note in _viewModel.Group.GetNotes())
         {
-            if(!_viewModel.Notes.Contains(note))
-                _viewModel.Notes.Add(note);
             
+            if (!_viewModel.Notes.Contains(note))
+            {
+                _viewModel.Notes.Add(note);
+            }
+
         }
 
         _viewModel.SortNotesByMainNote();

@@ -69,6 +69,7 @@ public class PopupService : IPopupService
         {
             parameterizedView.SetData(parameter);
         }
+     
         
         _popup = new InstantPopup { Content = view, CanBeDismissedByTappingOutsideOfPopup = canBeClosed };
         await Shell.Current.CurrentPage.ShowPopupAsync(_popup);
