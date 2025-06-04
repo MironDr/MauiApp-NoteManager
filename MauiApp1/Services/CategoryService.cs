@@ -43,6 +43,14 @@ public class CategoryService : ICategoryService
 
     public async Task AddCategory(CategoryModel category)
     {
+        bool titleExists = _categories.Any(c =>
+            c.CategoryName.Equals(category.CategoryName, StringComparison.OrdinalIgnoreCase) &&
+            c.Id != category.Id 
+        );
+
+        if (titleExists)
+            throw new InvalidOperationException($"Category with title '{category.CategoryName}' already exists.");
+        
         await _repository.SaveNewEntityAsync(category);
         await LoadCategories();
     }

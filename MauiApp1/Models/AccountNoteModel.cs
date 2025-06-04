@@ -1,5 +1,6 @@
 ﻿using MauiApp1.DTOs;
 using MauiApp1.Utilities;
+using SQLite;
 
 namespace MauiApp1.Models;
 
@@ -8,6 +9,7 @@ public class AccountNoteModel : NoteModel
     public string Login { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;
     
+    [Ignore]
     public override NoteType Type => NoteType.Account;
     
     public override NoteModel EditNote(NoteDto dto)
@@ -31,5 +33,7 @@ public class AccountNoteModel : NoteModel
         
         return accountNoteModel;
     }
+    
+   
 
 }

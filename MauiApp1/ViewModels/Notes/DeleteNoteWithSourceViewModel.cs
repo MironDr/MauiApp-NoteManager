@@ -3,7 +3,6 @@ using System.Windows.Input;
 using MauiApp1.Interfaces;
 using MauiApp1.Models;
 using MauiApp1.Services;
-using MP01.Models;
 
 namespace MauiApp1.ViewModels.Notes;
 

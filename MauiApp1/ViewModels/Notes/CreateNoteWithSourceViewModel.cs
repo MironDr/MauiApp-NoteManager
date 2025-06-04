@@ -4,7 +4,6 @@ using MauiApp1.DTOs;
 using MauiApp1.Models;
 using MauiApp1.Services;
 using MauiApp1.ViewModels.Categories;
-using MP01.Models;
 
 namespace MauiApp1.ViewModels.Notes;
 
@@ -12,7 +11,8 @@ public sealed class CreateNoteWithSourceViewModel : BaseViewModel
 {
     private readonly INoteService _noteService;
     private readonly IModalService _modalService;
-
+    private readonly INoteWithSourceService _noteWithSourceService;
+    
     public SpecificNoteSelectorViewModel SourceNoteSelectorViewModel;
     public SpecificNoteSelectorViewModel TextNoteSelectorViewModel;
     
@@ -55,13 +55,13 @@ public sealed class CreateNoteWithSourceViewModel : BaseViewModel
     public event Action? OnModelCreated;
     
 
-    public CreateNoteWithSourceViewModel(INoteService noteService, IModalService modalService)
+    public CreateNoteWithSourceViewModel(INoteService noteService, IModalService modalService, INoteWithSourceService noteWithSourceService)
     {
         _noteService = noteService;
         _modalService = modalService;
-        
-        
-        
+        _noteWithSourceService = noteWithSourceService;
+
+
         SaveNoteCommand = new AsyncRelayCommand(SaveNoteAsync);
 
         _ = Load();
@@ -107,13 +107,14 @@ public sealed class CreateNoteWithSourceViewModel : BaseViewModel
         Note.Note = TextNoteSelectorViewModel.SelectedNote as TextNoteModel;
         
         
-        if (Note.SourceNote == null || Note.Note == null)
+        if (Note.SourceNote == null || Note.Note == null || Note.Quote == null)
             return;
         
         var ns = NoteWithSourceModel.Create(Note);
         
         await _noteService.AddNote(ns.SourceNote!);
         await _noteService.AddNote(ns.Note!);
+        await _noteWithSourceService.Add(ns);
         
         OnModelCreated?.Invoke();
         ClearViewModel();

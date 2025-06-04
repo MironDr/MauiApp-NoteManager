@@ -1,60 +1,65 @@
 ﻿using MauiApp1.DTOs;
-using MauiApp1.Models;
+using SQLite;
 
+namespace MauiApp1.Models;
 
-namespace MP01.Models;
-
-public class NoteWithSourceModel
+public class NoteWithSourceModel : BaseModel
 {
-    //Asocjacje z atrybutem
-    public SourceNoteModel? SourceNote { get; private set; }
+
+   
+    public int NoteId { get; set; }
+    public int SourceNoteId { get; set; }
+
+  
+    [Ignore]
     public TextNoteModel? Note { get; private set; }
 
-    public string? Quote { get; private set; }
-    public string? Comment { get; private set; }
-    public DateTime CreatedAt { get; private init; }
+    [Ignore]
+    public SourceNoteModel? SourceNote { get; private set; }
 
-    private NoteWithSourceModel(SourceNoteModel sourceNote, TextNoteModel note)
-    {
-        SourceNote = sourceNote;
-        Note = note;
-        CreatedAt = DateTime.Now;
-    }
+    public string? Quote { get; set; }
+    public string? Comment { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     public static NoteWithSourceModel Create(NoteWithSourceDto dto)
     {
-        if(dto.SourceNote == null || dto.Note == null)
-            throw new Exception("Source and note must not be null");
-        
-        var ns = new NoteWithSourceModel(dto.SourceNote, dto.Note)
+        if (dto.SourceNote == null || dto.Note == null || dto.Quote == null)
+            throw new Exception("Source and note and quote must not be null");
+
+        var model = new NoteWithSourceModel
         {
+            SourceNote = dto.SourceNote,
+            Note = dto.Note,
+            SourceNoteId = dto.SourceNote.Id,
+            NoteId = dto.Note.Id,
             Quote = dto.Quote,
             Comment = dto.Comment,
-            CreatedAt = DateTime.Now,
+            CreatedAt = DateTime.Now
         };
-        
-        
-        dto.SourceNote.AddNote(ns);
-        dto.Note.AddSourceLink(ns);
 
-        return ns;
+        dto.SourceNote.AddNote(model);
+        dto.Note.AddSourceLink(model);
+
+        return model;
     }
 
     public void Remove()
     {
-        if (SourceNote != null && Note != null)
-        {
-            SourceNote?.RemoveNote(this);
-            Note?.RemoveSourceLink(this);
-            Note = null;
-            SourceNote = null;
-        }
-        
+        SourceNote?.RemoveNote(this);
+        Note?.RemoveSourceLink(this);
+        Note = null;
+        SourceNote = null;
     }
     
-    
-    
-    //
+    public void SetAssociations(SourceNoteModel source, TextNoteModel note)
+    {
+        SourceNote = source;
+        Note = note;
+        
+        source.AddNote(this);
+        note.AddSourceLink(this);
+    }
 
+  
    
 }

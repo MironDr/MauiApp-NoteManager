@@ -33,6 +33,19 @@ public class CreateGroupViewModel : BaseViewModel
         {
             return;
         }
+        
+        var allGroups = _groupService.GetGroups();
+        bool duplicateTitle = allGroups.Any(g =>
+            g.GroupName.Equals(Group.GroupName, StringComparison.OrdinalIgnoreCase));
+            
+
+        if (duplicateTitle)
+        {
+            await _popupService.ClosePopupAsync();
+            await _popupService.AlertAsync("Error", "Group title must be unique", "Ok");
+            return;
+        }
+
 
         GroupModel group = GroupModel.CreateGroup(Group);
         await _groupService.AddGroup(group);

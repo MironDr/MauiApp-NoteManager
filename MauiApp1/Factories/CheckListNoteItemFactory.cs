@@ -46,7 +46,7 @@ public class CheckListNoteItemFactory : INoteItemFactory
         
         return new NoteItemStruct
         {
-            NoteItemView = new CheckListNoteItemViewModel(model, checkListViewModel),
+            NoteItemView = new CheckListNoteItemViewModel(model, checkListViewModel, _noteService),
             NoteItemEdit = manager
         };
     }

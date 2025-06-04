@@ -1,5 +1,6 @@
 ﻿using MauiApp1.Interfaces;
 using MauiApp1.Models;
+using MauiApp1.Services;
 using MauiApp1.View;
 using MauiApp1.Views.Notes;
 
@@ -9,14 +10,17 @@ public sealed class CheckListNoteItemViewModel : NoteItemViewModel, ICompositeVi
 {
     private readonly CheckListNoteModel _model;
     
+    private readonly INoteService _noteService;
+    
     private readonly CheckListViewModel _checkListViewModel;
     
-    public CheckListNoteItemViewModel(NoteModel data, CheckListViewModel checkListViewModel) 
+    public CheckListNoteItemViewModel(NoteModel data, CheckListViewModel checkListViewModel, INoteService noteService) 
         : base(data)
     {
         if (data is not CheckListNoteModel checkListNoteModel)
             throw new ArgumentException("Type is not CheckListNoteModel.", nameof(data));
         _checkListViewModel = checkListViewModel;
+        _noteService = noteService;
         _model = checkListNoteModel;
         ReloadFields();
     }
@@ -32,7 +36,12 @@ public sealed class CheckListNoteItemViewModel : NoteItemViewModel, ICompositeVi
             _checkListViewModel.Boxes.Add(new CustomCheckBoxViewModel(
                 checkBox.Status,
                 checkBox.Title,
-                newStatus => checkBox.Status = newStatus,
+                newStatus =>
+                {
+                    checkBox.Status = newStatus;
+                    _model.SyncToJson();
+                    _noteService.AddNote(_model);
+                },
                 true
             ));
         }

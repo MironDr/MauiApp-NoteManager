@@ -43,6 +43,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<IPopupService, PopupService>();
         builder.Services.AddSingleton<IModalService, ModalService>();
         builder.Services.AddSingleton<IGroupService, GroupService>();
+        builder.Services.AddSingleton<INoteWithSourceService, NoteWithSourceService>();
         builder.Services.AddSingleton<IProtectionProfileService, ProtectionProfileService>();
         
         //Register ViewModels

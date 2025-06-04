@@ -34,6 +34,7 @@ public class DatabaseRepository : IDatabaseRepository
         _database.CreateTableAsync<AccountNoteModel>();
         _database.CreateTableAsync<SourceNoteModel>();
         _database.CreateTableAsync<CheckListNoteModel>();
+        _database.CreateTableAsync<NoteWithSourceModel>();
     }
     
     public Task<List<T>> GetEntitiesAsync<T>() where T : new()

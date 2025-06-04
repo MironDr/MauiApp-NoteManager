@@ -1,6 +1,6 @@
-﻿using MauiApp1.DTOs;
+﻿using System.Text.Json;
+using MauiApp1.DTOs;
 using MauiApp1.Utilities;
-using MP01.Models;
 using SQLite;
 
 namespace MauiApp1.Models;
@@ -49,32 +49,45 @@ public class CheckListNoteModel : NoteModel
     
     //Asocjacje  Kompozycja 
     
-    private readonly List<CheckBox> _checkBoxes = new();
+    public string CheckBoxesJson { get; set; } = "[]";
 
+
+    private readonly List<CheckBox> _checkBoxes = new();
+    
     public IReadOnlyList<CheckBox> GetCheckBoxes() => _checkBoxes.AsReadOnly();
 
-
-    private void AddCheckBox(string? title, bool status)
+    public void SyncToJson()
     {
-        _checkBoxes.Add(new CheckBox
-        {
-            Title = title,
-            Status = status
-        });
+        CheckBoxesJson = JsonSerializer.Serialize(_checkBoxes);
     }
 
+    public void LoadFromJson()
+    {
+        _checkBoxes.Clear();
+        var deserialized = JsonSerializer.Deserialize<List<CheckBox>>(CheckBoxesJson);
+        if (deserialized != null)
+            _checkBoxes.AddRange(deserialized);
+    }
     
+    public void AddCheckBox(string? title, bool status)
+    {
+        _checkBoxes.Add(new CheckBox { Title = title, Status = status });
+        SyncToJson(); 
+    }
+
     public void RemoveCheckBoxAt(int index)
     {
         if (index >= 0 && index < _checkBoxes.Count)
         {
             _checkBoxes.RemoveAt(index);
+            SyncToJson();
         }
     }
-    
-    private void ClearCheckBoxes()
+
+    public void ClearCheckBoxes()
     {
         _checkBoxes.Clear();
+        SyncToJson();
     }
 
     public int GetCheckListCount()
@@ -92,6 +105,15 @@ public class CheckListNoteModel : NoteModel
     {
         return _checkBoxes.Select(b => b.Status).ToList();
     }
+    
+    public class CheckBox 
+    {
+        [Ignore]
+        public required string? Title { get; set; }
+
+        [Ignore]
+        public bool Status { get; set; } 
+    }
     //
     
     
@@ -106,8 +128,3 @@ public class CheckListNoteModel : NoteModel
     
 }
 
-public class CheckBox 
-{
-    public required string? Title { get; set; }
-    public bool Status { get; set; } = false;
-}

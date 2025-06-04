@@ -43,8 +43,16 @@ public class ProtectionProfileService : IProtectionProfileService
 
     public async Task AddProfile(ProtectionProfileModel profile)
     {
-       await _repository.SaveNewEntityAsync(profile);
-       await LoadProfiles();
+        bool titleExists = _profiles.Any(p =>
+            p.ProfileName.Equals(profile.ProfileName, StringComparison.OrdinalIgnoreCase) &&
+            p.Id != profile.Id 
+        );
+
+        if (titleExists)
+            throw new InvalidOperationException($"Profile with title '{profile.ProfileName}' already exists.");
+        
+        await _repository.SaveNewEntityAsync(profile);
+        await LoadProfiles();
     }
     
     public List<ProtectionProfileModel> GetProfiles()

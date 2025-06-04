@@ -45,11 +45,14 @@
                                     CommandParameter="{Binding .}" />
                             </SwipeItems>
                         </SwipeView.LeftItems>
-
-                        <Button
-                            Text="{Binding Title}"
-                            Command="{Binding BindingContext.NoteSelectedCommand, Source={x:Reference MainLayout}}"
-                            CommandParameter="{Binding .}" />
+                        
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Type }"/>
+                            <Button
+                                Text="{Binding Title}"
+                                Command="{Binding BindingContext.NoteSelectedCommand, Source={x:Reference MainLayout}}"
+                                CommandParameter="{Binding .}" />
+                        </VerticalStackLayout>
                     </SwipeView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

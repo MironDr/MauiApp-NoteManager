@@ -27,7 +27,6 @@ public class NoteToProfileSelectorViewModel : NotesViewModel, IEventHandler
 
     public NoteToProfileSelectorViewModel(INoteService noteService, IModalService modalService, NoteItemFactoryManager factoryManager, IPopupService popupService) : base(noteService, modalService, factoryManager, popupService)
     {
-        Console.WriteLine("ZALUPA");
     }
     
     protected override IEnumerable<NoteModel> FilterNotes(IEnumerable<NoteModel> notes)

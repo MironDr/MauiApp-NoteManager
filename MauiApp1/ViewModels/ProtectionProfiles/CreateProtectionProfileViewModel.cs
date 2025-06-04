@@ -31,9 +31,23 @@ public class CreateProtectionProfileViewModel : BaseViewModel
         {
             return;
         }
+        
+        var allProfiles = _profileService.GetProfiles();
+        bool duplicateTitle = allProfiles.Any(p =>
+            p.ProfileName.Equals(Profile.ProfileName, StringComparison.OrdinalIgnoreCase));
+            
+
+        if (duplicateTitle)
+        {
+            await _popupService.ClosePopupAsync();
+            await _popupService.AlertAsync("Error", "Profile title must be unique", "Ok");
+            return;
+        }
 
         if (Profile.Password != Profile.PasswordRepeat)
         {
+            await _popupService.ClosePopupAsync();
+            await _popupService.AlertAsync("Error", "The passwords are different", "Ok");
             return;
         }
 

@@ -4,7 +4,6 @@ using MauiApp1.View;
 using MauiApp1.ViewModels.Notes.Items;
 using MauiApp1.Views.ElementsViews;
 using MauiApp1.Views.Notes;
-using MP01.Models;
 
 namespace MauiApp1.ViewModels.Notes;
 

@@ -17,6 +17,7 @@ public class NoteService : INoteService
 {
     private readonly IDatabaseRepository _repository;
     private readonly ICategoryService _categoryService;
+    private readonly INoteWithSourceService _noteWithSourceService;
     private readonly IGroupService _groupService;
     private readonly IProtectionProfileService _protectionProfileService;
 
@@ -25,12 +26,13 @@ public class NoteService : INoteService
 
     public event EventHandler NotesUpdated = null!;
 
-    public NoteService(IDatabaseRepository repository, ICategoryService categoryService, IGroupService groupService, IProtectionProfileService protectionProfileService)
+    public NoteService(IDatabaseRepository repository, ICategoryService categoryService, IGroupService groupService, IProtectionProfileService protectionProfileService, INoteWithSourceService noteWithSourceService)
     {
         _repository = repository;
         _categoryService = categoryService;
         _groupService = groupService;
         _protectionProfileService = protectionProfileService;
+        _noteWithSourceService = noteWithSourceService;
     }
 
     private async Task InitializeIfNeeded()
@@ -38,11 +40,50 @@ public class NoteService : INoteService
         if (_isInitialized) return;
 
         var loadedNotes = new List<NoteModel>();
-        loadedNotes.AddRange(await _repository.GetEntitiesAsync<TextNoteModel>());
+       
         loadedNotes.AddRange(await _repository.GetEntitiesAsync<AccountNoteModel>());
-        loadedNotes.AddRange(await _repository.GetEntitiesAsync<SourceNoteModel>());
-        loadedNotes.AddRange(await _repository.GetEntitiesAsync<CheckListNoteModel>());
 
+        var sourceNotes = await _repository.GetEntitiesAsync<SourceNoteModel>();
+        
+        var textNotes = await _repository.GetEntitiesAsync<TextNoteModel>();
+        foreach (var note in textNotes)
+            note.LoadFromJson();
+        
+        
+        var checkListNotes = await _repository.GetEntitiesAsync<CheckListNoteModel>();
+        foreach (var note in checkListNotes)
+            note.LoadFromJson();
+        
+        
+        var sourceLinks = _noteWithSourceService.GetAll();
+       
+
+        foreach (var link in sourceLinks)
+        {
+           
+            var sourceNote = sourceNotes.FirstOrDefault(n => n.Id == link.SourceNoteId);
+            var targetNote = textNotes.FirstOrDefault(n => n.Id == link.NoteId);
+
+      
+            
+            
+            if (sourceNote != null && targetNote != null)
+            {
+                link.SetAssociations(sourceNote, targetNote);
+            }
+        }
+        
+        
+        loadedNotes.AddRange(checkListNotes);
+
+        loadedNotes.AddRange(textNotes);
+        
+        loadedNotes.AddRange(sourceNotes);
+        
+        loadedNotes = loadedNotes
+            .OrderBy(n => n.CreatedAt)
+            .ToList();
+        
         var categories = _categoryService.GetCategories();
         var groups = _groupService.GetGroups();
         var profiles = _protectionProfileService.GetProfiles();
@@ -62,6 +103,8 @@ public class NoteService : INoteService
                 note.ProtectionProfile = profiles.FirstOrDefault(p => p.Id == note.ProfileId);
         }
 
+      
+
         _notes = loadedNotes;
         _isInitialized = true;
         Console.WriteLine("Note initialized.");
@@ -71,6 +114,14 @@ public class NoteService : INoteService
     public async Task AddNote(NoteModel note)
     {
         await InitializeIfNeeded();
+        
+        bool titleExists = _notes.Any(n =>
+                n.Title.Equals(note.Title, StringComparison.OrdinalIgnoreCase) &&
+                n.Id != note.Id
+        );
+
+        if (titleExists)
+            throw new InvalidOperationException($"Note with title '{note.Title}' already exists.");
 
         var existing = _notes.FirstOrDefault(n => n.Id == note.Id);
         if (existing != null)

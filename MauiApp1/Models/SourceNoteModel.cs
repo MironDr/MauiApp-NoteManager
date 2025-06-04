@@ -1,6 +1,5 @@
 ﻿using MauiApp1.DTOs;
 using MauiApp1.Utilities;
-using MP01.Models;
 using SQLite;
 
 namespace MauiApp1.Models;
@@ -117,7 +116,6 @@ public class SourceNoteModel : NoteModel
         base.UnlinkAssociations();
         RemoveAllSources();
     }
+
     
-   
-   
 }

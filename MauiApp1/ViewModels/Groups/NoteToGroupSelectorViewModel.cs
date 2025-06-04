@@ -27,7 +27,6 @@ public class NoteToGroupSelectorViewModel : NotesViewModel, IEventHandler
 
     public NoteToGroupSelectorViewModel(INoteService noteService, IModalService modalService, NoteItemFactoryManager factoryManager, IPopupService popupService) : base(noteService, modalService, factoryManager, popupService)
     {
-        Console.WriteLine("HUI");
     }
     
     protected override IEnumerable<NoteModel> FilterNotes(IEnumerable<NoteModel> notes)

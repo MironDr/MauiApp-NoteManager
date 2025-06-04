@@ -26,6 +26,14 @@ public class NoteDto : BaseCommon
         ProtectionProfile = noteModel.ProtectionProfile;
         IsMainInGroup = noteModel.IsMainInGroup;
     }
+    
+    public virtual string? CheckRequiredFields()
+    {
+        if(string.IsNullOrWhiteSpace(Title))
+            return nameof(Title);
+        
+        return null;
+    }
 }
 
 public class TextNoteDto : NoteDto
@@ -58,6 +66,23 @@ public class AccountNoteDto : NoteDto
             Password = textNote.Password;
         }
     }
+    
+    public override string? CheckRequiredFields()
+    {
+        string? result = base.CheckRequiredFields();
+        
+        if(result != null)
+            return result;
+        
+        if(string.IsNullOrWhiteSpace(Login))
+            return nameof(Login);
+        
+        if(string.IsNullOrWhiteSpace(Password))
+            return nameof(Password);
+        
+        return null;
+            
+    }
 }
 
 public class SourceNoteDto : NoteDto
@@ -78,6 +103,21 @@ public class SourceNoteDto : NoteDto
             PublishedDate = sourceNote.PublishedDate;
           
         }
+    }
+    
+    public override string? CheckRequiredFields()
+    {
+        string? result = base.CheckRequiredFields();
+        
+        if(result != null)
+            return result;
+        
+        if(string.IsNullOrWhiteSpace(Source))
+            return nameof(Source);
+        
+        
+        return null;
+            
     }
 }
 

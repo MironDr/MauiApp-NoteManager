@@ -64,12 +64,25 @@ public abstract class ManageNoteViewModel<TDto, TModel> : BaseViewModel, IEditab
    
     private async Task SaveNoteAsync()
     {
-        if (string.IsNullOrWhiteSpace(Note.Title))
+        string? result = Note.CheckRequiredFields();
+        
+        if (!string.IsNullOrWhiteSpace(result))
         {
-            await _popupService.AlertAsync("Error", "Title is required", "Ok");
+            await _popupService.AlertAsync("Error", $"{result} is required", "Ok");
             return;
         }
 
+        var allNotes = await _noteService.GetNotes();
+        bool duplicateTitle = !IsEditMode
+            ? allNotes.Any(n => n.Title.Equals(Note.Title, StringComparison.OrdinalIgnoreCase))
+            : allNotes.Any(n => n.Title.Equals(Note.Title, StringComparison.OrdinalIgnoreCase) && n.Id != _noteToEdit.Id);
+
+        if (duplicateTitle)
+        {
+            await _popupService.AlertAsync("Error", "Note title must be unique", "Ok");
+            return;
+        }
+        
         Note.Category = ClassifierSelectorViewModel.SelectedCategory;
        
         Note.Group = ClassifierSelectorViewModel.SelectedGroup;

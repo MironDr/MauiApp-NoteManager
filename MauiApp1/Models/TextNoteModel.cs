@@ -1,6 +1,6 @@
-﻿using MauiApp1.DTOs;
+﻿using System.Text.Json;
+using MauiApp1.DTOs;
 using MauiApp1.Utilities;
-using MP01.Models;
 using SQLite;
 
 namespace MauiApp1.Models;
@@ -48,62 +48,73 @@ public class TextNoteModel : NoteModel
     
     
     
-    //Asocjacje  Kompozycja 
-    
-    private List<TextBlock> TextBlocks = new();
-   
+    public string TextBlocksJson { get; set; } = "[]";
 
+    
+    [Ignore]
+    private List<TextBlock> TextBlocks { get; set; } = new();
+
+  
+    private class TextBlock
+    {
+        public string? Title { get; set; }
+        public string? Content { get; set; }
+    }
+
+  
     public void AddTextBlock(string? title, string? content)
     {
-        var list = TextBlocks;
-        list.Add(new TextBlock
+        TextBlocks.Add(new TextBlock
         {
             Title = title,
             Content = content
         });
-        TextBlocks = list;
+        SyncToJson();
     }
 
-    
+  
     public void RemoveTextBlockAt(int index)
     {
-        var list = TextBlocks;
-        if (index >= 0 && index < list.Count)
+        if (index >= 0 && index < TextBlocks.Count)
         {
-            list.RemoveAt(index);
-            TextBlocks = list;
+            TextBlocks.RemoveAt(index);
+            SyncToJson();
         }
     }
-    
+
+
     public void ClearTextBlocks()
     {
         TextBlocks = new List<TextBlock>();
+        SyncToJson();
     }
 
-    public int GetTextCount()
-    {
-        return TextBlocks.Count;
-    }
+  
+    public int GetTextCount() => TextBlocks.Count;
 
-
-    public IEnumerable<string?> GetBlocksTitles()
+    public IEnumerable<string?> GetBlocksTitles() => TextBlocks.Select(b => b.Title);
+    
+    public IEnumerable<string?> GetBlocksContents() => TextBlocks.Select(b => b.Content);
+    
+    public void SyncToJson()
     {
-        return TextBlocks.Select(b => b.Title);
+        TextBlocksJson = JsonSerializer.Serialize(TextBlocks);
     }
     
-    public IEnumerable<string?> GetBlocksContents()
+    public void LoadFromJson()
     {
-        return TextBlocks.Select(b => b.Content);
+        if (!string.IsNullOrWhiteSpace(TextBlocksJson))
+        {
+            try
+            {
+                TextBlocks = JsonSerializer.Deserialize<List<TextBlock>>(TextBlocksJson) ?? new();
+            }
+            catch
+            {
+                TextBlocks = new();
+            }
+        }
     }
-
-
-    private class TextBlock : BaseModel
-    {
-        public string? Title { get; set; }
-        public string? Content { get; set; }
-        
-    }
-    //
     
     
     //Asocjacje z atrybutem

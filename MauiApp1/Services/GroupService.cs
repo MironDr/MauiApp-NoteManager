@@ -43,6 +43,14 @@ public class GroupService : IGroupService
 
     public async Task AddGroup(GroupModel group)
     {
+        bool titleExists = _groups.Any(g =>
+                g.GroupName.Equals(group.GroupName, StringComparison.OrdinalIgnoreCase) &&
+                g.Id != group.Id 
+        );
+
+        if (titleExists)
+            throw new InvalidOperationException($"Group with title '{group.GroupName}' already exists.");
+        
         await _repository.SaveNewEntityAsync(group);
         await LoadGroups();
     }

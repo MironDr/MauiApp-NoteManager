@@ -32,6 +32,18 @@ public class CreateCategoryViewModel : BaseViewModel
             return;
         }
 
+        var allCategories = _categoryService.GetCategories();
+        bool duplicateTitle = allCategories.Any(c =>
+            c.CategoryName.Equals(Category.CategoryName, StringComparison.OrdinalIgnoreCase));
+            
+
+        if (duplicateTitle)
+        {
+            await _popupService.ClosePopupAsync();
+            await _popupService.AlertAsync("Error", "Category title must be unique", "Ok");
+            return;
+        }
+        
         CategoryModel category = CategoryModel.CreateCategory(Category);
         await _categoryService.AddCategory(category);
         

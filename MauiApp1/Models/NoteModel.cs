@@ -33,6 +33,9 @@ public abstract class NoteModel : BaseModel
         
         public DateTime CreatedAt { get; set; }
         
+        [Ignore]
+        public int DaysCount => DateTime.Now.Day - CreatedAt.Day;
+        
         public bool IsMain { get; set; }
 
     //Ignore
@@ -282,5 +285,7 @@ public abstract class NoteModel : BaseModel
         Group = null;
         Category = null;
     }
+
+    
    
 }
