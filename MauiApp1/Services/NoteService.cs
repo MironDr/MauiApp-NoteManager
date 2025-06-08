@@ -147,7 +147,7 @@ public class NoteService : INoteService
 
         note.UnlinkAssociations();
         await _repository.DeleteEntityAsync(note);
-        _notes.RemoveAll(n => n.Id == note.Id);
+        _notes.Remove(note);
 
         Console.WriteLine("Note deleted");
         NotesUpdated?.Invoke(this, EventArgs.Empty);

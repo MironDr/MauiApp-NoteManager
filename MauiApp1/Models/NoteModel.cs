@@ -51,11 +51,17 @@ public abstract class NoteModel : BaseModel
                                                || !_protectionProfile.IsUnlocked 
                                                || !ObjectUtils.IsBase64String(Description))
                     return Description;
-                
-            
-                return ObjectUtils.DecryptAes(Description, _protectionProfile.DerivedKey!);
+
+                try
+                {
+                    return ObjectUtils.DecryptAes(Description, _protectionProfile.DerivedKey!);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Failed to decrypt", ex);
+                }
             }
-            set
+            private set
             {
                 if (_protectionProfile == null)
                 {
@@ -63,8 +69,6 @@ public abstract class NoteModel : BaseModel
                     return;
                 }
                 
-                if(Description != null && ObjectUtils.IsBase64String(Description))
-                    return;
 
                 if (!_protectionProfile.IsUnlocked)
                     throw new InvalidOperationException("Profile is locked.");
@@ -88,7 +92,7 @@ public abstract class NoteModel : BaseModel
                     throw new InvalidOperationException("Current protection profile is not unlocked.");
                 
 
-                if (_protectionProfile != null)
+                if (_protectionProfile != null && _protectionProfile.GetNotes().ContainsKey(Id))
                 {
                     DecryptWithProfile();
                     _protectionProfile?.RemoveNote(Id);
@@ -259,24 +263,25 @@ public abstract class NoteModel : BaseModel
         return this;
     }
     
-    protected void EncryptWithProfile()
+    private void EncryptWithProfile()
     {
         if(ProtectionProfile == null)
             return;
-
-        if (Description != null)
+        
+        if (Description != null && ProtectionProfile.DerivedKey != null)
             EncryptedDescription = Description;
         
     }
 
-    protected void DecryptWithProfile()
+    private void DecryptWithProfile()
     {
         if(ProtectionProfile == null)
             return;
-        
-        if (EncryptedDescription != null)
+
+        if (Description != null && ProtectionProfile.DerivedKey != null)
             Description = EncryptedDescription;
         
+
     }
     
     public virtual void UnlinkAssociations()
